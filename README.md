@@ -41,4 +41,21 @@ Se SIM, insira um manual (ou um script) para auxiliar ainda mais os interessados
 
 ## Informações Complementares 
 
-Quaisquer outras informações sobre seu projeto podem ser descritas nessa seção.
+## Como rodar
+
+#### Build
+
+```bash
+$ docker-compose build
+```
+
+#### Run service
+
+```bash
+$ docker-compose up
+```
+
+#### Parar o docker
+
+```bash
+$ docker-compose down
