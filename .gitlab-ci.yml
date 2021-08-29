@@ -9,7 +9,7 @@ test:coverage:
     - cd frontend
     - yarn install --silent
   script:
-    - yarn run coverage
+    - yarn test --watchAll=false
   allow_failure: true
 
 .codequality:
