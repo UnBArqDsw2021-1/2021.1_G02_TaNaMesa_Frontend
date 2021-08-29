@@ -1,0 +1,110 @@
+stages:
+  - Test
+
+test:coverage:
+  stage: Test
+  image: node:alpine
+  before_script:
+    - apk add --no-cache git
+    - yarn install --silent
+  script:
+    - yarn run coverage
+  allow_failure: true
+
+.codequality:
+  stage: Test
+  image: docker:19.03.12
+  services:
+  - docker:19.03.12-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ''
+    CODE_QUALITY_IMAGE: registry.gitlab.com/gitlab-org/ci-cd/codequality:0.85.23
+  script:
+  - export SOURCE_CODE=$PWD
+  - |
+    if ! docker info &>/dev/null; then
+      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+        export DOCKER_HOST='tcp://localhost:2375'
+      fi
+    fi
+  - |
+    function propagate_env_vars() {
+      CURRENT_ENV=$(printenv)
+
+      for VAR_NAME; do
+        echo $CURRENT_ENV | grep "${VAR_NAME}=" > /dev/null && echo "--env $VAR_NAME "
+      done
+    }
+  - docker pull --quiet "$CODE_QUALITY_IMAGE"
+  - |
+    docker run \
+      $(propagate_env_vars \
+        SOURCE_CODE \
+        TIMEOUT_SECONDS \
+        CODECLIMATE_DEBUG \
+        CODECLIMATE_DEV \
+        REPORT_STDOUT \
+        REPORT_FORMAT \
+        ENGINE_MEMORY_LIMIT_BYTES \
+        CODECLIMATE_PREFIX \
+      ) \
+      --volume "$PWD":/code \
+      --volume /var/run/docker.sock:/var/run/docker.sock \
+      "$CODE_QUALITY_IMAGE" /code
+  artifacts:
+    reports:
+      codequality:
+      - gl-code-quality-report.json
+    expire_in: 1 week
+
+test:codequality:
+  image: docker:19.03.12
+  services:
+  - docker:19.03.12-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ''
+    CODE_QUALITY_IMAGE: registry.gitlab.com/gitlab-org/ci-cd/codequality:0.85.23
+    REPORT_FORMAT: html
+  script:
+  - export SOURCE_CODE=$PWD
+  - |
+    if ! docker info &>/dev/null; then
+      if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+        export DOCKER_HOST='tcp://localhost:2375'
+      fi
+    fi
+  - |
+    function propagate_env_vars() {
+      CURRENT_ENV=$(printenv)
+
+      for VAR_NAME; do
+        echo $CURRENT_ENV | grep "${VAR_NAME}=" > /dev/null && echo "--env $VAR_NAME "
+      done
+    }
+  - docker pull --quiet "$CODE_QUALITY_IMAGE"
+  - |
+    docker run \
+      $(propagate_env_vars \
+        SOURCE_CODE \
+        TIMEOUT_SECONDS \
+        CODECLIMATE_DEBUG \
+        CODECLIMATE_DEV \
+        REPORT_STDOUT \
+        REPORT_FORMAT \
+        ENGINE_MEMORY_LIMIT_BYTES \
+        CODECLIMATE_PREFIX \
+      ) \
+      --volume "$PWD":/code \
+      --volume /var/run/docker.sock:/var/run/docker.sock \
+      "$CODE_QUALITY_IMAGE" /code
+  artifacts:
+    reports:
+      codequality:
+      - gl-code-quality-report.json
+    expire_in: 1 week
+    paths:
+    - gl-code-quality-report.html
+  extends: .codequality
+  allow_failure: true
