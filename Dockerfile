@@ -14,4 +14,4 @@ RUN apk update \
 
 EXPOSE 3000
 
-CMD cd frontend && yarn $YARN_COMMAND
+CMD yarn $YARN_COMMAND
