@@ -1,5 +1,13 @@
 import React from 'react';
 
-const App: React.FC = () => <h1>Tá Na Mesa</h1>;
+import NavBar from './components/NavBar';
+
+const App: React.FC = () => {
+  return (
+    <>
+      <NavBar />
+    </>
+  );
+};
 
 export default App;
