@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavBarContainer } from './styles';
+import { NavBarContainer } from 'components/NavBar/styles';
 
 const NavBar: React.FC = () => {
   return (
