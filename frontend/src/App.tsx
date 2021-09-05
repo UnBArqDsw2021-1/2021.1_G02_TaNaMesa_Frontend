@@ -1,5 +1,15 @@
 import React from 'react';
 
-const App: React.FC = () => <h1>Tá Na Mesa</h1>;
+import Routes from './routes/index';
+import GlobalStyle from './styles/global';
+
+const App: React.FC = () => {
+  return (
+    <>
+      <Routes />
+      <GlobalStyle />
+    </>
+  );
+};
 
 export default App;
