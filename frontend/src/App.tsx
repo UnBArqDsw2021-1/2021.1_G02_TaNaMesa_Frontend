@@ -1,13 +1,12 @@
 import React from 'react';
 
-import GlobalStyle from 'styles/global';
-
-import NavBar from 'components/NavBar';
+import Routes from './routes/index';
+import GlobalStyle from './styles/global';
 
 const App: React.FC = () => {
   return (
     <>
-      <NavBar />
+      <Routes />
       <GlobalStyle />
     </>
   );

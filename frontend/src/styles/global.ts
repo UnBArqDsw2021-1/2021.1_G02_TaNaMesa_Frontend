@@ -27,7 +27,7 @@ export default createGlobalStyle`
   body, #root {
     width: 100%;
   }
-  
+
   button {
     cursor: pointer;
     font-size: 1.6rem;

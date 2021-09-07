@@ -1,9 +1,5 @@
 FROM node:alpine
 
-ARG YARN_PARAMS
-
-ENV YARN_COMMAND=$YARN_PARAMS
-
 WORKDIR /app
 
 COPY frontend/package.json /app
@@ -16,4 +12,4 @@ COPY frontend/ /app
 
 EXPOSE 3000
 
-CMD yarn $YARN_COMMAND
+CMD [ "/bin/sh", "-c", "yarn build && yarn serve" ]

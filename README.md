@@ -41,21 +41,41 @@ Se SIM, insira um manual (ou um script) para auxiliar ainda mais os interessados
 
 ## Informações Complementares 
 
-## Como rodar
+## Ambientes
+### Local
+**[Disponível na porta 3000.](http://localhost:3000/)**
 
-#### Build
+### Ambiente de homologação
+**[Disponível no Heroku]()**
 
-```bash
-$ docker-compose build
+### Ambiente de produção
+**[Disponível no Heroku]()**
+
+***
+## Colocando no ar localmente
+
+- Caso esteja utilizando o vscode para desenvolver:
+1. Instalar as dependências da aplicação:
+```shell
+    yarn
+```
+2. Rodar a aplicação:
+```shell
+    yarn start
 ```
 
-#### Run service
-
-```bash
-$ docker-compose up
+- Caso esteja utilizando outras formas para desenvolver ou queira somente rodar a aplicação:
+1. Build:
+```shell
+    docker-compose build
+```
+2. Rodar a aplicação:
+```shell
+    docker-compose up
 ```
 
-#### Parar o docker
+## Rodando os testes
 
-```bash
-$ docker-compose down
+```shell
+    yarn test
+```

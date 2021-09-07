@@ -6,12 +6,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        YARN_PARAMS: start
     environment:
       CHOKIDAR_USEPOLLING: "true"
+    stdin_open: true
     volumes:
       - /app/node_modules
       - ./frontend:/app
     ports:
       - 3000:3000
+    command: /bin/sh -c "yarn start"
