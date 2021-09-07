@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/791751ff-1717-4a40-9973-fa434318bbf5/deploy-status)](https://app.netlify.com/sites/tanamesa/deploys)
+
 # 2021.1_G02_TaNaMesa_Frontend
 
 Repositório para o Frontend do projeto da disciplina de Desenho e Arquitetura de Software do grupo Tá na Mesa (Grupo 02) .
