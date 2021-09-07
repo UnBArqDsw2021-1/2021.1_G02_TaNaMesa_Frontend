@@ -1,17 +1,15 @@
 FROM node:alpine
 
-ARG YARN_PARAMS
+WORKDIR /app
 
-ENV YARN_COMMAND=$YARN_PARAMS
-
-COPY ./frontend .
-
-WORKDIR .
+COPY frontend/package.json /app
 
 RUN apk update \
     && apk add --no-cache git \
     && yarn install
 
+COPY frontend/ /app
+
 EXPOSE 3000
 
-CMD cd frontend && yarn $YARN_COMMAND
+CMD [ "/bin/sh", "-c", "yarn build && yarn serve" ]
