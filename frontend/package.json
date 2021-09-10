@@ -55,6 +55,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "files": ["src/@types/styled-components.d.ts"],
   "browserslist": {
     "production": [
       ">0.2%",
