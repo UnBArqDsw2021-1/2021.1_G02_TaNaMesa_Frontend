@@ -1,9 +1,9 @@
 export default {
   type: 'default',
   primary01: '#8E3031',
-  primary02: '#7E2726',
-  primary03: '#B96739',
-  primary04: '#A45E4D',
+  primary02: '#7F2726',
+  primary03: '#B96738',
+  primary04: '#A35E4E',
 
   secondaryYellow: '#E7E400',
   secondaryRed: '#D62631',
