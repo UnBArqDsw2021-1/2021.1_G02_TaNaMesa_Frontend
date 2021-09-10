@@ -2,11 +2,15 @@ import React from 'react';
 
 import Routes from './routes/index';
 import GlobalStyle from './styles/global';
+import AppProvider from './hooks';
 
 const App: React.FC = () => {
   return (
     <>
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
+
       <GlobalStyle />
     </>
   );
