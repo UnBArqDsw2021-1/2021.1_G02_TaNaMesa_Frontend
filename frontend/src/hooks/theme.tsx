@@ -24,12 +24,14 @@ interface IAppTheme {
 
   secondaryYellow: string;
   secondaryRed: string;
+  secondaryRed02: string;
   secondaryWine: string;
   secondaryGreen: string;
   secondaryLightGreen: string;
 
   black: string;
   white: string;
+  gray: string;
 }
 
 const UserThemeContext = createContext<IUserThemeContextData | null>(null);
@@ -40,7 +42,11 @@ export const UserThemeProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const themeType = localStorage.getItem('@TaNaMesa:theme');
 
-    setTheme(themeType === 'default' ? taNaMesaTheme : taNaMesaDarkTheme);
+    if (themeType) {
+      setTheme(themeType === 'default' ? taNaMesaTheme : taNaMesaDarkTheme);
+    } else {
+      localStorage.setItem('@TaNaMesa:theme', 'default');
+    }
   }, []);
 
   const switchTheme = useCallback(() => {
