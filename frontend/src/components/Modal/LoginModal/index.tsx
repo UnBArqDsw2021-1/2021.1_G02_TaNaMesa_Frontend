@@ -8,7 +8,7 @@ type AlertModalProps = {
   // onClose?: string;
 };
 
-const Modal: React.FC<AlertModalProps> = ({ title, visible, onClose }) => {
+const Modal: React.FC<AlertModalProps> = ({ title, visible }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Modal: React.FC<AlertModalProps> = ({ title, visible, onClose }) => {
       document.removeEventListener('mousedown', handleClick);
       document.removeEventListener('touchstart', handleClick);
     };
-  }, [onClose]);
+  }, []);
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
       <div className="close-button">
