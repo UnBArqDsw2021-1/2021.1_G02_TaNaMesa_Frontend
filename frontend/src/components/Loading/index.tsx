@@ -1,0 +1,13 @@
+import React from "react";
+
+import { LoadingContainer } from "components/Loading/styles";
+
+const Loading: React.FC = ({}) => {
+    return (
+        <LoadingContainer>
+            <h1>loading...</h1>
+        </LoadingContainer>
+    );
+};
+
+export default Loading;
