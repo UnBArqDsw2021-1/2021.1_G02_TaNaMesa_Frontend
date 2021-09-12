@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: ${props => props.theme.white};
 
   h1 {

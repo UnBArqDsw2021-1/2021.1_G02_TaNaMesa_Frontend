@@ -1,16 +1,17 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
 
 import { useUserTheme } from 'hooks/theme';
 
 import { Container } from './styles';
 
+import NavBar from '../../components/NavBar';
+
 const Home: React.FC = () => {
-  const { switchTheme } = useUserTheme();
-  const theme = useTheme();
+  const { switchTheme, theme } = useUserTheme();
 
   return (
     <Container>
+      <NavBar />
       <h1>Tá na Mesa</h1>
 
       <button type="button" onClick={switchTheme}>
