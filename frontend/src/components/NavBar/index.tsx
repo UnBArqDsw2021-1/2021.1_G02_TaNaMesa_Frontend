@@ -1,11 +1,19 @@
 import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 
-import { NavBarContainer } from 'components/NavBar/styles';
+import { NavBarContainer, NameContainer } from 'components/NavBar/styles';
 
 const NavBar: React.FC = () => {
   return (
     <NavBarContainer>
-      <h1>Tá Na Mesa</h1>
+      <section>
+        <FiArrowLeft />
+        <span>Voltar</span>
+      </section>
+
+      <NameContainer>
+        <span>Pedido</span>
+      </NameContainer>
     </NavBarContainer>
   );
 };
