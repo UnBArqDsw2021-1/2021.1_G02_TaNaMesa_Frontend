@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { Container } from 'components/Modal/LoginModal/styles';
 
 type Props = {
-  title?: string;
+  title: string;
   visible: boolean;
   onClose: (event: any) => void;
 };
 
-const Modal: React.FC<Props> = ({ title, visible, onClose }) => {
+const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const Modal: React.FC<Props> = ({ title, visible, onClose }) => {
   );
 };
 
-export default Modal;
+export default LoginModal;
