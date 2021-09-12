@@ -1,23 +1,22 @@
 import React, { useEffect, useRef } from 'react';
-
 import { Container } from 'components/Modal/LoginModal/styles';
 
-type AlertModalProps = {
+type Props = {
   title?: string;
   visible: boolean;
-  // onClose?: string;
+  onClose: (event: any) => void;
 };
 
-const Modal: React.FC<AlertModalProps> = ({ title, visible }) => {
+const Modal: React.FC<Props> = ({ title, visible, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
     const escFunction = (event: any) => {
-      // if (event.keyCode === 27) onClose(event);
+      if (event.keyCode === 27) onClose(event);
     };
 
     const handleClick = (event: any) => {
-      // if (modalRef.current === event.target) onClose(event);
+      if (modalRef.current === event.target) onClose(event);
     };
 
     document.addEventListener('keydown', escFunction, false);
@@ -29,13 +28,13 @@ const Modal: React.FC<AlertModalProps> = ({ title, visible }) => {
       document.removeEventListener('mousedown', handleClick);
       document.removeEventListener('touchstart', handleClick);
     };
-  }, []);
+  }, [onClose]);
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
       <div className="close-button">
-        {/* <button type="button" onClick={onClose}>
+        <button type="button" onClick={onClose}>
           x
-        </button> */}
+        </button>
       </div>
       <div className="content">{title}</div>
     </Container>

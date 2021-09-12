@@ -11,35 +11,48 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   z-index: 1001;
-  transition: 500ms;
-  background: rgba(0, 0, 0, 0);
   visibility: hidden;
+  touch-action: none;
 
   & > .close-button {
-    text-align: right;
-    margin: 16px 16px 0;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    text-align: center;
+    margin-left: 280px;
     height: 24px;
+    border-radius: 50%;
+    background-color: ${props => props.theme.secondaryRed02};
+    height: 30px;
+    width: 30px;
+    margin-bottom: 60px;
 
     button {
       padding: 0;
       border: none;
       background: none;
+      color: ${props => props.theme.white};
+      width: 100%;
       outline: none;
+    }
+    button:hover {
+      box-shadow: none;
+      transform: none;
     }
   }
 
   & > .content {
     max-height: 100%;
     overflow: auto;
-    transition: 500ms;
-    transform: scaleX(0.95);
+    text-align: center;
+    font-size: 15px;
     opacity: 0;
     visibility: hidden;
     position: relative;
-    //top: 0;
+    background: ${props => props.theme.white};
     padding: 24px;
-    margin: 16px;
-    text-align: left;
+    width: 300px;
+    border-radius: 10px;
   }
 
   &.-visible {
@@ -47,10 +60,13 @@ export const Container = styled.div`
     visibility: visible;
 
     & > .content {
-      top: 0;
+      position: absolute;
       visibility: visible;
       opacity: 1;
-      transform: scaleX(1);
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 `;
