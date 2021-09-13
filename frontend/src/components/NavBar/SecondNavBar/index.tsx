@@ -1,20 +1,20 @@
 import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { SecondNavBarContainer, SecondNameContainer } from 'components/NavBar/SecondNavBar/styles';
+import { NavBarContainer,NameContainer } from 'components/NavBar/styles';
 
 const SecondNavBar: React.FC = () => {
   return (
-    <SecondNavBarContainer>
+    <NavBarContainer>
       <section>
         <FiArrowLeft />
         <span>Voltar</span>
       </section>
 
-      <SecondNameContainer>
+      <NameContainer>
         <span>Pedido Vazio</span>
-      </SecondNameContainer>
-    </SecondNavBarContainer>
+      </NameContainer>
+    </NavBarContainer>
   );
 };
 
