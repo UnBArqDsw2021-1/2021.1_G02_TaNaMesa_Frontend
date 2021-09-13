@@ -5,13 +5,16 @@ import { useUserTheme } from 'hooks/theme';
 import { Container } from './styles';
 
 import NavBar from '../../components/NavBar';
+import SecondNavBar from '../../components/NavBar/SecondNavBar';
+import ThirdNavBar from '../../components/NavBar/ThirdNavBar';
+import FourthNavBar from '../../components/NavBar/FourthNavBar';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
 
   return (
     <Container>
-      <NavBar />
+      <NavBar/>
       <h1>Tá na Mesa</h1>
 
       <button type="button" onClick={switchTheme}>
