@@ -19,7 +19,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     /* background-color: $#000; */
     transition: background-color .3s;
   }
