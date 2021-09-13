@@ -12,12 +12,12 @@ export const NavBarContainer = styled.div`
   section {
     display: flex;
     align-items: center;
-
+    margin-left: 3rem;
     svg {
       width: 1.5rem;
       height: 1.5rem;
       color: ${props => props.theme.black};
-      margin: 0 0.6rem 0 3rem;
+      margin: 0 0.6rem 0 0rem;
     }
 
     span {
