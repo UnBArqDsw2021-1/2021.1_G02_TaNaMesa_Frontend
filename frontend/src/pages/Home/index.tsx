@@ -5,9 +5,10 @@ import { useUserTheme } from 'hooks/theme';
 import { Container } from './styles';
 
 import NavBar from '../../components/NavBar';
-import SecondNavBar from '../../components/NavBar/SecondNavBar';
-import ThirdNavBar from '../../components/NavBar/ThirdNavBar';
-import FourthNavBar from '../../components/NavBar/FourthNavBar';
+//import SecondNavBar from '../../components/NavBar/SecondNavBar';
+//import ThirdNavBar from '../../components/NavBar/ThirdNavBar';
+//import FourthNavBar from '../../components/NavBar/FourthNavBar';
+//import FifthNavBar from '../../components/NavBar/FifthNavBar';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
