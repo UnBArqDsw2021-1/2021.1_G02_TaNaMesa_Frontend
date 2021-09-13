@@ -6,7 +6,7 @@ interface IMenuItem {
     id: number;
     image: string;
     name: string;
-    price: number;
+    price: string;
     discount: number;
     description: string;
 }
@@ -19,22 +19,15 @@ const MenuItem: React.FC<IMenuItem> = ({
     discount,
     description,
 }: IMenuItem) => {
-    const addItem = () => {};
     //const addItem = ({ addItem } = useContext(ItemContext));
     return (
         <MenuItemContainer>
             <img src={image} alt={name} />
             <div>
-                <h3>{name}</h3>
+                <h4>{name}</h4>
                 <p>{description}</p>
-                <h2>${price}</h2>
-                <button
-                    onClick={() => {
-                        addItem;
-                    }}
-                >
-                    Adicionar
-                </button>
+                <h5>R${price}</h5>
+                <button onClick={() => {}}>Adicionar</button>
             </div>
         </MenuItemContainer>
     );
