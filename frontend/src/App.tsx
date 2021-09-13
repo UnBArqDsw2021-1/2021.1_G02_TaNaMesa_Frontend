@@ -1,16 +1,15 @@
 import React from 'react';
 
-import Routes from './routes/index';
-import GlobalStyle from './styles/global';
-import AppProvider from './hooks';
+import GlobalStyle from 'styles/global';
+
+import NavBar from 'components/NavBar';
+import Loading from 'components/Loading';
 
 const App: React.FC = () => {
   return (
     <>
-      <AppProvider>
-        <Routes />
-      </AppProvider>
-
+      <NavBar />
+      <Loading />
       <GlobalStyle />
     </>
   );
