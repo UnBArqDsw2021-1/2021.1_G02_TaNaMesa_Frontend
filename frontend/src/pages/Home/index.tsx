@@ -4,13 +4,13 @@ import { useUserTheme } from 'hooks/theme';
 
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
-import { Container } from './styles';
+import { Container } from 'pages/Home/styles';
 
-import NavBar from '../../components/NavBar';
-import SecondNavBar from '../../components/NavBar/SecondNavBar';
-import ThirdNavBar from '../../components/NavBar/ThirdNavBar';
-import FourthNavBar from '../../components/NavBar/FourthNavBar';
-import FifthNavBar from '../../components/NavBar/FifthNavBar';
+import NavBar from 'components/NavBar';
+import SecondNavBar from 'components/NavBar/SecondNavBar';
+import ThirdNavBar from 'components/NavBar/ThirdNavBar';
+import FourthNavBar from 'components/NavBar/FourthNavBar';
+import FifthNavBar from 'components/NavBar/FifthNavBar';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
