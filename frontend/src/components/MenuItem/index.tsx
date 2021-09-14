@@ -28,6 +28,7 @@ const MenuItem: React.FC<Props> = ({
         <p>{description}</p>
         <h5>R${price}</h5>
         <button
+          type="button"
           onClick={() => {
             console.log('addItem here');
           }}
