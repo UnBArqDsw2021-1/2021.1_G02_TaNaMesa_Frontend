@@ -1,11 +1,11 @@
 import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { NavBarContainer,NameContainer } from 'components/NavBar/styles';
+import { NavBarContainer, NameContainer } from 'components/NavBar/styles';
 
 const SecondNavBar: React.FC = () => {
   return (
-    <NavBarContainer>
+    <NavBarContainer style={{ marginBottom: '4rem' }}>
       <section>
         <FiArrowLeft />
         <span>Voltar</span>

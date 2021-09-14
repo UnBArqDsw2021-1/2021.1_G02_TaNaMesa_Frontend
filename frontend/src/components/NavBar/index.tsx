@@ -5,7 +5,7 @@ import { NavBarContainer, NameContainer } from 'components/NavBar/styles';
 
 const NavBar: React.FC = () => {
   return (
-    <NavBarContainer>
+    <NavBarContainer style={{ marginBottom: '4rem' }}>
       <section>
         <FiArrowLeft />
         <span>Voltar</span>
@@ -16,6 +16,10 @@ const NavBar: React.FC = () => {
       </NameContainer>
     </NavBarContainer>
   );
+};
+
+NavBar.defaultProps = {
+  styles: {},
 };
 
 export default NavBar;

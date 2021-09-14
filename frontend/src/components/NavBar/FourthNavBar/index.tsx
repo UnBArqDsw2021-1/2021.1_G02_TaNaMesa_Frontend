@@ -4,11 +4,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { NavBarContainer } from 'components/NavBar/styles';
 
 const FourthNavBar: React.FC = () => {
-  return (
-    <NavBarContainer>
-      
-    </NavBarContainer>
-  );
+  return <NavBarContainer style={{ marginBottom: '4rem' }} />;
 };
 
 export default FourthNavBar;

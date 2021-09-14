@@ -36,6 +36,13 @@
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/naming-convention": [
+      "off",
+      {
+        "selector": "interface",
+        "format": ["camelCase"]
+      }
+    ],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {

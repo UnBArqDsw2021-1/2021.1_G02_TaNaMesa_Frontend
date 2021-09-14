@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 
 type Hook = (url: string, setMenuItem: (menuItem: string) => void) => boolean;

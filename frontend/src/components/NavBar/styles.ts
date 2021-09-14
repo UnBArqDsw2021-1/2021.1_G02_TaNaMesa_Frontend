@@ -21,7 +21,8 @@ export const NavBarContainer = styled.div`
     }
 
     span {
-      font-size: 1.5rem;
+      font-size: 2.4rem;
+      color: ${props => props.theme.black};
     }
   }
 `;
@@ -36,5 +37,6 @@ export const NameContainer = styled.div`
   span {
     font-size: 1.5rem;
     font-weight: 500;
+    color: ${props => props.theme.black};
   }
 `;

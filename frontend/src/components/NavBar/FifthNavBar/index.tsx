@@ -4,11 +4,10 @@ import { NavBarContainer } from 'components/NavBar/styles';
 
 const FifthNavBar: React.FC = () => {
   return (
-    <NavBarContainer>
+    <NavBarContainer style={{ marginBottom: '4rem' }}>
       <section>
         <span>Mesa</span>
       </section>
-
     </NavBarContainer>
   );
 };
