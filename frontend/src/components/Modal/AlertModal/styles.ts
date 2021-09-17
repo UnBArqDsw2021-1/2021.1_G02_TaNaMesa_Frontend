@@ -13,55 +13,40 @@ export const Container = styled.div`
   z-index: 1001;
   visibility: hidden;
   touch-action: none;
-  & > .close-button {
-    display: flex;
-    cursor: pointer;
-    justify-content: center;
-    text-align: center;
-    margin-left: 280px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: ${props => props.theme.secondaryRed02};
-    height: 30px;
-    width: 30px;
-    margin-bottom: 60px;
-    button {
-      padding: 0;
-      border: none;
-      background: none;
-      color: ${props => props.theme.white};
-      width: 100%;
-      outline: none;
-    }
-    button:hover {
-      box-shadow: none;
-      transform: none;
-    }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
   }
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+
   & > .content {
     max-height: 100%;
     overflow: auto;
     text-align: center;
-    font-size: 15px;
     opacity: 0;
     visibility: hidden;
     position: relative;
     background: ${props => props.theme.white};
     padding: 24px;
-    width: 300px;
+    width: 400px;
     border-radius: 10px;
   }
   &.-visible {
     background: rgba(0, 0, 0, 0.7);
     visibility: visible;
+    font-size: 30px;
+
     & > .content {
-      position: absolute;
       visibility: visible;
       opacity: 1;
       z-index: -1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
   }
 `;

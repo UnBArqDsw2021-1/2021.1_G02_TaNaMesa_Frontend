@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import { Container } from '../AlertModal/styles';
+import Icons from '../../../utils/assets';
 
 type Props = {
-  title: string;
+  children: ReactNode;
   visible: boolean;
+  icon?: string;
   onClose: (event: any) => void;
 };
 
-const AlertModal: React.FC<Props> = ({ title, visible, onClose }) => {
+const AlertModal: React.FC<Props> = ({ children, icon, visible, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -31,14 +33,16 @@ const AlertModal: React.FC<Props> = ({ title, visible, onClose }) => {
   }, [onClose]);
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
-      <div className="close-button">
-        <button type="button" onClick={onClose}>
-          x
-        </button>
+      <div className="content">
+        {icon && <img alt="alertModal" src={Icons.simbolo_cozinha} />}
+        {children}
       </div>
-      <div className="content">{title}</div>
     </Container>
   );
+};
+
+AlertModal.defaultProps = {
+  icon: 'simbolo_ok',
 };
 
 export default AlertModal;
