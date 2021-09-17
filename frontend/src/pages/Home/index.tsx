@@ -37,10 +37,7 @@ const Home: React.FC = () => {
         name="Milkshake"
         price="16.90"
         // discount={0}
-        description={
-          'Disponível nos sabores morango, chocolate, oreo e creme de\
-                    avelã.'
-        }
+        description="Disponível nos sabores morango, chocolate, oreo e creme de avelã."
       />
       <Loading />
     </Container>

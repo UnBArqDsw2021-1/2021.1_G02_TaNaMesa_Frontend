@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
-import LoginModal from '../../../../components/Modal/LoginModal';
+import LoginModal from 'components/Modal/LoginModal';
 
 describe('LoginModal', () => {
   it('renders nothing when not visible', () => {
