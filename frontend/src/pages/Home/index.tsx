@@ -9,7 +9,7 @@ import { Container } from 'pages/Home/styles';
 import NavBar from 'components/NavBar';
 import SecondNavBar from 'components/NavBar/SecondNavBar';
 import ThirdNavBar from 'components/NavBar/ThirdNavBar';
-import FourthNavBar from 'components/NavBar/FourthNavBar';
+// import FourthNavBar from 'components/NavBar/FourthNavBar';
 import FifthNavBar from 'components/NavBar/FifthNavBar';
 
 const Home: React.FC = () => {
@@ -32,11 +32,11 @@ const Home: React.FC = () => {
       <h4>{theme.type}</h4>
 
       <MenuItem
-        id={0}
+        // id={0}
         image="https://blog.finamac.com/wp-content/uploads/2019/10/309956-como-oferecer-os-melhores-sabores-de-milkshake-para-os-clientes-1280x640.jpg"
         name="Milkshake"
         price="16.90"
-        discount={0}
+        // discount={0}
         description={
           'Disponível nos sabores morango, chocolate, oreo e creme de\
                     avelã.'

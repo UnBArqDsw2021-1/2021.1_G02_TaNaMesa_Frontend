@@ -3,23 +3,22 @@ import React from 'react';
 import { MenuItemContainer } from 'components/MenuItem/styles';
 
 type Props = {
-  id: number;
+  // id: number;
   image: string;
   name: string;
   price: string;
-  discount: number;
+  // discount: number;
   description: string;
 };
 
 const MenuItem: React.FC<Props> = ({
-  id,
+  // id,
   image,
   name,
   price,
-  discount,
+  // discount,
   description,
 }) => {
-  // const addItem = ({ addItem } = useContext(ItemContext));
   return (
     <MenuItemContainer>
       <img src={image} alt={name} />
@@ -30,7 +29,7 @@ const MenuItem: React.FC<Props> = ({
         <button
           type="button"
           onClick={() => {
-            console.log('addItem here');
+            null;
           }}
         >
           Adicionar
