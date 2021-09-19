@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 import { FiArrowLeft } from 'react-icons/fi';
 
