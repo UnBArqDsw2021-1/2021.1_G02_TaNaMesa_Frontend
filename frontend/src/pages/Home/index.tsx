@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useUserTheme } from 'hooks/theme';
-import Modal from '../../components/Modal/AlertModal';
+
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
 import { Container } from 'pages/Home/styles';
@@ -14,12 +14,6 @@ import FifthNavBar from 'components/NavBar/FifthNavBar';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
-  const theme = useTheme();
-  const [modalOpen, setModalOpen] = useState(false);
-  const onCloseModal = (event: any) => {
-    event.preventDefault();
-    setModalOpen(false);
-  };
 
   return (
     <Container>
@@ -31,18 +25,8 @@ const Home: React.FC = () => {
 
       <h1>Tá na Mesa</h1>
 
-      <Modal icon="simbolo_cozinha" visible={modalOpen} onClose={onCloseModal}>
-        <p>
-          Sua conta já foi solicitada, aguarde o garçom para saber as formas de
-          pagamento.
-        </p>
-        <p>Obrigada por comer conosco! :D</p>
-      </Modal>
       <button type="button" onClick={switchTheme}>
         Trocar tema
-      </button>
-      <button type="button" onClick={() => setModalOpen(true)}>
-        Abrir modal
       </button>
 
       <h4>{theme.type}</h4>
