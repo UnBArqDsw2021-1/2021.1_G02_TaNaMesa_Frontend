@@ -1,9 +1,9 @@
-import Simbolo_cozinha from '../assets/simbolo_cozinha.svg';
-import Simbolo_ok from '../assets/simbolo_ok.svg';
+import simboloCozinha from '../assets/simbolo_cozinha.svg';
+import simboloOk from '../assets/simbolo_ok.svg';
 
 const Icons = {
-  simbolo_cozinha: Simbolo_cozinha,
-  simbolo_ok: Simbolo_ok,
+  simbolo_cozinha: simboloCozinha,
+  simbolo_ok: simboloOk,
 };
 
 export default Icons;

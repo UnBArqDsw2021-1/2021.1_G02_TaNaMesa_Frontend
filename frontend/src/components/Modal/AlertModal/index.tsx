@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { Container } from '../AlertModal/styles';
+import { Container } from './styles';
 import Icons from '../../../utils/assets';
 
 type Props = {
@@ -42,7 +43,7 @@ const AlertModal: React.FC<Props> = ({ children, icon, visible, onClose }) => {
 };
 
 AlertModal.defaultProps = {
-  icon: 'simbolo_ok',
+  icon: '',
 };
 
 export default AlertModal;
