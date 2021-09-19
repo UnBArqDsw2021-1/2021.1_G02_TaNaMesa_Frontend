@@ -26,7 +26,7 @@ const NavBar: React.FC<NavBarProps> = ({
 }) => {
   const history = useHistory();
 
-  const renderLeftSide = (): ReactChild | null => {
+  const renderLeftSide = (): JSX.Element | null => {
     switch (left) {
       case 'Voltar':
         return (
@@ -41,7 +41,7 @@ const NavBar: React.FC<NavBarProps> = ({
     }
   };
 
-  const renderRightSide = (): ReactChild | null => {
+  const renderRightSide = (): JSX.Element | null => {
     switch (right) {
       case 'Pedido':
         return (
@@ -55,7 +55,7 @@ const NavBar: React.FC<NavBarProps> = ({
     }
   };
 
-  const renderOnCenter = (): ReactChild | null => {
+  const renderOnCenter = (): JSX.Element | null => {
     switch (center) {
       case 'Mesa':
         return (
