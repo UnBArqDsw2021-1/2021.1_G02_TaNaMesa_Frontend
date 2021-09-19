@@ -11,11 +11,11 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    const escFunction = (event: any) => {
+    const escFunction = (event: any): void => {
       if (event.keyCode === 27) onClose(event);
     };
 
-    const handleClick = (event: any) => {
+    const handleClick = (event: any): void => {
       if (modalRef.current === event.target) onClose(event);
     };
 
