@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useUserTheme } from 'hooks/theme';
 
-import Loading from 'components/Loading';
+// import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
 import NavBar from 'components/NavBar';
 
