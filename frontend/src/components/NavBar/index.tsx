@@ -5,7 +5,6 @@ import { FiArrowLeft } from 'react-icons/fi';
 import {
   NavBarContainer,
   BackButton,
-  TableContainer,
   CenterContainer,
   RightContainer,
 } from 'components/NavBar/styles';

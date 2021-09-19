@@ -36,18 +36,6 @@ export const BackButton = styled.button`
   }
 `;
 
-export const TableContainer = styled.section`
-  display: flex;
-  align-items: center;
-  margin: 0 3rem 0 3rem;
-
-  span {
-    font-size: 2rem;
-    font-weight: 600;
-    color: ${props => props.theme.black};
-  }
-`;
-
 export const CenterContainer = styled.div`
   width: 100%;
   display: flex;
