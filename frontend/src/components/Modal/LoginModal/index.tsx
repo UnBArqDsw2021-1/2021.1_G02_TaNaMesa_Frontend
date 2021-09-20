@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import React, { useEffect, useRef, useState } from 'react';
 import { Container } from 'components/Modal/LoginModal/styles';
 
 type Props = {
@@ -9,9 +10,10 @@ type Props = {
 
 const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
   const modalRef = useRef(null);
+  const [valueSelect, setValueSelect] = useState('Usuario');
 
-  const onChangeDropdown = (event: any): any => {
-    return event.target.value;
+  const onChangeDropdown = (event: any): void => {
+    return setValueSelect(event.target.value);
   };
 
   useEffect(() => {
@@ -43,7 +45,12 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
       <div className="content">
         {title}
         <div id="dropdown">
-          <select onChange={onChangeDropdown}>
+          <select
+            name="dropdown"
+            data-testid="select"
+            value={valueSelect}
+            onChange={onChangeDropdown}
+          >
             <option value="Usuario">Usuário</option>
             <option value="Mesa">Mesa</option>
             <option value="Garcom">Garçom</option>
@@ -51,7 +58,7 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
             <option value="Gerencia">Gerência</option>
           </select>
         </div>
-        <input type="password" />
+        <input type="password" id="password" />
       </div>
     </Container>
   );

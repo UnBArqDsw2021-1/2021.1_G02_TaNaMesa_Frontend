@@ -48,6 +48,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     font-size: 15px;
+    font-weight: bold;
     opacity: 0;
     visibility: hidden;
     position: relative;
@@ -76,11 +77,10 @@ export const Container = styled.div`
     border: 0 none;
     color: ${props => props.theme.white};
     background: ${props => props.theme.gray};
-    font-weight: bold;
     padding: 10px;
     font-weight: bold;
-    width: 90%;
     font-size: 15px;
+    width: 90%;
   }
 
   #dropdown {
@@ -89,6 +89,10 @@ export const Container = styled.div`
     height: 40px;
     border-radius: 20px;
     background: ${props => props.theme.gray};
+  }
+
+  #dropdown option {
+    color: ${props => props.theme.black};
   }
 
   input {
