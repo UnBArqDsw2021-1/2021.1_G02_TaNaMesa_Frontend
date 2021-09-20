@@ -63,4 +63,32 @@ describe('LoginModal', () => {
 
     expect(onCloseHandler).toHaveBeenCalled();
   });
+
+  it('simulates selection', async () => {
+    const props = {
+      title: 'Some content',
+      visible: true,
+      onClose: () => {
+        return;
+      },
+    };
+    render(<LoginModal {...props} />);
+    const dropdown = screen.getByTestId('select') as HTMLSelectElement;
+    expect(dropdown.value).toBe('Usuario');
+    fireEvent.change(dropdown, { target: { value: 'Mesa' } });
+    expect(dropdown.value).toBe('Mesa');
+  });
+
+  it('simulates selection', async () => {
+    const props = {
+      title: 'Some content',
+      visible: true,
+      onClose: () => {
+        return;
+      },
+    };
+    render(<LoginModal {...props} />);
+    const passwordField = document.querySelector('#password')
+    expect(passwordField).toBeInTheDocument();
+  });
 });

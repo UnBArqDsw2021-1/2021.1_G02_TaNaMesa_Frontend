@@ -25,7 +25,7 @@ export const Container = styled.div`
     background-color: ${props => props.theme.secondaryRed02};
     height: 30px;
     width: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 150px;
 
     button {
       padding: 0;
@@ -45,7 +45,10 @@ export const Container = styled.div`
     max-height: 100%;
     overflow: auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
     font-size: 15px;
+    font-weight: bold;
     opacity: 0;
     visibility: hidden;
     position: relative;
@@ -68,5 +71,38 @@ export const Container = styled.div`
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+
+  select {
+    border: 0 none;
+    color: ${props => props.theme.white};
+    background: ${props => props.theme.gray};
+    padding: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    width: 90%;
+  }
+
+  #dropdown {
+    overflow: hidden;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 20px;
+    background: ${props => props.theme.gray};
+  }
+
+  #dropdown option {
+    color: ${props => props.theme.black};
+  }
+
+  input {
+    background: ${props => props.theme.gray};
+    color: ${props => props.theme.white};
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
   }
 `;
