@@ -10,6 +10,10 @@ type Props = {
 const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
   const modalRef = useRef(null);
 
+  const onChangeDropdown = (event: any): any => {
+    return event.target.value;
+  };
+
   useEffect(() => {
     const escFunction = (event: any): void => {
       if (event.keyCode === 27) onClose(event);
@@ -36,7 +40,19 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
           x
         </button>
       </div>
-      <div className="content">{title}</div>
+      <div className="content">
+        {title}
+        <div id="dropdown">
+          <select onChange={onChangeDropdown}>
+            <option value="Usuario">Usuário</option>
+            <option value="Mesa">Mesa</option>
+            <option value="Garcom">Garçom</option>
+            <option value="Cozinha">Cozinha</option>
+            <option value="Gerencia">Gerência</option>
+          </select>
+        </div>
+        <input type="password" />
+      </div>
     </Container>
   );
 };
