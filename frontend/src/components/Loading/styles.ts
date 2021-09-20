@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
 export const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background-color: ${props => props.theme.white + 90};
+
   div,
   div:before,
   div:after {
@@ -10,7 +18,7 @@ export const LoadingContainer = styled.div`
     height: 4em;
   }
   div {
-    color: black;
+    color: ${props => props.theme.black};
     text-indent: -9999em;
     margin: 88px auto;
     margin-top: 20rem;

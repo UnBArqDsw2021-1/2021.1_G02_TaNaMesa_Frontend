@@ -2,32 +2,29 @@ import React from 'react';
 
 import { useUserTheme } from 'hooks/theme';
 
-import Loading from 'components/Loading';
+// import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
-import { Container } from 'pages/Home/styles';
-
 import NavBar from 'components/NavBar';
-import SecondNavBar from 'components/NavBar/SecondNavBar';
-import ThirdNavBar from 'components/NavBar/ThirdNavBar';
-// import FourthNavBar from 'components/NavBar/FourthNavBar';
-import FifthNavBar from 'components/NavBar/FifthNavBar';
+
+import { Container, StyledButton } from 'pages/Home/styles';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
 
   return (
     <Container>
-      <NavBar />
-      <SecondNavBar />
-      <ThirdNavBar />
-      {/* <FourthNavBar /> */}
-      <FifthNavBar />
+      <NavBar center="Mesa" tableTitle="Mesa 1" />
+      <NavBar left="Voltar" center="Mesa" tableTitle="Mesa 1" />
+      <NavBar left="Voltar" right="Pedido" />
+      <NavBar left="Voltar" right="Pedido" isOrderEmpty />
+      <NavBar left="Voltar" />
+      <NavBar left="Voltar" center="Pedidos" />
 
       <h1>Tá na Mesa</h1>
 
-      <button type="button" onClick={switchTheme}>
+      <StyledButton type="button" onClick={switchTheme}>
         Trocar tema
-      </button>
+      </StyledButton>
 
       <h4>{theme.type}</h4>
 
@@ -39,7 +36,8 @@ const Home: React.FC = () => {
         // discount={0}
         description="Disponível nos sabores morango, chocolate, oreo e creme de avelã."
       />
-      <Loading />
+
+      {/* <Loading /> */}
     </Container>
   );
 };
