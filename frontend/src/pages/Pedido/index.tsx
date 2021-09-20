@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 
-import { Container, ContainerOrderList, ContainerTotal, Item, OrderList } from './styles';
+import { Container, ContainerOrderList, ContainerTotal, Item, OrderList} from './styles';
 
 interface Item {
   quantity: number;
@@ -40,9 +40,12 @@ const Pedido: React.FC = () => {
             );
           })}
         </OrderList>
+        <div id="linha-horizontal"></div>
+        <p>Comandas abertas:</p>
       </ContainerOrderList>
       <ContainerTotal>
         <h1>Total</h1>
+        <div id="linha-horizontal"></div>
       </ContainerTotal>
     </Container>
   );
