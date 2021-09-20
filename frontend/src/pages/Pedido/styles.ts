@@ -13,6 +13,21 @@ export const Container = styled.div`
     color: ${props => props.theme.black};
     margin-bottom: 0;
   }
+
+  #linha-horizontal {
+    margin-top: 18rem;
+    width: 100%;
+    border: 1.5px solid ${props => props.theme.gray};
+    background-color: ${props => props.theme.gray};
+  }
+
+  p {
+    margin: 0;
+    align-items: inherit;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: ${props => props.theme.black};
+  }
 `;
 
 export const ContainerOrderList = styled.div`
@@ -60,4 +75,12 @@ export const ContainerTotal = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: ${props => props.theme.gray};
+
+  #linha-horizontal {
+    margin-bottom: 35rem;
+    width: 25rem;
+    border: 1px solid ${props => props.theme.black};
+    background-color: ${props => props.theme.black};
+  }
 `;
+
