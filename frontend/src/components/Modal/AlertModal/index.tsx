@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { Container } from './styles';
-import Icons from '../../../utils/assets';
+import { Container } from 'components/Modal/AlertModal/styles';
+import Icons from 'utils/assets';
 
 type Props = {
   children: ReactNode;
@@ -14,11 +14,11 @@ const AlertModal: React.FC<Props> = ({ children, icon, visible, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    const escFunction = (event: any) => {
+    const escFunction = (event: any): void => {
       if (event.keyCode === 27) onClose(event);
     };
 
-    const handleClick = (event: any) => {
+    const handleClick = (event: any): void => {
       if (modalRef.current === event.target) onClose(event);
     };
 
