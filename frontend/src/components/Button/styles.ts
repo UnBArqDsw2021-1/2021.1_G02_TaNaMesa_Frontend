@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface NormalButtonProps {
   width?: string;
   padding?: string;
-  enabled?: boolean;
+  disabled?: boolean;
 }
 
 export const NormalButton = styled.button<NormalButtonProps>`
@@ -14,11 +14,11 @@ export const NormalButton = styled.button<NormalButtonProps>`
   width: ${props => props.width};
   color: ${props => props.theme.white};
   background-color: ${props => props.color};
-  opacity: ${props => (props.enabled ? 1 : 0.7)};
-  cursor: ${props => (props.enabled ? 'pointer' : 'default')};
+  opacity: ${props => (props.disabled ? 0.7 : 1)};
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   transition: 0.2s all;
 
   &:hover {
-    opacity: ${props => (props.enabled ? 0.9 : 0.7)};
+    opacity: ${props => (props.disabled ? 0.7 : 0.9)};
   }
 `;

@@ -6,7 +6,7 @@ type ButtonProps = {
   color: string;
   width?: string;
   padding?: string;
-  enabled?: boolean;
+  disabled?: boolean;
   onClick: () => void;
 };
 
@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   color,
   width,
   padding,
-  enabled,
+  disabled,
   onClick,
 }) => {
   return (
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
       color={color}
       width={width}
       padding={padding}
-      enabled={enabled}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
 Button.defaultProps = {
   width: '15rem',
   padding: '1.5rem',
-  enabled: true,
+  disabled: false,
 };
 
 export default Button;

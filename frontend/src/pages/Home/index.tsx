@@ -23,7 +23,7 @@ const Home: React.FC = () => {
 
       <h1>Tá na Mesa</h1>
 
-      <Button color={theme.primary01} enabled={false} onClick={switchTheme}>
+      <Button color={theme.primary01} onClick={switchTheme}>
         Trocar tema
       </Button>
 
