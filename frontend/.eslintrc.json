@@ -35,13 +35,14 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
-    "@typescript-eslint/interface-name-prefix": [
-      "error",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/naming-convention": [
+      "off",
       {
-        "prefixWithI": "always"
+        "selector": "interface",
+        "format": ["camelCase"]
       }
     ],
-    "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
