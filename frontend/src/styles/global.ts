@@ -30,7 +30,7 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    font-size: 1.6rem;
+    /* font-size: 1.6rem; */
     background: none;
     border: 0;
   }
