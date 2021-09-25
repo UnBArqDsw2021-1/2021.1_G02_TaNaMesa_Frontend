@@ -5,8 +5,9 @@ import { useUserTheme } from 'hooks/theme';
 // import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
 import NavBar from 'components/NavBar';
+import Button from 'components/Button';
 
-import { Container, StyledButton } from 'pages/Home/styles';
+import { Container } from 'pages/Home/styles';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
@@ -22,9 +23,9 @@ const Home: React.FC = () => {
 
       <h1>Tá na Mesa</h1>
 
-      <StyledButton type="button" onClick={switchTheme}>
+      <Button color={theme.primary01} onClick={switchTheme}>
         Trocar tema
-      </StyledButton>
+      </Button>
 
       <h4>{theme.type}</h4>
 
