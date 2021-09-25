@@ -1,7 +1,7 @@
 import React from 'react';
 
 import imgBurguer from 'assets/SideBar/smbolo_hamburguer 1.png';
-import { SideBarButtonContainer } from './styles';
+import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 
 interface SideBarButtonProps {
   icon: string;

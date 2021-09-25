@@ -7,14 +7,13 @@ export const SideBarButtonContainer = styled.button`
   align-items: center;
   justify-content: center;
   width: 75%;
-  height: 7rem;
   background-color: ${props => props.theme.white};
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   border-radius: 20px;
   transition: 0.2s all;
 
   img {
-    width: 4rem;
+    width: 3rem;
     position: absolute;
     left: 2rem;
   }
@@ -23,7 +22,6 @@ export const SideBarButtonContainer = styled.button`
     font-size: 2.5rem;
     font-weight: 600;
     color: ${props => props.theme.black};
-    text-align: center;
     margin-left: 2rem;
   }
 
@@ -44,6 +42,28 @@ export const SideBarButtonContainer = styled.button`
     img {
       width: 3rem;
       left: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: static;
+    flex-direction: column;
+    padding: 1rem 0;
+
+    img {
+      position: static;
+      width: 2.5rem;
+    }
+
+    span {
+      font-size: 2rem;
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 375px) {
+    span {
+      font-size: 1.5rem;
     }
   }
 `;
