@@ -4,7 +4,7 @@ import SideBarButton from 'components/SideBarButton';
 import logo from 'assets/logo-contorno.png';
 import sideBarObjects from './sideBarObjects';
 
-import { Container } from './styles';
+import { Container, Logo } from './styles';
 
 interface SideBarProps {
   page: 'menu-user' | string;
@@ -36,7 +36,7 @@ const SideBar: React.FC<SideBarProps> = ({ page }) => {
 
   return (
     <Container>
-      <img src={logo} alt="Tá Na Mesa" />
+      <Logo src={logo} alt="Tá Na Mesa" />
 
       {menuOptions.map(option => {
         return <SideBarButton text={option.text} icon={option.icon} />;

@@ -12,9 +12,22 @@ export const Container = styled.div`
     ${props => props.theme.primary02} 100%
   );
 
-  img {
-    width: 20rem;
-    margin: 8rem 0;
+  @media (max-width: 768px) {
+    width: 45%;
+  }
+`;
+
+export const Logo = styled.img`
+  width: 20rem;
+  margin: 8rem 0;
+
+  @media (max-width: 768px) {
+    width: 15rem;
+    margin: 3rem 0;
+  }
+
+  @media (max-width: 320px) {
+    width: 12rem;
   }
 `;
 
