@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  hasLogo?: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 37%;
+  justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
+  width: 30%;
   height: 100%;
   background: linear-gradient(
     180deg,
@@ -19,7 +24,7 @@ export const Container = styled.div`
 
 export const Logo = styled.img`
   width: 20rem;
-  margin: 8rem 0;
+  margin: 6rem 0;
 
   @media (max-width: 768px) {
     width: 15rem;
@@ -30,5 +35,3 @@ export const Logo = styled.img`
     width: 12rem;
   }
 `;
-
-export const Title = styled.h1``;
