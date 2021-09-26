@@ -19,6 +19,7 @@ export const SideBarButtonContainer = styled.button`
   }
 
   span {
+    width: 70%;
     font-size: 2.5rem;
     font-weight: 600;
     color: ${props => props.theme.black};

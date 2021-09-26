@@ -1,20 +1,28 @@
 import React from 'react';
 
-import imgBurguer from 'assets/SideBar/smbolo_hamburguer 1.png';
 import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 
 interface SideBarButtonProps {
   icon: string;
   text: string;
+  isCallWaiter?: boolean;
 }
 
-const SideBarButton: React.FC<SideBarButtonProps> = ({ icon, text }) => {
+const SideBarButton: React.FC<SideBarButtonProps> = ({
+  icon,
+  text,
+  isCallWaiter,
+}) => {
   return (
-    <SideBarButtonContainer>
+    <SideBarButtonContainer style={isCallWaiter ? { marginTop: '12rem' } : {}}>
       <img src={icon} alt="Buguer" />
       <span>{text}</span>
     </SideBarButtonContainer>
   );
+};
+
+SideBarButton.defaultProps = {
+  isCallWaiter: false,
 };
 
 export default SideBarButton;
