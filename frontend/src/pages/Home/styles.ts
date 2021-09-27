@@ -3,20 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
+  flex-direction: row;
   background-color: ${props => props.theme.white};
-
-  h1 {
-    color: ${props => props.theme.black};
-    margin-bottom: 2rem;
-  }
-
-  h4 {
-    color: ${props => props.theme.black};
-    margin-top: 2rem;
-  }
 `;
 
 export const StyledButton = styled.button`
