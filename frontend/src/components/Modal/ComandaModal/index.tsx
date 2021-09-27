@@ -53,6 +53,7 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
       document.removeEventListener('touchstart', handleClick);
     };
   }, [onClose]);
+
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
       <div className="content">
@@ -83,6 +84,14 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
               </div>
             );
           })}
+          {comandas.length === 0 ? (
+            <div className="comanda">
+              <div className="person">
+                <span>Nenhuma comanda cadastrada</span>
+              </div>
+              <div className="buttons" />
+            </div>
+          ) : null}
         </div>
 
         <label htmlFor="name">Digite o nome da nova comanda:</label>
