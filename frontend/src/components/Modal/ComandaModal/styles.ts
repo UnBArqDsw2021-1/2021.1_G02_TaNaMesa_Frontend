@@ -17,7 +17,7 @@ export const Container = styled.div`
   .close-button {
     display: flex;
     justify-content: center;
-    text-align: center;
+    align-items: center;
     border-radius: 50%;
     overflow: hidden;
     position: absolute;
@@ -47,7 +47,7 @@ export const Container = styled.div`
     text-align: center;
     display: flex;
     flex-direction: column;
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: bold;
     opacity: 0;
     visibility: hidden;
@@ -58,7 +58,7 @@ export const Container = styled.div`
     border-radius: 10px;
 
     span {
-      font-size: 16px;
+      font-size: 1.6rem;
       font-weight: bold;
     }
   }
@@ -83,13 +83,28 @@ export const Container = styled.div`
     margin-bottom: 3rem;
   }
 
+  .comanda:nth-child(even) {
+    background-color: ${props => props.theme.gray + 70};
+    border-radius: 10px;
+  }
+
+  .comanda-vazia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 30rem;
+    }
+  }
+
   .comanda {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    padding: 1rem;
 
-    .person span {
-      font-size: 15px;
+    &.person span {
+      font-size: 1.5rem;
       font-weight: 500;
     }
 
