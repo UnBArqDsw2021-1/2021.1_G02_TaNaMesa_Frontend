@@ -26,6 +26,15 @@ export const Logo = styled.img`
   @media (max-width: 320px) {
     width: 12rem;
   }
+
+  @media (max-height: 780px) {
+    width: 30rem;
+    margin: 3rem 0 0 0;
+  }
+
+  @media (max-height: 700px) {
+    width: 20rem;
+  }
 `;
 
 export const Slogan = styled.div`
@@ -43,5 +52,18 @@ export const Slogan = styled.div`
     font-weight: 700;
     /* font-size: 4rem; */
     color: ${props => props.theme.black};
+    /* text-shadow: 0 0 1px ${props => props.theme.secondaryLightGreen}; */
+  }
+
+  @media (max-height: 780px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-height: 700px) {
+    h1 {
+      font-size: 2.5rem;
+    }
   }
 `;

@@ -14,7 +14,9 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   isCallWaiter,
 }) => {
   return (
-    <SideBarButtonContainer style={isCallWaiter ? { marginTop: '12rem' } : {}}>
+    <SideBarButtonContainer
+      style={isCallWaiter ? { marginTop: '12rem', marginBottom: '2rem' } : {}}
+    >
       <img src={icon} alt="Buguer" />
       <span>{text}</span>
     </SideBarButtonContainer>

@@ -11,6 +11,7 @@ export const Container = styled.div<ContainerProps>`
   justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
   width: 30%;
   height: 100%;
+  overflow-y: auto;
   background: linear-gradient(
     180deg,
     ${props => props.theme.primary03} 0%,
