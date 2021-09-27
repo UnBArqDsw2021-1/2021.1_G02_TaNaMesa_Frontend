@@ -21,12 +21,12 @@ export const Container = styled.div`
     border-radius: 50%;
     overflow: hidden;
     position: absolute;
-    top: -17px;
-    right: -17px;
+    top: -18px;
+    right: -18px;
 
     button {
-      height: 34px;
-      width: 34px;
+      height: 36px;
+      width: 36px;
       padding: 0;
       border: none;
       background-color: ${props => props.theme.secondaryRed};
@@ -54,8 +54,13 @@ export const Container = styled.div`
     position: relative;
     background: ${props => props.theme.white};
     padding: 34px;
-    width: 300px;
+    width: 500px;
     border-radius: 10px;
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+    }
   }
 
   &.-visible {
@@ -73,36 +78,60 @@ export const Container = styled.div`
     }
   }
 
-  select {
-    border: 0 none;
-    color: ${props => props.theme.white};
-    background: ${props => props.theme.gray};
-    padding: 10px;
-    font-weight: bold;
-    font-size: 15px;
-    width: 90%;
+  .comandas {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
-  #dropdown {
-    overflow: hidden;
+  .comanda {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .person span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .buttons button {
+      color: ${props => props.theme.secondaryRed};
+    }
+    .buttons button:hover {
+      color: ${props => props.theme.secondaryWine};
+    }
+  }
+
+  label {
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .new-comanda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
-    height: 40px;
-    border-radius: 20px;
-    background: ${props => props.theme.gray};
-  }
 
-  #dropdown option {
-    color: ${props => props.theme.black};
-  }
+    input {
+      background: ${props => props.theme.white};
+      color: ${props => props.theme.black};
+      font-weight: bold;
+      border: 2px ${props => props.theme.gray} solid;
+      height: 40px;
+      width: 80%;
+      border-radius: 20px;
+      padding: 10px;
+    }
 
-  input {
-    background: ${props => props.theme.gray};
-    color: ${props => props.theme.white};
-    font-weight: bold;
-    border: none;
-    height: 40px;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
+    button {
+      border-radius: 50%;
+      background-color: ${props => props.theme.secondaryRed};
+      padding: 10px 10px 5px 10px;
+      color: ${props => props.theme.white};
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: ${props => props.theme.secondaryWine};
+    }
   }
 `;

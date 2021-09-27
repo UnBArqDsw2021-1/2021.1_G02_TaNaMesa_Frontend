@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useUserTheme } from 'hooks/theme';
 
@@ -7,9 +7,14 @@ import MenuItem from 'components/MenuItem';
 import NavBar from 'components/NavBar';
 
 import { Container, StyledButton } from 'pages/Home/styles';
+import LoginModal from 'components/Modal/LoginModal';
+import ComandaModal from 'components/Modal/ComandaModal';
 
 const Home: React.FC = () => {
   const { switchTheme, theme } = useUserTheme();
+
+  const [showLogin, setShowLogin] = useState(false);
+  const [showComanda, setShowComanda] = useState(true);
 
   return (
     <Container>
@@ -35,6 +40,16 @@ const Home: React.FC = () => {
         price="16.90"
         // discount={0}
         description="Disponível nos sabores morango, chocolate, oreo e creme de avelã."
+      />
+
+      <LoginModal
+        title="Login"
+        visible={showLogin}
+        onClose={() => setShowLogin(false)}
+      />
+      <ComandaModal
+        visible={showComanda}
+        onClose={() => setShowComanda(false)}
       />
 
       {/* <Loading /> */}
