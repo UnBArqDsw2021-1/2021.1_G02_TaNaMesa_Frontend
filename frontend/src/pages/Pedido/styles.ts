@@ -55,11 +55,17 @@ export const ContainerOrderList = styled.div`
 export const OrderList = styled.div`
   width: 85%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   margin-top: 2rem;
+
+  .pedido-vazio {
+    margin-top: 10%;
+  }
 `;
 
 export const Item = styled.div`
+  width: 100%;
   display: flex;
   margin: 1rem 0;
   justify-content: space-between;

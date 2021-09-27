@@ -68,17 +68,24 @@ const Pedido: React.FC = () => {
           <ContainerOrderList>
             <h1>Brenda</h1>
             <OrderList>
-              {items.map(item => {
-                return (
-                  <Item>
-                    <h2>
-                      {item.quantity}x {item.name}
-                      {item.obs ? <h3>Observação: {item.obs}</h3> : <br />}
-                    </h2>
-                    <h2>R$ {item.price.toFixed(2)}</h2>
-                  </Item>
-                );
-              })}
+              {items.length === 0 ? (
+                <h2 className="pedido-vazio">
+                  Aqui você pode consultar os pedidos realizados sempre que
+                  quiser.
+                </h2>
+              ) : (
+                items.map(item => {
+                  return (
+                    <Item>
+                      <h2>
+                        {item.quantity}x {item.name}
+                        {item.obs ? <h3>Observação: {item.obs}</h3> : <br />}
+                      </h2>
+                      <h2>R$ {item.price.toFixed(2)}</h2>
+                    </Item>
+                  );
+                })
+              )}
             </OrderList>
           </ContainerOrderList>
           <ContainerClientsOrder>
