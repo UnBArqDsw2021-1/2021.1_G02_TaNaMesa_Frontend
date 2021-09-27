@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -22,8 +23,11 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
 
   const addPersonToComanda = (): void => {
     const newComandas = comandas.slice();
+    const hasComanda = comandas.filter(comanda => comanda === name);
 
-    if (name.length > 0) {
+    if (hasComanda.length > 0) {
+      alert('Já existe uma comanda com esse nome');
+    } else if (name.length > 0) {
       newComandas.push(name);
       setComandas(newComandas);
       setName('');
@@ -97,7 +101,13 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
         <label htmlFor="name">Digite o nome da nova comanda:</label>
 
         <div className="new-comanda">
-          <input type="text" id="name" value={name} onChange={onChangeInput} />
+          <input
+            type="text"
+            id="name"
+            data-testid="name"
+            value={name}
+            onChange={onChangeInput}
+          />
           <button type="button" onClick={addPersonToComanda}>
             <FiPlus />
           </button>
