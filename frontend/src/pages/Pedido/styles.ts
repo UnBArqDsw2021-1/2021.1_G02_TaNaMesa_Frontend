@@ -15,7 +15,7 @@ export const Container = styled.div`
   }
 
   h2 {
-    margin: 0 1.5rem;
+    margin: 0;
     font-weight: 600;
     font-size: 1.8rem;
     color: ${props => props.theme.black};
@@ -53,7 +53,7 @@ export const ContainerOrderList = styled.div`
 `;
 
 export const OrderList = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
@@ -73,7 +73,7 @@ export const Item = styled.div`
 export const ContainerClientsOrder = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 3rem 3rem;
+  padding: 1rem 5rem 3rem;
   border-top: 3px solid ${props => props.theme.gray};
 `;
 
@@ -93,13 +93,43 @@ export const ButtonsContainer = styled.div`
 export const ContainerTotal = styled.div`
   width: 30%;
   display: flex;
-  padding: 2rem 3rem;
+  overflow-y: auto;
+  padding: 2rem 3rem 3rem;
   align-items: center;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: ${props => props.theme.gray};
 
+  .total {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .valor-total {
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cliente:first-of-type {
+    margin-top: 2rem;
+  }
+
+  .cliente h2 {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+  }
+
+  .pedido h1 {
+    margin-bottom: 2rem;
+  }
+
   #linha-horizontal {
+    margin: 2rem 0;
     width: 100%;
     height: 2px;
     background-color: ${props => props.theme.black};

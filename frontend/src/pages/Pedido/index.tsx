@@ -23,10 +23,16 @@ interface Item {
   obs?: string;
 }
 
+interface Client {
+  name: string;
+  totalPrice: number;
+}
+
 const Pedido: React.FC = () => {
   const theme = useTheme();
 
   const [items, setItems] = useState<Item[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
     setItems([
@@ -38,16 +44,21 @@ const Pedido: React.FC = () => {
         obs: 'Suco sem açúcar',
       },
       { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
-      {
-        quantity: 2,
-        name: 'Suco de Laranja',
-        price: 20.0,
-        obs: 'Suco sem açúcar',
-      },
+      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
       { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
     ]);
+
+    setClients([
+      { name: 'Brenda', totalPrice: 35.0 },
+      { name: 'Sérgio', totalPrice: 23.0 },
+      { name: 'Hérick', totalPrice: 42.0 },
+      { name: 'Eduarda', totalPrice: 15.0 },
+    ]);
   }, []);
+
+  const getTotalPrice = (): number => {
+    return clients.reduce((sum, { totalPrice }) => sum + totalPrice, 0);
+  };
 
   return (
     <>
@@ -73,22 +84,18 @@ const Pedido: React.FC = () => {
           <ContainerClientsOrder>
             <p>Comandas abertas:</p>
             <ButtonsContainer>
-              <Button
-                color={theme.primary02}
-                width="10rem"
-                padding="1rem"
-                onClick={() => {}}
-              >
-                Sérgio
-              </Button>
-              <Button
-                color={theme.primary02}
-                width="10rem"
-                padding="1rem"
-                onClick={() => {}}
-              >
-                Brenda
-              </Button>
+              {clients.map(({ name }) => {
+                return (
+                  <Button
+                    color={theme.primary02}
+                    width="10rem"
+                    padding="1rem"
+                    onClick={() => {}}
+                  >
+                    {name}
+                  </Button>
+                );
+              })}
               <Button
                 color={theme.secondaryGreen}
                 padding="1rem"
@@ -100,12 +107,23 @@ const Pedido: React.FC = () => {
           </ContainerClientsOrder>
         </ContainerLeft>
         <ContainerTotal>
-          <h1>Total</h1>
-          <h2>Brenda R$ 10.00</h2>
-          <h2>Sérgio R$ 15.00</h2>
-          <div id="linha-horizontal" />
-          <h1>Total R$ 25.00</h1>
-          <Button color={theme.primary02} width="30rem" onClick={() => {}}>
+          <div className="total">
+            <h1>Total</h1>
+            {clients.map(client => {
+              return (
+                <div className="valor-total cliente">
+                  <h2>{client.name}:</h2>
+                  <h2>R$ {client.totalPrice.toFixed(2)}</h2>
+                </div>
+              );
+            })}
+            <div id="linha-horizontal" />
+            <div className="valor-total pedido">
+              <h1>Total:</h1>
+              <h1>R$ {getTotalPrice().toFixed(2)}</h1>
+            </div>
+          </div>
+          <Button color={theme.primary02} width="80%" onClick={() => {}}>
             Pedir Conta
           </Button>
         </ContainerTotal>
