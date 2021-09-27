@@ -14,28 +14,29 @@ export const Container = styled.div`
   visibility: hidden;
   touch-action: none;
 
-  & > .close-button {
+  .close-button {
     display: flex;
-    cursor: pointer;
     justify-content: center;
     text-align: center;
-    margin-left: 280px;
-    height: 24px;
     border-radius: 50%;
-    background-color: ${props => props.theme.secondaryRed02};
-    height: 30px;
-    width: 30px;
-    margin-bottom: 150px;
-
+    overflow: hidden;
+    position: absolute;
+    top: -17px;
+    right: -17px;
+  
     button {
+      height: 34px;
+      width: 34px;
       padding: 0;
       border: none;
-      background: none;
+      background-color: ${props => props.theme.secondaryRed};
+      cursor: pointer;
       color: ${props => props.theme.white};
-      width: 100%;
+      font-weight: 700;
       outline: none;
     }
     button:hover {
+      background-color: ${props => props.theme.secondaryWine};
       box-shadow: none;
       transform: none;
     }
@@ -43,7 +44,6 @@ export const Container = styled.div`
 
   & > .content {
     max-height: 100%;
-    overflow: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
