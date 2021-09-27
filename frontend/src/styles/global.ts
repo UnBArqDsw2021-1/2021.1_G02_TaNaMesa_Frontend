@@ -13,9 +13,14 @@ export default createGlobalStyle`
     font-size: 62.5%;
   }
 
+  html {
+    /* 1rem = 10px, 10px(target)/16px(browser-default) = 62.5% */
+    font-size: 62.5%;
+  }
+
   body, input, button {
     font-family: 'Montserrat', sans-serif;
-    /* font-family: 'Poppins', sans-serif; */
+    /* background-color: $#000; */
     transition: background-color .3s;
   }
 
@@ -25,7 +30,7 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    font-size: 1.6rem;
+    /* font-size: 1.6rem; */
     background: none;
     border: 0;
   }
@@ -33,18 +38,15 @@ export default createGlobalStyle`
   h1, h2, h3, h4, h5 {
     line-height: 1.5;
     font-weight: 600;
+    /* color: #000; */
   }
 
   strong {
-  }
-
-  h2, h3, h4, h5 {
-    margin: 28px 0 20px 0;
+    /* color: #000; */
   }
 
   h1 {
     font-size: 4.18rem;
-    margin-bottom: 3.2rem;
   }
 
   h2 {
@@ -66,8 +68,8 @@ export default createGlobalStyle`
   p {
     font-size: 1.6rem;
     line-height: 1.75;
+    /* color: #000; */
   }
-
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -79,4 +81,5 @@ export default createGlobalStyle`
   input[type=number] {
     -moz-appearance: textfield;
   }
+
 `;

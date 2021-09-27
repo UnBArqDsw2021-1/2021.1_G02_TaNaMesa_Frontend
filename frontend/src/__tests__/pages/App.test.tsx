@@ -5,7 +5,7 @@ import App from '../../App';
 describe('App', () => {
   it('render ta na mesa application name', () => {
     const { getByText } = render(<App />);
-    const linkElement = getByText('Tá Na Mesa');
+    const linkElement = getByText('Tá na Mesa');
     expect(linkElement).toBeInTheDocument();
   });
 });
