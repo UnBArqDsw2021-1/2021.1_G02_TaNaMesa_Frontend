@@ -68,6 +68,7 @@ export default createGlobalStyle`
   p {
     font-size: 1.6rem;
     line-height: 1.75;
+    font-family: 'Poppins';
     /* color: #000; */
   }
   /* Chrome, Safari, Edge, Opera */
@@ -80,6 +81,27 @@ export default createGlobalStyle`
   /* Firefox */
   input[type=number] {
     -moz-appearance: textfield;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.gray};
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${props => props.theme.secondaryWine};
   }
 
 `;
