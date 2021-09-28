@@ -10,12 +10,12 @@ import { ThemeProvider } from 'styled-components';
 import taNaMesaTheme from '../styles/taNaMesaTheme';
 import taNaMesaDarkTheme from '../styles/taNaMesaDarkTheme';
 
-interface IUserThemeContextData {
-  theme: IAppTheme;
+interface UserThemeContextData {
+  theme: AppTheme;
   switchTheme: () => void;
 }
 
-interface IAppTheme {
+interface AppTheme {
   type: string;
   primary01: string;
   primary02: string;
@@ -31,10 +31,11 @@ interface IAppTheme {
 
   black: string;
   white: string;
+  background: string;
   gray: string;
 }
 
-const UserThemeContext = createContext<IUserThemeContextData | null>(null);
+const UserThemeContext = createContext<UserThemeContextData | null>(null);
 
 export const UserThemeProvider: React.FC = ({ children }) => {
   const [theme, setTheme] = useState(taNaMesaTheme);
@@ -64,7 +65,7 @@ export const UserThemeProvider: React.FC = ({ children }) => {
   );
 };
 
-export function useUserTheme(): IUserThemeContextData {
+export function useUserTheme(): UserThemeContextData {
   const context = useContext(UserThemeContext);
 
   if (!context) {
