@@ -1,40 +1,44 @@
 import React from 'react';
 
-import { MenuItemContainer } from 'components/MenuItem/styles';
+import { useUserTheme } from 'hooks/theme';
+
+import {
+  ItemInfo,
+  MenuItemContainer,
+  ButtonContainer,
+} from 'components/MenuItem/styles';
+import Button from 'components/Button';
 
 type Props = {
-  // id: number;
   image: string;
   name: string;
   price: string;
-  // discount: number;
   description: string;
 };
 
-const MenuItem: React.FC<Props> = ({
-  // id,
-  image,
-  name,
-  price,
-  // discount,
-  description,
-}) => {
+const MenuItem: React.FC<Props> = ({ image, name, price, description }) => {
+  const { theme } = useUserTheme();
+
   return (
     <MenuItemContainer>
       <img src={image} alt={name} />
-      <div>
+
+      <ItemInfo>
         <h4>{name}</h4>
         <p>{description}</p>
-        <h5>R${price}</h5>
-        <button
-          type="button"
-          onClick={() => {
-            null;
-          }}
-        >
-          Adicionar
-        </button>
-      </div>
+
+        <ButtonContainer>
+          <p>R${price}</p>
+          <Button
+            color={theme.primary01}
+            onClick={() => {
+              null;
+            }}
+          >
+            <span>Adicionar</span>
+          </Button>
+        </ButtonContainer>
+      </ItemInfo>
     </MenuItemContainer>
   );
 };
