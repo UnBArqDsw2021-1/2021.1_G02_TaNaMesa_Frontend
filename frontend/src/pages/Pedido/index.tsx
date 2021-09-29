@@ -17,6 +17,7 @@ import {
 } from './styles';
 
 interface Item {
+  id: number;
   quantity: number;
   name: string;
   price: number;
@@ -36,39 +37,67 @@ const Pedido: React.FC = () => {
 
   useEffect(() => {
     setItems([
-      { quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
+      { id: 0, quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
       {
+        id: 1,
         quantity: 2,
         name: 'Suco de Laranja',
         price: 20.0,
         obs: 'Suco sem açúcar',
       },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { id: 2, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
       {
+        id: 3,
+        quantity: 3,
+        name: 'Petit Gateu',
+        price: 21.0,
+        obs: 'Tem observação',
+      },
+      { id: 4, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { id: 5, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        id: 6,
+        quantity: 3,
+        name: 'Petit Gateu',
+        price: 21.0,
+        obs: 'Tem observação',
+      },
+      { id: 7, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        id: 8,
         quantity: 2,
         name: 'Suco de Laranja',
         price: 20.0,
         obs: 'Suco sem açúcar',
       },
-      { quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
+      { id: 9, quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
       {
+        id: 10,
         quantity: 2,
         name: 'Suco de Laranja',
         price: 20.0,
         obs: 'Suco sem açúcar',
       },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
-      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { id: 11, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
       {
+        id: 12,
+        quantity: 3,
+        name: 'Petit Gateu',
+        price: 21.0,
+        obs: 'Tem observação',
+      },
+      { id: 13, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { id: 14, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        id: 15,
+        quantity: 3,
+        name: 'Petit Gateu',
+        price: 21.0,
+        obs: 'Tem observação',
+      },
+      { id: 16, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        id: 17,
         quantity: 2,
         name: 'Suco de Laranja',
         price: 20.0,
@@ -104,7 +133,7 @@ const Pedido: React.FC = () => {
               ) : (
                 items.map(item => {
                   return (
-                    <Item>
+                    <Item key={item.id}>
                       <h3>
                         {item.quantity}x {item.name}
                         {item.obs ? (
@@ -131,6 +160,7 @@ const Pedido: React.FC = () => {
               {clients.map(({ name }) => {
                 return (
                   <Button
+                    key={name}
                     color={theme.primary02}
                     width="10rem"
                     padding="1rem"
@@ -148,7 +178,7 @@ const Pedido: React.FC = () => {
             <h1>Total</h1>
             {clients.map(client => {
               return (
-                <div className="valor-total cliente">
+                <div key={client.name} className="valor-total cliente">
                   <h3>{client.name}:</h3>
                   <p>R$ {client.totalPrice.toFixed(2)}</p>
                 </div>
