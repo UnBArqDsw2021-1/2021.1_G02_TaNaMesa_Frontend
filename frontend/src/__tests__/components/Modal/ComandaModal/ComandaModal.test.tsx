@@ -2,45 +2,42 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
-import LoginModal from '../../../../components/Modal/LoginModal';
+import ComandaModal from '../../../../components/Modal/ComandaModal';
 
-describe('LoginModal', () => {
+describe('ComandaModal', () => {
   it('renders nothing when not visible', () => {
     const props = {
-      title: 'Some content',
       visible: false,
       onClose: () => {
         return;
       },
     };
-    render(<LoginModal {...props} />);
+    render(<ComandaModal {...props} />);
 
-    expect(screen.queryByText('Some content')).not.toBeVisible();
+    expect(screen.queryByText('Comandas')).not.toBeVisible();
   });
 
   it('renders content when visible', () => {
     const props = {
-      title: 'Some content',
       visible: true,
       onClose: () => {
         return;
       },
     };
-    render(<LoginModal {...props} />);
+    render(<ComandaModal {...props} />);
 
-    expect(screen.getByText('Some content')).toBeVisible();
+    expect(screen.getByText('Comandas')).toBeVisible();
   });
 
   it('fires onClosed when clicking the button', () => {
     const onCloseHandler = jest.fn();
     const props = {
-      title: 'Some content',
       visible: true,
       onClose: onCloseHandler,
     };
-    render(<LoginModal {...props} />);
+    render(<ComandaModal {...props} />);
 
-    const button = screen.getByRole('button');
+    const button = document.querySelector('.close-button button');
     fireEvent.click(button);
 
     expect(onCloseHandler).toHaveBeenCalled();
@@ -49,11 +46,10 @@ describe('LoginModal', () => {
   it('fires onClosed when pressing esc', () => {
     const onCloseHandler = jest.fn();
     const props = {
-      title: 'Some content',
       visible: true,
       onClose: onCloseHandler,
     };
-    render(<LoginModal {...props} />);
+    render(<ComandaModal {...props} />);
 
     fireEvent.keyDown(document.body, {
       key: 'Escape',
@@ -64,31 +60,29 @@ describe('LoginModal', () => {
     expect(onCloseHandler).toHaveBeenCalled();
   });
 
-  it('simulates selection', async () => {
+  it('simulates input', async () => {
     const props = {
-      title: 'Some content',
       visible: true,
       onClose: () => {
         return;
       },
     };
-    render(<LoginModal {...props} />);
-    const dropdown = screen.getByTestId('select') as HTMLSelectElement;
-    expect(dropdown.value).toBe('Usuario');
-    fireEvent.change(dropdown, { target: { value: 'Mesa' } });
-    expect(dropdown.value).toBe('Mesa');
+    render(<ComandaModal {...props} />);
+    const input = screen.getByTestId('name') as HTMLInputElement;
+    expect(input.value).toBe('');
+    fireEvent.change(input, { target: { value: 'Ítalo' } });
+    expect(input.value).toBe('Ítalo');
   });
 
-  it('simulates selection', async () => {
+  it('verifies input', async () => {
     const props = {
-      title: 'Some content',
       visible: true,
       onClose: () => {
         return;
       },
     };
-    render(<LoginModal {...props} />);
-    const passwordField = document.querySelector('#password');
-    expect(passwordField).toBeInTheDocument();
+    render(<ComandaModal {...props} />);
+    const input = screen.getByTestId('name') as HTMLInputElement;
+    expect(input).toBeInTheDocument();
   });
 });
