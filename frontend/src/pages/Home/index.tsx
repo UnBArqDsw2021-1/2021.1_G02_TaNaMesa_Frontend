@@ -1,45 +1,20 @@
 import React from 'react';
 
-import { useUserTheme } from 'hooks/theme';
-
+import SideBar from 'components/SideBar';
+import BackgroundHamburguer from 'components/BackgroundHamburguer';
 // import Loading from 'components/Loading';
-import MenuItem from 'components/MenuItem';
-import NavBar from 'components/NavBar';
-import Button from 'components/Button';
 
 import { Container } from 'pages/Home/styles';
 
 const Home: React.FC = () => {
-  const { switchTheme, theme } = useUserTheme();
-
   return (
-    <Container>
-      <NavBar center="Mesa" tableTitle="Mesa 1" />
-      <NavBar left="Voltar" center="Mesa" tableTitle="Mesa 1" />
-      <NavBar left="Voltar" right="Pedido" />
-      <NavBar left="Voltar" right="Pedido" isOrderEmpty />
-      <NavBar left="Voltar" />
-      <NavBar left="Voltar" center="Pedidos" />
-
-      <h1>Tá na Mesa</h1>
-
-      <Button color={theme.primary01} onClick={switchTheme}>
-        Trocar tema
-      </Button>
-
-      <h4>{theme.type}</h4>
-
-      <MenuItem
-        // id={0}
-        image="https://blog.finamac.com/wp-content/uploads/2019/10/309956-como-oferecer-os-melhores-sabores-de-milkshake-para-os-clientes-1280x640.jpg"
-        name="Milkshake"
-        price="16.90"
-        // discount={0}
-        description="Disponível nos sabores morango, chocolate, oreo e creme de avelã."
-      />
-
-      {/* <Loading /> */}
-    </Container>
+    <>
+      <Container>
+        <SideBar page="menu-home" />
+        <BackgroundHamburguer text="Da mesa pra cozinha e da cozinha pra mesa." />
+        {/* <Loading /> */}
+      </Container>
+    </>
   );
 };
 

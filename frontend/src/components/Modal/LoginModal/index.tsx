@@ -37,12 +37,12 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
   }, [onClose]);
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
-      <div className="close-button">
-        <button type="button" onClick={onClose}>
-          x
-        </button>
-      </div>
       <div className="content">
+        <div className="close-button">
+          <button type="button" onClick={onClose}>
+            x
+          </button>
+        </div>
         {title}
         <div id="dropdown">
           <select
