@@ -1,6 +1,6 @@
 import api from 'api';
 
-export interface Item {
+interface Item {
   category: string;
   createdAt: string;
   description: string;

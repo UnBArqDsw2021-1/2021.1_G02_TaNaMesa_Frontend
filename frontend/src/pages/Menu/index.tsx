@@ -7,7 +7,19 @@ import { useScreenSize } from 'hooks/screen';
 
 import { Container, MenuContainer } from 'pages/Menu/styles';
 
-import { getAllItems, Item } from 'services/items';
+import { getAllItems } from 'services/items';
+
+interface Item {
+  category: string;
+  createdAt: string;
+  description: string;
+  discount: number;
+  idItem: number;
+  name: string;
+  notes: string;
+  price: number;
+  updatedAt: string;
+}
 
 const Menu: React.FC = () => {
   const { openMenu } = useScreenSize();
