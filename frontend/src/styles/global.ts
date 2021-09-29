@@ -30,7 +30,7 @@ export default createGlobalStyle`
 
   button {
     cursor: pointer;
-    font-size: 1.6rem;
+    /* font-size: 1.6rem; */
     background: none;
     border: 0;
   }
@@ -45,13 +45,8 @@ export default createGlobalStyle`
     /* color: #000; */
   }
 
-  h2, h3, h4, h5 {
-    margin: 28px 0 20px 0;
-  }
-
   h1 {
     font-size: 4.18rem;
-    margin-bottom: 3.2rem;
   }
 
   h2 {
