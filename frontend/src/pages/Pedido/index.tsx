@@ -46,6 +46,34 @@ const Pedido: React.FC = () => {
       { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
       { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
       { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        quantity: 2,
+        name: 'Suco de Laranja',
+        price: 20.0,
+        obs: 'Suco sem açúcar',
+      },
+      { quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
+      {
+        quantity: 2,
+        name: 'Suco de Laranja',
+        price: 20.0,
+        obs: 'Suco sem açúcar',
+      },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      { quantity: 3, name: 'Petit Gateu', price: 21.0, obs: 'Tem observação' },
+      { quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
+      {
+        quantity: 2,
+        name: 'Suco de Laranja',
+        price: 20.0,
+        obs: 'Suco sem açúcar',
+      },
     ]);
 
     setClients([
@@ -77,11 +105,15 @@ const Pedido: React.FC = () => {
                 items.map(item => {
                   return (
                     <Item>
-                      <h2>
+                      <h3>
                         {item.quantity}x {item.name}
-                        {item.obs ? <h3>Observação: {item.obs}</h3> : <br />}
-                      </h2>
-                      <h2>R$ {item.price.toFixed(2)}</h2>
+                        {item.obs ? (
+                          <span>Observação: {item.obs}</span>
+                        ) : (
+                          <br />
+                        )}
+                      </h3>
+                      <p>R$ {item.price.toFixed(2)}</p>
                     </Item>
                   );
                 })
@@ -89,7 +121,12 @@ const Pedido: React.FC = () => {
             </OrderList>
           </ContainerOrderList>
           <ContainerClientsOrder>
-            <p>Comandas abertas:</p>
+            <div className="criar-comanda">
+              <p>Comandas abertas:</p>
+              <button type="button" onClick={() => {}}>
+                +
+              </button>
+            </div>
             <ButtonsContainer>
               {clients.map(({ name }) => {
                 return (
@@ -103,13 +140,6 @@ const Pedido: React.FC = () => {
                   </Button>
                 );
               })}
-              <Button
-                color={theme.secondaryGreen}
-                padding="1rem"
-                onClick={() => {}}
-              >
-                Criar Comanda
-              </Button>
             </ButtonsContainer>
           </ContainerClientsOrder>
         </ContainerLeft>
@@ -119,8 +149,8 @@ const Pedido: React.FC = () => {
             {clients.map(client => {
               return (
                 <div className="valor-total cliente">
-                  <h2>{client.name}:</h2>
-                  <h2>R$ {client.totalPrice.toFixed(2)}</h2>
+                  <h3>{client.name}:</h3>
+                  <p>R$ {client.totalPrice.toFixed(2)}</p>
                 </div>
               );
             })}
