@@ -26,6 +26,7 @@ export default createGlobalStyle`
 
   body, #root {
     width: 100%;
+    background-color: ${props => props.theme.background};
   }
 
   button {
