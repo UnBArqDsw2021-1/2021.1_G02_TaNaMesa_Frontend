@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
+import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
 import { useScreenSize } from 'hooks/screen';
+import imgNoItems from 'assets/Menu/sem-items.png';
 
 import { Container, MenuContainer } from 'pages/Menu/styles';
 
 import { getAllItems } from 'services/items';
+import { useMenu } from 'hooks/menu';
 
 interface Item {
   category: string;
@@ -15,6 +18,7 @@ interface Item {
   description: string;
   discount: number;
   idItem: number;
+  image: string;
   name: string;
   notes: string;
   price: number;
@@ -23,14 +27,23 @@ interface Item {
 
 const Menu: React.FC = () => {
   const { openMenu } = useScreenSize();
+  const { selectedCategory } = useMenu();
 
   const [menuItems, setMenuItems] = useState<Item[]>([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getAllItems().then(response => {
-      setMenuItems(response);
-    });
-  }, []);
+    setIsLoading(true);
+    getAllItems(selectedCategory)
+      .then(response => {
+        setMenuItems(response);
+      })
+      .catch(() => {
+        setMenuItems([]);
+      })
+      .finally(() => setIsLoading(false));
+  }, [selectedCategory]);
 
   return (
     <>
@@ -43,14 +56,17 @@ const Menu: React.FC = () => {
           hasLogo
         />
 
-        <MenuContainer size={openMenu ? 'small' : 'large'}>
-          <h1>Cardápio</h1>
+        <MenuContainer
+          hasItems={menuItems.length !== 0}
+          size={openMenu ? 'small' : 'large'}
+        >
+          {menuItems.length !== 0 && <h1>Cardápio</h1>}
 
           {menuItems.map(item => {
             return (
               <MenuItem
                 key={item.idItem}
-                image="https://blog.finamac.com/wp-content/uploads/2019/10/309956-como-oferecer-os-melhores-sabores-de-milkshake-para-os-clientes-1280x640.jpg"
+                image={item.image}
                 name={item.name}
                 price={String(item.price)}
                 // discount={0}
@@ -58,8 +74,22 @@ const Menu: React.FC = () => {
               />
             );
           })}
+          {menuItems.length === 0 ? (
+            <>
+              <img
+                className="menu-vazio"
+                src={imgNoItems}
+                alt="Sem itens no momento"
+              />
+              <p className="menu-vazio-texto">Sem items no menu no momento</p>
+              <br />
+              <p className="menu-vazio-texto">
+                Fale com um garçom para mais informações 😋
+              </p>
+            </>
+          ) : null}
         </MenuContainer>
-        {/* <Loading /> */}
+        {isLoading && <Loading />}
       </Container>
     </>
   );
