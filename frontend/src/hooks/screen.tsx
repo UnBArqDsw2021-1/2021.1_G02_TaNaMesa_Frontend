@@ -1,4 +1,3 @@
-// const [openMenu, setOpenMenu] = useState(false);
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
 interface ScreenContextData {
