@@ -33,6 +33,7 @@ interface SideBarObjects {
   text: string;
   id: number;
   route?: string;
+  category?: string;
 }
 
 const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
@@ -105,6 +106,7 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
                 key={option.id}
                 text={option.text}
                 icon={option.icon}
+                category={option.category ? option.category : null}
                 route={option.route ? option.route : null}
               />
             );

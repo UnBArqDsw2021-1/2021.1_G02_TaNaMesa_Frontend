@@ -2,20 +2,34 @@ import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router';
 
 import { SideBarButtonContainer } from 'components/SideBarButton/styles';
+import { useMenu } from 'hooks/menu';
+import { useScreenSize } from 'hooks/screen';
 
 interface SideBarButtonProps {
   icon: string;
   text: string;
   isCallWaiter?: boolean;
   route?: string | null;
+  category?: string | null;
 }
+
+type Categories =
+  | 'hamburgueres'
+  | 'petiscos'
+  | 'molhos adicionais'
+  | 'saladas'
+  | 'bebidas'
+  | 'sobremesas';
 
 const SideBarButton: React.FC<SideBarButtonProps> = ({
   icon,
   text,
   isCallWaiter,
   route,
+  category,
 }) => {
+  const { changeMenuItemCategory } = useMenu();
+  const { switchScreenSize } = useScreenSize();
   const history = useHistory();
 
   const whichFunctionOnClick = (): ((e: FormEvent) => void) => {
@@ -23,6 +37,13 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
       return e => {
         e.preventDefault();
         history.push(route);
+      };
+    }
+    if (category) {
+      return e => {
+        e.preventDefault();
+        changeMenuItemCategory(category as Categories);
+        switchScreenSize();
       };
     }
 
@@ -44,6 +65,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
 SideBarButton.defaultProps = {
   isCallWaiter: false,
   route: null,
+  category: null,
   // onClick: () => console.log('Sem função de onClick'),
 };
 

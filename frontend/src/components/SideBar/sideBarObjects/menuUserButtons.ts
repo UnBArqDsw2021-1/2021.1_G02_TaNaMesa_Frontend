@@ -9,21 +9,25 @@ const options = [
     id: 0,
     icon: imgBurguer,
     text: 'Burguers',
+    category: 'hamburgueres',
   },
   {
     id: 1,
     icon: imgFries,
     text: 'Batatas',
+    category: 'petiscos',
   },
   {
     id: 2,
     icon: imgDrink,
     text: 'Bebidas',
+    category: 'bebidas',
   },
   {
     id: 3,
     icon: imgDessert,
     text: 'Sobremesas',
+    category: 'sobremesas',
   },
 ];
 
