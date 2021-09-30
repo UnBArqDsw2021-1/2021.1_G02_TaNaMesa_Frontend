@@ -7,24 +7,24 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
-  position: fixed;
+  position: ${props => (props.size === 'large' ? 'fixed' : 'static')};
   flex-direction: column;
   align-items: center;
+  z-index: 5555;
   justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
   width: ${props => (props.size === 'large' ? '30%' : '7%')};
   padding-top: ${props => (props.size === 'small' ? '2rem' : 0)};
   height: 100%;
   overflow-y: auto;
-  transition: 1s ease;
-  position: relative;
+  transition: 0.6s ease;
   background: linear-gradient(
     180deg,
     ${props => props.theme.primary03} 0%,
     ${props => props.theme.primary02} 100%
   );
 
-  @media (max-width: 768px) {
-    width: ${props => (props.size === 'large' ? '45%' : '10%')};
+  @media (max-width: 1000px) {
+    width: ${props => (props.size === 'large' ? '60%' : '10%')};
   }
 `;
 

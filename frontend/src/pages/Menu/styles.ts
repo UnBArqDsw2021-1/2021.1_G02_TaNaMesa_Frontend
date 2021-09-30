@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface MenuContainerProps {
   size: 'large' | 'small';
+  hasItems: boolean;
 }
 
 export const Container = styled.div`
@@ -18,12 +19,23 @@ export const Container = styled.div`
 export const MenuContainer = styled.section<MenuContainerProps>`
   display: flex;
   flex-direction: column;
-  width: ${props => (props.size === 'large' ? '93%' : '70%')};
+  width: 100%;
+  /* width: ${props => (props.size === 'large' ? '93%' : '70%')}; */
   height: 100%;
   background-color: ${props => props.theme.background};
   overflow-y: auto;
   padding: 4rem 2.5rem;
-  transition: 1s ease;
+  transition: 0.6s ease;
+  opacity: ${props => (props.size === 'large' ? 1 : 0.4)};
+
+  ${props =>
+    !props.hasItems &&
+    css`
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 0;
+    `}
 
   h1 {
     font-weight: 600;
@@ -33,7 +45,29 @@ export const MenuContainer = styled.section<MenuContainerProps>`
     margin-bottom: 4rem;
   }
 
+  .menu-vazio {
+    width: 30%;
+    margin-bottom: 3.6rem;
+  }
+
+  .menu-vazio-texto {
+    font-weight: normal;
+    font-size: 2.4rem;
+    text-align: center;
+    line-height: 3.6rem;
+  }
+
   @media (max-width: 768px) {
-    width: ${props => (props.size === 'large' ? '90%' : '55%')};
+    /* width: ${props => (props.size === 'large' ? '90%' : '55%')}; */
+    .menu-vazio-texto {
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
+
+    .menu-vazio {
+      width: 45%;
+    }
   }
 `;
+
+export const EmptyMenuContainer = styled.section``;
