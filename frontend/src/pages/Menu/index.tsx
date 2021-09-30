@@ -26,12 +26,14 @@ interface Item {
 }
 
 const Menu: React.FC = () => {
-  const { openMenu } = useScreenSize();
+  const { openMenu, switchActualScreen } = useScreenSize();
   const { selectedCategory } = useMenu();
 
   const [menuItems, setMenuItems] = useState<Item[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  switchActualScreen('menu');
 
   useEffect(() => {
     setIsLoading(true);

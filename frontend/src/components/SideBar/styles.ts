@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   hasLogo?: boolean;
   size: 'large' | 'small' | undefined;
+  needToBeStatic: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -12,7 +13,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   z-index: 5555;
   justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
-  width: ${props => (props.size === 'large' ? '30%' : '7%')};
+  width: ${props => (props.size === 'large' ? '40%' : '10%')};
   padding-top: ${props => (props.size === 'small' ? '2rem' : 0)};
   height: 100%;
   overflow-y: auto;
@@ -23,8 +24,14 @@ export const Container = styled.div<ContainerProps>`
     ${props => props.theme.primary02} 100%
   );
 
+  ${props =>
+    props.needToBeStatic &&
+    css`
+      position: static;
+    `}
+
   @media (max-width: 1000px) {
-    width: ${props => (props.size === 'large' ? '60%' : '10%')};
+    width: ${props => (props.size === 'large' ? '100%' : '10%')};
   }
 `;
 

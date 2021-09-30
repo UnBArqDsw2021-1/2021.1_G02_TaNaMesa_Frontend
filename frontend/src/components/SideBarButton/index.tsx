@@ -37,6 +37,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
       return e => {
         e.preventDefault();
         history.push(route);
+        switchScreenSize();
       };
     }
     if (category) {

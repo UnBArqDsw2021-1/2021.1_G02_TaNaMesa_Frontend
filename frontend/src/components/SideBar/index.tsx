@@ -37,7 +37,7 @@ interface SideBarObjects {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
-  const { switchScreenSize } = useScreenSize();
+  const { switchScreenSize, actualScreen } = useScreenSize();
   const { theme } = useUserTheme();
 
   const [menuOptions, setMenuOptions] = useState<SideBarObjects[]>([]);
@@ -83,7 +83,11 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
   }, [getMenuOptions]);
 
   return (
-    <Container size={size} hasLogo={hasLogo}>
+    <Container
+      needToBeStatic={actualScreen === 'home'}
+      size={size}
+      hasLogo={hasLogo}
+    >
       {size === 'large' ? (
         <>
           <LogoContainer>
