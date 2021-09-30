@@ -12,6 +12,7 @@ export const MenuItemContainer = styled.div`
 
   img {
     width: 30rem;
+    height: 15rem;
     object-fit: cover;
     border-radius: 20px;
     margin-right: 4rem;
