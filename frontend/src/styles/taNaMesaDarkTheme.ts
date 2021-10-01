@@ -1,7 +1,7 @@
 export default {
   type: 'dark',
   primary01: '#FF0000',
-  primary02: '#5E2129',
+  primary02: '#EB4040',
   primary03: '#FFA500',
   primary04: '#A45E4D40',
 
@@ -14,5 +14,5 @@ export default {
 
   black: '#FFFFFF',
   white: '#000000',
-  gray: '#C4C4C4',
+  gray: '#424A4D',
 };

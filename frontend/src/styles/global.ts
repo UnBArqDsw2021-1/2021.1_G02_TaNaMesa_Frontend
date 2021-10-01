@@ -19,7 +19,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', 'Montserrat', sans-serif;
     /* background-color: $#000; */
     transition: background-color .3s;
   }
