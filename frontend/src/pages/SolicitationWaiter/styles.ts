@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  height: calc(100vh - 6rem);
   flex-direction: row;
-  width: 100%;
-  background-color: ${props => props.theme.white};
+  justify-content: space-between;
+  background-color: ${props => props.theme.gray};
 
   .buttons {
     flex-direction: column;
@@ -13,12 +12,16 @@ export const Container = styled.div`
   }
 
   .title {
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
     width: 100%;
     text-align: center;
     background-color: ${props => props.theme.white};
-    height: 60px;
-    padding: 20px;
+    height: 6rem;
+    padding: 2rem;
+  }
+
+  .button-mesas {
+    margin: 1rem;
   }
 `;
