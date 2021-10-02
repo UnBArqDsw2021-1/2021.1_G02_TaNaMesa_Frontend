@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import SideBar from 'components/SideBar';
 import BackgroundHamburguer from 'components/BackgroundHamburguer';
@@ -10,7 +10,7 @@ import { useScreenSize } from 'hooks/screen';
 const Home: React.FC = () => {
   const { actualScreen, switchActualScreen } = useScreenSize();
 
-  switchActualScreen('home');
+  useEffect(() => switchActualScreen('home'), [switchActualScreen]);
 
   return (
     <>

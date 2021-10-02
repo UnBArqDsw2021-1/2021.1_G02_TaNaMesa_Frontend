@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const SideBarButtonContainer = styled.button`
+interface SideBarButtonContainerProps {
+  hasBorder?: boolean;
+}
+
+export const SideBarButtonContainer = styled.button<SideBarButtonContainerProps>`
   display: flex;
   position: relative;
   flex-direction: row;
@@ -34,6 +38,13 @@ export const SideBarButtonContainer = styled.button`
     box-shadow: 0 0 10px ${props => props.theme.white};
     opacity: 0.8;
   }
+
+  ${props =>
+    props.hasBorder &&
+    css`
+      border: 2px solid ${props.theme.white};
+      background-color: ${props.theme.white + 50};
+    `}
 
   @media (max-width: 900px) {
     span {

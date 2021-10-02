@@ -34,7 +34,7 @@ export const MenuContainer = styled.section<MenuContainerProps>`
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      padding: 0;
+      padding: 0 1rem;
     `}
 
   h1 {
@@ -46,7 +46,7 @@ export const MenuContainer = styled.section<MenuContainerProps>`
   }
 
   .menu-vazio {
-    width: 30%;
+    width: 20%;
     margin-bottom: 3.6rem;
   }
 

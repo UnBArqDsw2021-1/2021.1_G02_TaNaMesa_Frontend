@@ -21,6 +21,8 @@ type Categories =
   | 'bebidas'
   | 'sobremesas';
 
+type CategoriesTexts = 'Burguers' | 'Batatas' | 'Bebidas' | 'Sobremesas';
+
 const SideBarButton: React.FC<SideBarButtonProps> = ({
   icon,
   text,
@@ -28,7 +30,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   route,
   category,
 }) => {
-  const { changeMenuItemCategory } = useMenu();
+  const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
   const { switchScreenSize } = useScreenSize();
   const history = useHistory();
 
@@ -44,6 +46,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
       return e => {
         e.preventDefault();
         changeMenuItemCategory(category as Categories);
+        changeMenuItemCategoryText(text as CategoriesTexts);
         switchScreenSize();
       };
     }
@@ -54,7 +57,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
 
   return (
     <SideBarButtonContainer
-      style={isCallWaiter ? { marginTop: '12rem', marginBottom: '2rem' } : {}}
+      hasBorder={isCallWaiter}
       onClick={whichFunctionOnClick()}
     >
       <img src={icon} alt="Buguer" />

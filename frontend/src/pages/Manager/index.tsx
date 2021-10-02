@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
@@ -9,7 +9,7 @@ import { useScreenSize } from 'hooks/screen';
 const Manager: React.FC = () => {
   const { switchActualScreen } = useScreenSize();
 
-  switchActualScreen('manager');
+  useEffect(() => switchActualScreen('manager'), [switchActualScreen]);
 
   return (
     <>

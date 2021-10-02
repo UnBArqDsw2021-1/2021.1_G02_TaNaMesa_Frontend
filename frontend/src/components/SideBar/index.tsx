@@ -36,6 +36,8 @@ interface SideBarObjects {
   category?: string;
 }
 
+const screensNamesNeedToBeStatic = ['home', 'waiter', 'kitchen', 'manager'];
+
 const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
   const { switchScreenSize, actualScreen } = useScreenSize();
   const { theme } = useUserTheme();
@@ -84,7 +86,7 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
 
   return (
     <Container
-      needToBeStatic={actualScreen === 'home'}
+      needToBeStatic={screensNamesNeedToBeStatic.includes(actualScreen)}
       size={size}
       hasLogo={hasLogo}
     >
