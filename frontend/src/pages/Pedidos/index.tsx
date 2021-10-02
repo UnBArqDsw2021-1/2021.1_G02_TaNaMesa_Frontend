@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import NavBar from 'components/NavBar';
 
-import { Container } from './styles';
+import { Container, Status } from './styles';
 
 interface Mesa {
   id: number;
@@ -67,12 +67,66 @@ const Pedidos: React.FC = () => {
         <div className="pedidos">
           <div className="col">
             <h3>Em aberto</h3>
+
+            <div className="mesas">
+              {mesas.map(mesa => (
+                <div className="mesa">
+                  <div className="status">
+                    <h4>Mesa {mesa.id}</h4>
+                    <Status color="#EB4040" />
+                  </div>
+                  <div className="content">
+                    <h5>
+                      {mesa.comanda.length === 1
+                        ? `1 Comanda`
+                        : `${mesa.comanda.length} Comandas`}
+                    </h5>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="col">
             <h3>Em produção</h3>
+
+            <div className="mesas">
+              {mesas.map(mesa => (
+                <div className="mesa">
+                  <div className="status">
+                    <h4>Mesa {mesa.id}</h4>
+                    <Status color="#F9FC66" />
+                  </div>
+                  <div className="content">
+                    <h5>
+                      {mesa.comanda.length === 1
+                        ? `1 Comanda`
+                        : `${mesa.comanda.length} Comandas`}
+                    </h5>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="col">
             <h3>Concluídos</h3>
+
+            <div className="mesas">
+              {mesas.map(mesa => (
+                <div className="mesa">
+                  <div className="status">
+                    <h4>Mesa {mesa.id}</h4>
+                    <Status color="#2BB426" />
+                  </div>
+                  <div className="content">
+                    <h5>
+                      {mesa.comanda.length === 1
+                        ? `1 Comanda`
+                        : `${mesa.comanda.length} Comandas`}
+                    </h5>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Container>
