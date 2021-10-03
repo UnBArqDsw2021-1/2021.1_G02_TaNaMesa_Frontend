@@ -6,7 +6,7 @@ import HelpButton from 'components/HelpButton';
 import { Container } from 'pages/SolicitationWaiter/styles';
 
 const SolicitationWaiter: React.FC = () => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState('');
   const mesas = [
     {
       id: '1',
@@ -33,27 +33,27 @@ const SolicitationWaiter: React.FC = () => {
       mesa: '15',
     },
     {
-      id: '1',
+      id: '7',
       mesa: '10',
     },
     {
-      id: '2',
+      id: '8',
       mesa: '11',
     },
     {
-      id: '3',
+      id: '9',
       mesa: '12',
     },
     {
-      id: '4',
+      id: '10',
       mesa: '13',
     },
     {
-      id: '5',
+      id: '11',
       mesa: '14',
     },
     {
-      id: '6',
+      id: '12',
       mesa: '15',
     },
   ];
@@ -62,18 +62,18 @@ const SolicitationWaiter: React.FC = () => {
     <>
       <NavBar left="Voltar" />
       <Container>
-        <SideBar page="menu-waiter" hasLogo />
+        {/* <SideBar page="menu-waiter" hasLogo /> */}
         <div className="buttons">
           <div className="title">
             Clique sobre a mesa quando atender a solicitação de ajuda
           </div>
           {mesas.map(value => {
             return (
-              <div className="button-mesas">
+              <div key={value.id} className="button-mesas">
                 <HelpButton
-                  key={value.id}
+                  id={value.id}
                   checked={checked}
-                  onToggle={setChecked}
+                  onToggle={() => setChecked(value.id)}
                 >
                   Mesa {value.mesa}
                 </HelpButton>

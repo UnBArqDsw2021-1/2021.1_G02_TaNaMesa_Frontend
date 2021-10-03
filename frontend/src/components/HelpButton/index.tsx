@@ -5,30 +5,27 @@ import Icons from 'utils/assets';
 import { Container } from 'components/HelpButton/styles';
 
 type HelpButtonProps = {
-  checked: boolean;
-  onToggle: (checked: boolean) => void;
+  checked: string;
+  id: string;
+  onToggle: (checked: string) => void;
 };
 
 const HelpButton: React.FC<HelpButtonProps> = ({
   children,
   checked,
   onToggle,
+  id,
 }) => {
-  const checkCheckbox = (): boolean => {
-    if (checked === true) return (checked = false);
-    if (checked === false) return (checked = true);
-    return true;
-  };
   return (
-    <Container onClick={() => onToggle(!checked)}>
+    <Container onClick={() => onToggle(checked)}>
       {children}
       <img alt="helpbutton" src={Icons.simbolo_duvida} />
       <label htmlFor="checkmark" className="containerInput">
         <input
+          id={id}
           type="checkbox"
-          checked={checked}
-          onClick={checkCheckbox}
-          onChange={() => onToggle(!checked)}
+          checked={checked === id}
+          onChange={() => onToggle(checked)}
         />
         <span className="checkmark" />
       </label>

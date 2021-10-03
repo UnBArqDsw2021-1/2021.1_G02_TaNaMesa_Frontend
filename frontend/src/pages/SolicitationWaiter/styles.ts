@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  /* height: calc(100vh - 6rem); */
   flex-direction: row;
-  justify-content: space-between;
   background-color: ${props => props.theme.gray};
 
   .buttons {
     flex-direction: column;
     width: 100%;
+    /* overflow-y: scroll; */
   }
 
   .title {

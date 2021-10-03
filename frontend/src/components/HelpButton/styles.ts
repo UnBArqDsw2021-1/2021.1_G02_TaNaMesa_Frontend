@@ -28,7 +28,7 @@ export const Container = styled.button`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    width: 97%;
+    width: 96%;
     position: absolute;
   }
 
@@ -71,13 +71,13 @@ export const Container = styled.button`
 
   @media (max-width: 900px) {
     .containerInput {
-      width: 95%;
+      width: 93%;
     }
   }
 
   @media (max-width: 500px) {
     .containerInput {
-      width: 92%;
+      width: 90%;
     }
   }
 `;
