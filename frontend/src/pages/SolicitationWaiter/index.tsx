@@ -6,57 +6,64 @@ import HelpButton from 'components/HelpButton';
 import { Container } from 'pages/SolicitationWaiter/styles';
 
 const SolicitationWaiter: React.FC = () => {
-  const [checked, setChecked] = useState('');
   const mesas = [
     {
-      id: '1',
+      id: 0,
+      mesa: 1,
+    },
+    {
+      id: 1,
+      mesa: '2',
+    },
+    {
+      id: 2,
+      mesa: '3',
+    },
+    {
+      id: 3,
+      mesa: '4',
+    },
+    {
+      id: 4,
+      mesa: '5',
+    },
+    {
+      id: 5,
+      mesa: '6',
+    },
+    {
+      id: 6,
+      mesa: '7',
+    },
+    {
+      id: 7,
+      mesa: '8',
+    },
+    {
+      id: 8,
+      mesa: '9',
+    },
+    {
+      id: 9,
       mesa: '10',
     },
     {
-      id: '2',
+      id: 10,
       mesa: '11',
     },
     {
-      id: '3',
+      id: 11,
       mesa: '12',
-    },
-    {
-      id: '4',
-      mesa: '13',
-    },
-    {
-      id: '5',
-      mesa: '14',
-    },
-    {
-      id: '6',
-      mesa: '15',
-    },
-    {
-      id: '7',
-      mesa: '10',
-    },
-    {
-      id: '8',
-      mesa: '11',
-    },
-    {
-      id: '9',
-      mesa: '12',
-    },
-    {
-      id: '10',
-      mesa: '13',
-    },
-    {
-      id: '11',
-      mesa: '14',
-    },
-    {
-      id: '12',
-      mesa: '15',
     },
   ];
+  const [checked, setChecked] = useState(new Array(mesas.length).fill(false));
+
+  const handleOnChange = (position: number): void => {
+    const updatedCheckedState = checked.map((item, index) =>
+      index === position ? !item : item,
+    );
+    setChecked(updatedCheckedState);
+  };
 
   return (
     <>
@@ -72,8 +79,8 @@ const SolicitationWaiter: React.FC = () => {
               <div key={value.id} className="button-mesas">
                 <HelpButton
                   id={value.id}
-                  checked={checked}
-                  onToggle={() => setChecked(value.id)}
+                  checked={checked[value.id]}
+                  onToggle={() => handleOnChange(value.id)}
                 >
                   Mesa {value.mesa}
                 </HelpButton>

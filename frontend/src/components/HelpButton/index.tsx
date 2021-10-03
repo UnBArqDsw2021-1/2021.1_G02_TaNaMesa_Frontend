@@ -5,8 +5,8 @@ import Icons from 'utils/assets';
 import { Container } from 'components/HelpButton/styles';
 
 type HelpButtonProps = {
-  checked: string;
-  id: string;
+  [checked: string]: any;
+  id: number;
   onToggle: (checked: string) => void;
 };
 
@@ -17,15 +17,14 @@ const HelpButton: React.FC<HelpButtonProps> = ({
   id,
 }) => {
   return (
-    <Container onClick={() => onToggle(checked)}>
+    <Container onClick={() => onToggle(checked[id])}>
       {children}
       <img alt="helpbutton" src={Icons.simbolo_duvida} />
       <label htmlFor="checkmark" className="containerInput">
         <input
-          id={id}
           type="checkbox"
-          checked={checked === id}
-          onChange={() => onToggle(checked)}
+          checked={checked}
+          onChange={() => onToggle(checked[id])}
         />
         <span className="checkmark" />
       </label>
