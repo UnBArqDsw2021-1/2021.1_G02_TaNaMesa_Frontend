@@ -15,9 +15,10 @@ export const Container = styled.div<ContainerProps>`
   justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
   width: ${props => (props.size === 'large' ? '40%' : '10%')};
   padding-top: ${props => (props.size === 'small' ? '2rem' : 0)};
-  height: 100%;
+  height: 100vh;
   overflow-y: auto;
   transition: 0.6s ease;
+  /* padding-bottom: 8rem; */
   background: linear-gradient(
     180deg,
     ${props => props.theme.primary03} 0%,
