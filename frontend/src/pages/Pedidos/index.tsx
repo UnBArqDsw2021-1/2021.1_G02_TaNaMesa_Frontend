@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import NavBar from 'components/NavBar';
+import PedidosModal from 'components/Modal/PedidosModal';
 
 import { Container, Status } from './styles';
 
 interface Mesa {
   id: number;
-  comanda: Array<Comanda>;
+  comandas: Array<Comanda>;
 }
 
 interface Comanda {
@@ -35,7 +36,7 @@ const Pedidos: React.FC = () => {
     setMesas([
       {
         id: 1,
-        comanda: [
+        comandas: [
           {
             id: 1,
             pessoa: { name: 'Ítalo', totalPrice: 21.0 },
@@ -47,7 +48,7 @@ const Pedidos: React.FC = () => {
       },
       {
         id: 2,
-        comanda: [
+        comandas: [
           {
             id: 2,
             pessoa: { name: 'Tiago', totalPrice: 12.0 },
@@ -70,16 +71,16 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa">
+                <div className="mesa" key={mesa.id}>
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#EB4040" />
                   </div>
                   <div className="content">
                     <h5>
-                      {mesa.comanda.length === 1
+                      {mesa.comandas.length === 1
                         ? `1 Comanda`
-                        : `${mesa.comanda.length} Comandas`}
+                        : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
                 </div>
@@ -91,16 +92,16 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa">
+                <div className="mesa" key={mesa.id}>
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#F9FC66" />
                   </div>
                   <div className="content">
                     <h5>
-                      {mesa.comanda.length === 1
+                      {mesa.comandas.length === 1
                         ? `1 Comanda`
-                        : `${mesa.comanda.length} Comandas`}
+                        : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
                 </div>
@@ -112,16 +113,16 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa">
+                <div className="mesa" key={mesa.id}>
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#2BB426" />
                   </div>
                   <div className="content">
                     <h5>
-                      {mesa.comanda.length === 1
+                      {mesa.comandas.length === 1
                         ? `1 Comanda`
-                        : `${mesa.comanda.length} Comandas`}
+                        : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
                 </div>
@@ -130,6 +131,8 @@ const Pedidos: React.FC = () => {
           </div>
         </div>
       </Container>
+
+      <PedidosModal visible onClose={value => console.log(value)} />
     </>
   );
 };
