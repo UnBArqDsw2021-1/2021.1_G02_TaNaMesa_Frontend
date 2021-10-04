@@ -13,7 +13,7 @@ const Kitchen: React.FC = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar center="Mesa" tableTitle="Cozinha" />
       <Container>
         <SideBar page="menu-kitchen" />
         <BackgroundHamburguer text="Área da Cozinha" />

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useScreenSize } from 'hooks/screen';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import HelpButton from 'components/HelpButton';
-import { Container } from 'pages/SolicitationWaiter/styles';
+import {
+  Container,
+  SolicitationWaiterContainer,
+} from 'pages/SolicitationWaiter/styles';
 
 const SolicitationWaiter: React.FC = () => {
-  const { openMenu } = useScreenSize();
+  const { openMenu, switchActualScreen } = useScreenSize();
   const mesas = [
     {
       id: 0,
@@ -60,6 +63,8 @@ const SolicitationWaiter: React.FC = () => {
   ];
   const [checked, setChecked] = useState(new Array(mesas.length).fill(false));
 
+  useEffect(() => switchActualScreen('waiter-help'), [switchActualScreen]);
+
   const handleOnChange = (position: number): void => {
     const updatedCheckedState = checked.map((item, index) =>
       index === position ? !item : item,
@@ -77,7 +82,7 @@ const SolicitationWaiter: React.FC = () => {
           page="menu-waiter"
           hasLogo
         />
-        <div className="buttons">
+        <SolicitationWaiterContainer size={openMenu ? 'small' : 'large'}>
           <div className="title">
             Clique sobre a mesa quando atender a solicitação de ajuda
           </div>
@@ -94,7 +99,7 @@ const SolicitationWaiter: React.FC = () => {
               </div>
             );
           })}
-        </div>
+        </SolicitationWaiterContainer>
       </Container>
     </>
   );

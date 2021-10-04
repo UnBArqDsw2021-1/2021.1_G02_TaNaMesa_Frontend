@@ -7,7 +7,7 @@ import BackgroundHamburguer from 'components/BackgroundHamburguer';
 import { useScreenSize } from 'hooks/screen';
 
 const Waiter: React.FC = () => {
-  const { switchActualScreen } = useScreenSize();
+  const { switchActualScreen, openMenu } = useScreenSize();
 
   useEffect(() => switchActualScreen('waiter'), [switchActualScreen]);
 
@@ -15,7 +15,11 @@ const Waiter: React.FC = () => {
     <>
       <NavBar center="Mesa" tableTitle="Garçom" />
       <Container>
-        <SideBar page="menu-waiter" />
+        <SideBar
+          size={openMenu ? 'large' : 'small'}
+          page="menu-waiter"
+          hasLogo
+        />
         <BackgroundHamburguer text="Área do Garçom" />
         {/* <Loading /> */}
       </Container>
