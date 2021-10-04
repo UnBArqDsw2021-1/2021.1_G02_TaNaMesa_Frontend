@@ -1,21 +1,25 @@
 import styled from 'styled-components';
 
+interface SolicitationWaiterContainerProps {
+  size: 'large' | 'small';
+}
+
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  overflow: hidden;
   flex-direction: row;
   transition: 1s ease;
-  height: 100vh;
-  overflow-y: hidden;
+  height: calc(100vh - 6rem);
+`;
 
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow-y: auto;
-    transition: 0.6s ease;
-  }
+export const SolicitationWaiterContainer = styled.section<SolicitationWaiterContainerProps>`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  transition: 0.6s ease;
+  opacity: ${props => (props.size === 'large' ? 1 : 0.4)};
 
   .title {
     font-size: 1.4rem;
