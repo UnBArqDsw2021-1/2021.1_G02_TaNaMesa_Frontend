@@ -8,6 +8,7 @@ const homeButtons = [
     id: 0,
     icon: imgMenu,
     text: 'Cardápio',
+    route: '/menu',
   },
   {
     id: 1,

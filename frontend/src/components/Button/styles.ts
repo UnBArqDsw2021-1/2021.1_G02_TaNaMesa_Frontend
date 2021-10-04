@@ -8,7 +8,6 @@ interface NormalButtonProps {
 
 export const NormalButton = styled.button<NormalButtonProps>`
   padding: ${props => props.padding};
-  font-weight: 600;
   text-align: center;
   border-radius: 2rem;
   width: ${props => props.width};

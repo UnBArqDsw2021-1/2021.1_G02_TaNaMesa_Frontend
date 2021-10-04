@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import logo from 'assets/hamburguer-background.png';
 
-export const Container = styled.div`
+interface ContainerProps {
+  needToBeHidden: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +16,10 @@ export const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (max-width: 100px) {
+    display: ${props => (props.needToBeHidden ? 'none' : 'flex')};
+  }
 `;
 
 export const Logo = styled.img`
