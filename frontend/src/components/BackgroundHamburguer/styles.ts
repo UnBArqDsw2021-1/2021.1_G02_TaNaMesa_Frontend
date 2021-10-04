@@ -11,7 +11,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: url(${logo});
   background-position: center;
   background-repeat: no-repeat;
@@ -52,7 +52,7 @@ export const Slogan = styled.div`
   justify-content: center;
   padding: 2rem 3rem 2rem 3rem;
   border-radius: 20px;
-  background-color: ${props => props.theme.white + 70};
+  background-color: ${props => props.theme.white + 95};
   margin-bottom: 8rem;
   text-align: center;
 
@@ -60,7 +60,7 @@ export const Slogan = styled.div`
     font-weight: 700;
     /* font-size: 4rem; */
     color: ${props => props.theme.black};
-    /* text-shadow: 0 0 1px ${props => props.theme.secondaryLightGreen}; */
+    text-shadow: 0 0 20px ${props => props.theme.white};
   }
 
   @media (max-height: 780px) {

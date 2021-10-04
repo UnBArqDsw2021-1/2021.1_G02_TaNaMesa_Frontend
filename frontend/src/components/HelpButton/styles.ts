@@ -12,15 +12,19 @@ export const Container = styled.button`
   background-color: ${props => props.theme.white};
   cursor: pointer;
   transition: 0.2s all;
+  flex-basis: 20%;
 
   img {
     height: 20px;
     width: 20px;
     margin-left: 10px;
   }
+  .content {
+    width: 97%;
+  }
 
-  .containerInput {
-    display: flex;
+  .container {
+    display: block;
     position: relative;
     cursor: pointer;
     font-size: 22px;
@@ -28,23 +32,26 @@ export const Container = styled.button`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    width: 97%;
-    position: absolute;
   }
 
-  .containerInput input {
-    visibility: hidden;
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
   }
 
   .checkmark {
     position: absolute;
+    top: 0;
     height: 25px;
     width: 25px;
-    right: 0;
+    background-color: transparent;
   }
 
-  .containerInput input:checked ~ .checkmark {
-    background-color: ${props => props.theme.white};
+  .container input:checked ~ .checkmark {
+    background-color: transparent;
   }
 
   .checkmark:after {
@@ -53,11 +60,11 @@ export const Container = styled.button`
     display: none;
   }
 
-  .containerInput input:checked ~ .checkmark:after {
+  .container input:checked ~ .checkmark:after {
     display: block;
   }
 
-  .containerInput .checkmark:after {
+  .container .checkmark:after {
     left: 8px;
     top: 3px;
     width: 7px;
@@ -69,15 +76,9 @@ export const Container = styled.button`
     transform: rotate(45deg);
   }
 
-  @media (max-width: 900px) {
-    .containerInput {
+  @media (max-width: 600px) {
+    .content {
       width: 95%;
-    }
-  }
-
-  @media (max-width: 500px) {
-    .containerInput {
-      width: 92%;
     }
   }
 `;
