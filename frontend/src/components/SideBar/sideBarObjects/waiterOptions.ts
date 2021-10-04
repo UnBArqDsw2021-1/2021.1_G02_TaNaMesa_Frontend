@@ -11,6 +11,7 @@ const homeButtons = [
     id: 1,
     icon: imgDoubt,
     text: 'Mesas que solicitam ajuda',
+    route: '/garcom/ajuda',
   },
 ];
 
