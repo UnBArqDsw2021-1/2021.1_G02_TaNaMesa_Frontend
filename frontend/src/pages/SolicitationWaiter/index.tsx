@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useScreenSize } from 'hooks/screen';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
@@ -6,6 +7,7 @@ import HelpButton from 'components/HelpButton';
 import { Container } from 'pages/SolicitationWaiter/styles';
 
 const SolicitationWaiter: React.FC = () => {
+  const { openMenu } = useScreenSize();
   const mesas = [
     {
       id: 0,
@@ -69,7 +71,12 @@ const SolicitationWaiter: React.FC = () => {
     <>
       <NavBar left="Voltar" />
       <Container>
-        {/* <SideBar page="menu-waiter" hasLogo /> */}
+        <SideBar
+          collapse
+          size={openMenu ? 'large' : 'small'}
+          page="menu-waiter"
+          hasLogo
+        />
         <div className="buttons">
           <div className="title">
             Clique sobre a mesa quando atender a solicitação de ajuda

@@ -18,15 +18,17 @@ const HelpButton: React.FC<HelpButtonProps> = ({
 }) => {
   return (
     <Container onClick={() => onToggle(checked[id])}>
-      {children}
-      <img alt="helpbutton" src={Icons.simbolo_duvida} />
-      <label htmlFor="checkmark" className="containerInput">
+      <div className="content">
+        {children}
+        <img alt="helpbutton" src={Icons.simbolo_duvida} />
+      </div>
+      <label htmlFor="checkmark" className="container">
         <input
           type="checkbox"
           checked={checked}
           onChange={() => onToggle(checked[id])}
         />
-        <span className="checkmark" />
+        <span className="checkmark"></span>
       </label>
     </Container>
   );
