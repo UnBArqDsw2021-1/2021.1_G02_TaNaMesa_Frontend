@@ -16,6 +16,7 @@ import Doubt from 'assets/SideBar/duvida 1.png';
 import Drink from 'assets/SideBar/simbolo_bebida 1.png';
 import Fries from 'assets/SideBar/simbolo batata 1.png';
 import Dessert from 'assets/SideBar/simbolo_sobremesa 1.png';
+import NotFound from 'assets/notFound.png';
 
 const Icons = {
   simbolo_cozinha: simboloCozinha,
@@ -36,6 +37,7 @@ const Icons = {
   drink: Drink,
   fries: Fries,
   dessert: Dessert,
+  not_found: NotFound,
 };
 
 export default Icons;
