@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from 'assets/hamburguer-background.png';
+import Icons from 'utils/assets';
 
 interface ContainerProps {
   needToBeHidden: boolean;
@@ -12,7 +12,7 @@ export const Container = styled.div<ContainerProps>`
   justify-content: space-between;
   width: 100%;
   height: 100vh;
-  background: url(${logo});
+  background: url(${Icons.hamburguer_background});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

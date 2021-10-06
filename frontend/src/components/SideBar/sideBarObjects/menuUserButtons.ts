@@ -1,31 +1,27 @@
-import imgBurguer from 'assets/SideBar/smbolo_hamburguer 1.png';
-import imgDrink from 'assets/SideBar/simbolo_bebida 1.png';
-import imgFries from 'assets/SideBar/simbolo batata 1.png';
-import imgDessert from 'assets/SideBar/simbolo_sobremesa 1.png';
-import imgWaiter from 'assets/SideBar/simbolo_usuario 2.png';
+import Icons from 'utils/assets';
 
 const options = [
   {
     id: 0,
-    icon: imgBurguer,
+    icon: Icons.simbolo_hamburguer,
     text: 'Burguers',
     category: 'hamburgueres',
   },
   {
     id: 1,
-    icon: imgFries,
+    icon: Icons.fries,
     text: 'Batatas',
     category: 'petiscos',
   },
   {
     id: 2,
-    icon: imgDrink,
+    icon: Icons.drink,
     text: 'Bebidas',
     category: 'bebidas',
   },
   {
     id: 3,
-    icon: imgDessert,
+    icon: Icons.dessert,
     text: 'Sobremesas',
     category: 'sobremesas',
   },
@@ -33,7 +29,7 @@ const options = [
 
 const callWaiter = {
   id: 4,
-  icon: imgWaiter,
+  icon: Icons.simbolo_usuario,
   text: 'Chamar Garçom',
 };
 

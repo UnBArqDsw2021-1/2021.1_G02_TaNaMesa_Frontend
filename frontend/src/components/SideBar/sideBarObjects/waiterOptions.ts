@@ -1,15 +1,14 @@
-import imgViewOrders from 'assets/SideBar/visualizar_pedido 1.png';
-import imgDoubt from 'assets/SideBar/duvida 1.png';
+import Icons from 'utils/assets';
 
 const homeButtons = [
   {
     id: 0,
-    icon: imgViewOrders,
+    icon: Icons.visualizar_pedido,
     text: 'Visualizar Pedidos das Mesas',
   },
   {
     id: 1,
-    icon: imgDoubt,
+    icon: Icons.doubt,
     text: 'Mesas que solicitam ajuda',
     route: '/garcom/ajuda',
   },

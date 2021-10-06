@@ -1,6 +1,6 @@
 import React from 'react';
 
-import imgWithoutPhoto from 'assets/sem-foto.jpg';
+import Icons from 'utils/assets';
 
 import { useUserTheme } from 'hooks/theme';
 
@@ -27,7 +27,7 @@ const MenuItem: React.FC<Props> = ({ image, name, price, description }) => {
         src={
           image
             ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${image}`
-            : imgWithoutPhoto
+            : Icons.without_photo
         }
         alt={name}
       />
