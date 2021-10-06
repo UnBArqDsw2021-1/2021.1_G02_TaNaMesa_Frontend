@@ -2,7 +2,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from 'react';
 
-import imgEmptyOrder from 'assets/Modal/empty-orders.png';
+import Icons from 'utils/assets';
 
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 
@@ -92,7 +92,7 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
           })}
           {comandas.length === 0 ? (
             <div className="comanda-vazia">
-              <img src={imgEmptyOrder} alt="Comanda vazia" />
+              <img src={Icons.empty_order} alt="Comanda vazia" />
               <div className="buttons" />
             </div>
           ) : null}

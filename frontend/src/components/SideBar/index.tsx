@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import SideBarButton from 'components/SideBarButton';
 import Button from 'components/Button';
-import logo from 'assets/logo-contorno.png';
+import Icons from 'utils/assets';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { useUserTheme } from 'hooks/theme';
 import { useScreenSize } from 'hooks/screen';
@@ -93,7 +93,7 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
       {size === 'large' ? (
         <>
           <LogoContainer>
-            {hasLogo && <img src={logo} alt="Tá Na Mesa" />}
+            {hasLogo && <img src={Icons.logo_contorno} alt="Tá Na Mesa" />}
             {collapse && (
               <Button
                 width="25%"

@@ -5,7 +5,7 @@ import SideBar from 'components/SideBar';
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
 import { useScreenSize } from 'hooks/screen';
-import imgNoItems from 'assets/Menu/sem-items.png';
+import Icons from 'utils/assets';
 
 import { Container, MenuContainer } from 'pages/Menu/styles';
 
@@ -80,7 +80,7 @@ const Menu: React.FC = () => {
             <>
               <img
                 className="menu-vazio"
-                src={imgNoItems}
+                src={Icons.sem_itens}
                 alt="Sem itens no momento"
               />
               <p className="menu-vazio-texto">Sem items no menu no momento</p>

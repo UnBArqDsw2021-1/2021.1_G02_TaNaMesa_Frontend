@@ -1,15 +1,14 @@
-import imgWaiter from 'assets/SideBar/simbolo_usuario 2.png';
-import imgOrder from 'assets/SideBar/visualizar_pedido 1.png';
+import Icons from 'utils/assets';
 
 const kitchenOptions = [
   {
     id: 0,
-    icon: imgOrder,
+    icon: Icons.visualizar_pedido,
     text: 'Visualizar Área de Pedidos',
   },
   {
     id: 1,
-    icon: imgWaiter,
+    icon: Icons.simbolo_usuario,
     text: 'Chamar Garçom',
   },
 ];
