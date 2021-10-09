@@ -2,43 +2,43 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from 'react';
 
-import imgEmptyOrder from 'assets/Modal/empty-orders.png';
-
-import { FiTrash2, FiPlus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 
 import { Container } from './styles';
+import { Status } from '../../../pages/Pedidos/styles';
+
+interface Mesa {
+  id: number;
+  comandas: Array<Comanda>;
+}
+
+interface Comanda {
+  id: number;
+  pessoa: Client;
+  itens: Array<Item>;
+}
+
+interface Client {
+  name: string;
+  totalPrice: number;
+}
+
+interface Item {
+  id: number;
+  quantity: number;
+  name: string;
+  price: number;
+  obs?: string;
+}
 
 type Props = {
   visible: boolean;
+  table: Mesa;
   onClose: (event: any) => void;
 };
 
-const PedidosModal: React.FC<Props> = ({ visible, onClose }) => {
+const PedidosModal: React.FC<Props> = ({ visible, table, onClose }) => {
   const modalRef = useRef(null);
-  const [comandas, setComandas] = useState<string[]>([]);
-  const [name, setName] = useState('');
-
-  const removePersonFromComanda = (person: string): void => {
-    const newComandas = comandas.filter(comanda => comanda !== person);
-    setComandas(newComandas);
-  };
-
-  const addPersonToComanda = (): void => {
-    const newComandas = comandas.slice();
-    const hasComanda = comandas.filter(comanda => comanda === name);
-
-    if (hasComanda.length > 0) {
-      alert('Já existe uma comanda com esse nome');
-    } else if (name.length > 0) {
-      newComandas.push(name);
-      setComandas(newComandas);
-      setName('');
-    }
-  };
-
-  const onChangeInput = (event: any): void => {
-    return setName(event.target.value);
-  };
 
   useEffect(() => {
     const escFunction = (event: any): void => {
@@ -69,48 +69,36 @@ const PedidosModal: React.FC<Props> = ({ visible, onClose }) => {
           </button>
         </div>
 
-        <span>Comandas</span>
+        <span>Mesa {table.id}</span>
 
         <div className="comandas">
-          {comandas.map((person, index) => {
-            const key = index + 1;
-            return (
-              <div className="comanda" key={key}>
+          {table.comandas.map((comanda, index) => (
+            <div className="comanda" key={comanda.id}>
+              <div className="resume">
                 <div className="person">
-                  <span>{person}</span>
+                  <Status color="#EB4040" />
+                  <h6>
+                    Comanda {index + 1} - {comanda.pessoa?.name}
+                  </h6>
                 </div>
                 <div className="buttons">
-                  <button
-                    type="button"
-                    onClick={() => removePersonFromComanda(person)}
-                  >
-                    <FiTrash2 />
+                  <button type="button">
+                    <FiPlus />
                   </button>
                 </div>
               </div>
-            );
-          })}
-          {comandas.length === 0 ? (
-            <div className="comanda-vazia">
-              <img src={imgEmptyOrder} alt="Comanda vazia" />
-              <div className="buttons" />
+              <div className="orders">
+                {comanda.itens.map(item => (
+                  <div className="item" key={item.id}>
+                    <div className="name">
+                      {item.quantity}x {item.name}
+                    </div>
+                    {item.obs ? <span>Observação: {item.obs}</span> : null}
+                  </div>
+                ))}
+              </div>
             </div>
-          ) : null}
-        </div>
-
-        <label htmlFor="name">Digite o nome da nova comanda:</label>
-
-        <div className="new-comanda">
-          <input
-            type="text"
-            id="name"
-            data-testid="name"
-            value={name}
-            onChange={onChangeInput}
-          />
-          <button type="button" onClick={addPersonToComanda}>
-            <FiPlus />
-          </button>
+          ))}
         </div>
       </div>
     </Container>

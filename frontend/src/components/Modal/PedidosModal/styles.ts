@@ -58,7 +58,7 @@ export const Container = styled.div`
     border-radius: 10px;
 
     span {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: bold;
     }
   }
@@ -80,73 +80,61 @@ export const Container = styled.div`
 
   .comandas {
     margin-top: 3rem;
-    margin-bottom: 3rem;
   }
 
-  .comanda:nth-child(even) {
-    background-color: ${props => props.theme.gray + 70};
-    border-radius: 10px;
-  }
-
-  .comanda-vazia {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 30rem;
-    }
+  .comanda + .comanda {
+    margin-top: 2rem;
   }
 
   .comanda {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+    border: 1px ${props => props.theme.gray} solid;
+    border-radius: 20px;
+    padding: 1.2rem;
 
-    &.person span {
-      font-size: 1.5rem;
-      font-weight: 500;
+    .resume {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+
+      h6 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-left: 15px;
+      }
     }
 
     .buttons button {
-      color: ${props => props.theme.secondaryRed};
-    }
-    .buttons button:hover {
-      color: ${props => props.theme.secondaryWine};
-    }
-  }
-
-  label {
-    font-weight: 600;
-    text-align: left;
-  }
-
-  .new-comanda {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-
-    input {
-      background: ${props => props.theme.white};
-      color: ${props => props.theme.black};
-      font-weight: bold;
-      border: 2px ${props => props.theme.gray} solid;
-      height: 40px;
-      width: 80%;
-      border-radius: 20px;
-      padding: 10px;
-    }
-
-    button {
       border-radius: 50%;
-      background-color: ${props => props.theme.secondaryRed};
+      background-color: ${props => props.theme.secondaryWine};
       padding: 10px 10px 5px 10px;
       color: ${props => props.theme.white};
       margin-left: 10px;
     }
-    button:hover {
-      background-color: ${props => props.theme.secondaryWine};
+    .buttons button:hover {
+      background-color: ${props => props.theme.primary04};
+    }
+
+    .orders {
+      font-size: 1.5rem;
+      font-weight: 500;
+      text-align: left;
+      margin-top: 1rem;
+      margin-left: 35px;
+
+      .item {
+        margin-bottom: 0.5rem;
+
+        span {
+          font-size: 1.5rem;
+          font-weight: 400;
+          display: block;
+          margin-left: 15px;
+        }
+      }
     }
   }
 `;
