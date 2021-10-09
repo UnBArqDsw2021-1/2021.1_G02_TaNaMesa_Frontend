@@ -16,6 +16,7 @@ const homeButtons = [
     id: 2,
     icon: Icons.simbolo_usuario,
     text: 'Chamar Garçom',
+    solicitationWaiter: true,
   },
   {
     id: 3,

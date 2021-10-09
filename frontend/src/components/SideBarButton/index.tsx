@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 import { useMenu } from 'hooks/menu';
 import { useScreenSize } from 'hooks/screen';
+import { useWaiter } from 'hooks/waiter';
 
 interface SideBarButtonProps {
   icon: string;
@@ -11,6 +12,7 @@ interface SideBarButtonProps {
   isCallWaiter?: boolean;
   route?: string | null;
   category?: string | null;
+  solicitationWaiter?: boolean;
 }
 
 type Categories =
@@ -29,8 +31,10 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   isCallWaiter,
   route,
   category,
+  solicitationWaiter,
 }) => {
   const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
+  const { handleSolicitationWaiter } = useWaiter();
   const { switchScreenSize } = useScreenSize();
   const history = useHistory();
 
@@ -48,6 +52,12 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
         changeMenuItemCategory(category as Categories);
         changeMenuItemCategoryText(text as CategoriesTexts);
         switchScreenSize();
+      };
+    }
+    if (solicitationWaiter) {
+      return e => {
+        e.preventDefault();
+        handleSolicitationWaiter(true);
       };
     }
 
@@ -70,6 +80,7 @@ SideBarButton.defaultProps = {
   isCallWaiter: false,
   route: null,
   category: null,
+  solicitationWaiter: false,
   // onClick: () => console.log('Sem função de onClick'),
 };
 
