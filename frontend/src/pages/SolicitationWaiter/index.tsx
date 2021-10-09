@@ -50,8 +50,8 @@ const SolicitationWaiter: React.FC = () => {
     const updatedCheckedState = checked.map((item, index) =>
       index === position ? !item : item,
     );
-    setMesaArray(mesaArray.filter(item => item.id !== position));
     setChecked(updatedCheckedState);
+    setMesaArray(mesaArray.filter(item => item.id !== position));
   };
 
   useEffect(() => switchActualScreen('waiter-help'), [switchActualScreen]);
@@ -85,18 +85,18 @@ const SolicitationWaiter: React.FC = () => {
                   >
                     Mesa {value.mesa}
                   </HelpButton>
-                  <div onClick={() => setModalOpen(false)}>
-                    <AlertModal
-                      icon={Icons.simbolo_ok}
-                      visible={modalOpen}
-                      onClose={onCloseModal}
-                    >
-                      <p>Mesa {idTable} retirada da Solicitação de Ajuda!</p>
-                    </AlertModal>
-                  </div>
                 </div>
               );
             })}
+          <div onClick={() => setModalOpen(false)}>
+            <AlertModal
+              icon={Icons.simbolo_ok}
+              visible={modalOpen}
+              onClose={onCloseModal}
+            >
+              <p>Mesa {idTable} retirada da Solicitação de Ajuda!</p>
+            </AlertModal>
+          </div>
         </SolicitationWaiterContainer>
       </Container>
     </>
