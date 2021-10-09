@@ -52,4 +52,5 @@ export const Status = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 20px;
+  display: inline-block;
 `;

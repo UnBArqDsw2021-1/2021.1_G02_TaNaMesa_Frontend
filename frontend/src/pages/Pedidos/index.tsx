@@ -41,7 +41,15 @@ const Pedidos: React.FC = () => {
             id: 1,
             pessoa: { name: 'Ítalo', totalPrice: 21.0 },
             itens: [
-              { id: 0, quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
+              { id: 0, quantity: 2, name: 'Petit', price: 21.0, obs: 'Obs.' },
+              { id: 1, quantity: 1, name: 'Creme', price: 12.0, obs: '' },
+            ],
+          },
+          {
+            id: 2,
+            pessoa: { name: 'Tiago', totalPrice: 12.0 },
+            itens: [
+              { id: 2, quantity: 3, name: 'Creme', price: 12.0, obs: '' },
             ],
           },
         ],
@@ -50,10 +58,10 @@ const Pedidos: React.FC = () => {
         id: 2,
         comandas: [
           {
-            id: 2,
+            id: 3,
             pessoa: { name: 'Tiago', totalPrice: 12.0 },
             itens: [
-              { id: 2, quantity: 1, name: 'Creme', price: 12.0, obs: '' },
+              { id: 3, quantity: 3, name: 'Creme', price: 12.0, obs: '' },
             ],
           },
         ],
@@ -132,7 +140,11 @@ const Pedidos: React.FC = () => {
         </div>
       </Container>
 
-      <PedidosModal visible onClose={value => console.log(value)} />
+      <PedidosModal
+        visible
+        table={mesas[0]}
+        onClose={value => console.log(value)}
+      />
     </>
   );
 };
