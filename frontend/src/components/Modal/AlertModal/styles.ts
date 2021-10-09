@@ -18,6 +18,7 @@ export const Container = styled.div`
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   img {
