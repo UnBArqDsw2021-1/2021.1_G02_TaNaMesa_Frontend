@@ -1,27 +1,24 @@
-import imgWaiter from 'assets/SideBar/simbolo_usuario 2.png';
-import imgMenu from 'assets/SideBar/simbolo_cardapio 1.png';
-import imgOrder from 'assets/SideBar/simbolo_conta 1.png';
-import imgKitchen from 'assets/SideBar/smbolo_hamburguer 1.png';
+import Icons from 'utils/assets';
 
 const kitchenOptions = [
   {
     id: 0,
-    icon: imgMenu,
+    icon: Icons.simbolo_cardapio,
     text: 'Gerenciar Cardápio',
   },
   {
     id: 1,
-    icon: imgOrder,
+    icon: Icons.simbolo_conta,
     text: 'Gerenciar Contas',
   },
   {
     id: 2,
-    icon: imgWaiter,
+    icon: Icons.simbolo_usuario,
     text: 'Gerenciar Garçons',
   },
   {
     id: 3,
-    icon: imgKitchen,
+    icon: Icons.simbolo_hamburguer,
     text: 'Gerenciar Cozinha',
   },
 ];

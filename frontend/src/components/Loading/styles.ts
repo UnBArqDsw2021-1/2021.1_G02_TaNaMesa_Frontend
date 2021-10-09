@@ -49,7 +49,7 @@ export const LoadingContainer = styled.div`
     }
     40% {
       box-shadow: 0 -2em;
-      height: 5em;
+      height: 4em;
     }
   }
 `;
