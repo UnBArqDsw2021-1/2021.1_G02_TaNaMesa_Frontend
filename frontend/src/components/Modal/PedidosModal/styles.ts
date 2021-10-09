@@ -122,8 +122,10 @@ export const Container = styled.div`
       font-size: 1.5rem;
       font-weight: 500;
       text-align: left;
-      margin-top: 1rem;
       margin-left: 35px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.25s ease-out;
 
       .item {
         margin-bottom: 0.5rem;
@@ -135,6 +137,12 @@ export const Container = styled.div`
           margin-left: 15px;
         }
       }
+    }
+
+    .orders.show {
+      margin-top: 1rem;
+      max-height: 500px;
+      transition: max-height 0.5s ease-in;
     }
   }
 `;

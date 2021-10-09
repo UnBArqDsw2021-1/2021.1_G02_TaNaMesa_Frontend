@@ -29,44 +29,54 @@ interface Item {
   obs?: string;
 }
 
-const Pedidos: React.FC = () => {
-  const [mesas, setMesas] = useState<Mesa[]>([]);
-
-  useEffect(() => {
-    setMesas([
+// eslint-disable-next-line no-underscore-dangle
+const mesas_ = [
+  {
+    id: 1,
+    comandas: [
       {
         id: 1,
-        comandas: [
-          {
-            id: 1,
-            pessoa: { name: 'Ítalo', totalPrice: 21.0 },
-            itens: [
-              { id: 0, quantity: 2, name: 'Petit', price: 21.0, obs: 'Obs.' },
-              { id: 1, quantity: 1, name: 'Creme', price: 12.0, obs: '' },
-            ],
-          },
-          {
-            id: 2,
-            pessoa: { name: 'Tiago', totalPrice: 12.0 },
-            itens: [
-              { id: 2, quantity: 3, name: 'Creme', price: 12.0, obs: '' },
-            ],
-          },
+        pessoa: { name: 'Ítalo', totalPrice: 21.0 },
+        itens: [
+          { id: 0, quantity: 2, name: 'Petit', price: 21.0, obs: 'Obs.' },
+          { id: 1, quantity: 1, name: 'Creme', price: 12.0, obs: '' },
         ],
       },
       {
         id: 2,
-        comandas: [
-          {
-            id: 3,
-            pessoa: { name: 'Tiago', totalPrice: 12.0 },
-            itens: [
-              { id: 3, quantity: 3, name: 'Creme', price: 12.0, obs: '' },
-            ],
-          },
-        ],
+        pessoa: { name: 'Tiago', totalPrice: 12.0 },
+        itens: [{ id: 2, quantity: 3, name: 'Creme', price: 12.0, obs: '' }],
       },
-    ]);
+    ],
+  },
+  {
+    id: 2,
+    comandas: [
+      {
+        id: 3,
+        pessoa: { name: 'Tiago', totalPrice: 12.0 },
+        itens: [{ id: 3, quantity: 3, name: 'Creme', price: 12.0, obs: '' }],
+      },
+    ],
+  },
+];
+
+const Pedidos: React.FC = () => {
+  const [mesas, setMesas] = useState<Mesa[]>(mesas_);
+  const [mesaSelected, setMesaSelected] = useState<Mesa>({
+    id: 0,
+    comandas: [],
+  });
+
+  const [showMesa, setShowMesa] = useState<boolean>(false);
+
+  const selectMesa = (mesa: Mesa): void => {
+    setMesaSelected(mesa);
+    setShowMesa(true);
+  };
+
+  useEffect(() => {
+    setMesas(mesas_);
   }, []);
 
   return (
@@ -79,7 +89,12 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa" key={mesa.id}>
+                <button
+                  type="button"
+                  className="mesa"
+                  key={mesa.id}
+                  onClick={() => selectMesa(mesa)}
+                >
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#EB4040" />
@@ -91,7 +106,7 @@ const Pedidos: React.FC = () => {
                         : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -100,7 +115,12 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa" key={mesa.id}>
+                <button
+                  type="button"
+                  className="mesa"
+                  key={mesa.id}
+                  onClick={() => selectMesa(mesa)}
+                >
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#F9FC66" />
@@ -112,7 +132,7 @@ const Pedidos: React.FC = () => {
                         : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -121,7 +141,12 @@ const Pedidos: React.FC = () => {
 
             <div className="mesas">
               {mesas.map(mesa => (
-                <div className="mesa" key={mesa.id}>
+                <button
+                  type="button"
+                  className="mesa"
+                  key={mesa.id}
+                  onClick={() => selectMesa(mesa)}
+                >
                   <div className="status">
                     <h4>Mesa {mesa.id}</h4>
                     <Status color="#2BB426" />
@@ -133,7 +158,7 @@ const Pedidos: React.FC = () => {
                         : `${mesa.comandas.length} Comandas`}
                     </h5>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -141,9 +166,9 @@ const Pedidos: React.FC = () => {
       </Container>
 
       <PedidosModal
-        visible
-        table={mesas[0]}
-        onClose={value => console.log(value)}
+        visible={showMesa}
+        table={mesaSelected}
+        onClose={e => setShowMesa(e.target.value)}
       />
     </>
   );

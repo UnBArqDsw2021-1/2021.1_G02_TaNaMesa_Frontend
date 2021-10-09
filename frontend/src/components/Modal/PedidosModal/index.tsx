@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -39,6 +38,21 @@ type Props = {
 
 const PedidosModal: React.FC<Props> = ({ visible, table, onClose }) => {
   const modalRef = useRef(null);
+
+  const toggleOrders = (e: any): void => {
+    const button = e.currentTarget;
+    const id = button.getAttribute('data-target');
+
+    const orders = document.getElementById(id);
+
+    if (orders) {
+      if (orders.classList.contains('show')) {
+        orders.classList.remove('show');
+      } else {
+        orders.classList.add('show');
+      }
+    }
+  };
 
   useEffect(() => {
     const escFunction = (event: any): void => {
@@ -82,12 +96,16 @@ const PedidosModal: React.FC<Props> = ({ visible, table, onClose }) => {
                   </h6>
                 </div>
                 <div className="buttons">
-                  <button type="button">
+                  <button
+                    type="button"
+                    data-target={`orders-${index + 1}`}
+                    onClick={e => toggleOrders(e)}
+                  >
                     <FiPlus />
                   </button>
                 </div>
               </div>
-              <div className="orders">
+              <div id={`orders-${index + 1}`} className="orders">
                 {comanda.itens.map(item => (
                   <div className="item" key={item.id}>
                     <div className="name">

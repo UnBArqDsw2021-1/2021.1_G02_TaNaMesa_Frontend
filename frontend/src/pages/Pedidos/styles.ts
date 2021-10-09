@@ -30,9 +30,11 @@ export const Container = styled.div`
   }
 
   .mesa {
+    width: 100%;
     background-color: ${props => props.theme.white};
     border-radius: 15px;
     margin-bottom: 2rem;
+    text-align: left;
     padding: 2rem;
 
     .status {
@@ -40,6 +42,10 @@ export const Container = styled.div`
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  .mesa:hover {
+    box-shadow: 0.4rem 0 2rem #00000060;
   }
 
   h5 {
