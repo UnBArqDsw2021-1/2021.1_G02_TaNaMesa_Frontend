@@ -32,6 +32,7 @@ interface AppTheme {
   black: string;
   white: string;
   background: string;
+  darkGray: string;
   gray: string;
 }
 
