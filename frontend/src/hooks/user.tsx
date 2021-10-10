@@ -27,7 +27,7 @@ export const UserProvider: React.FC = ({ children }) => {
     if (jwtToken) {
       setToken(jwtToken.split(' ')[1]);
       setTable(actualTable || '0');
-      api.defaults.headers.common.Authorization = `Beare ${jwtToken}`;
+      api.defaults.headers.common.Authorization = `${jwtToken}`;
     }
   }, []);
 
