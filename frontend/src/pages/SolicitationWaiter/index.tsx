@@ -7,6 +7,8 @@ import SideBar from 'components/SideBar';
 import HelpButton from 'components/HelpButton';
 import AlertModal from 'components/Modal/AlertModal';
 
+import { getAllTables, putOneTable } from 'services/tables';
+
 import {
   Container,
   SolicitationWaiterContainer,
@@ -14,31 +16,8 @@ import {
 
 const SolicitationWaiter: React.FC = () => {
   const { openMenu, switchActualScreen } = useScreenSize();
-  const mesas = [
-    {
-      id: 0,
-      mesa: 1,
-    },
-    {
-      id: 1,
-      mesa: '2',
-    },
-    {
-      id: 2,
-      mesa: '3',
-    },
-    {
-      id: 3,
-      mesa: '4',
-    },
-    {
-      id: 4,
-      mesa: '5',
-    },
-  ];
-  const [checked, setChecked] = useState(new Array(mesas.length).fill(false));
   const [modalOpen, setModalOpen] = useState(false);
-  const [mesaArray, setMesaArray] = useState(mesas);
+  const [mesaArray, setMesaArray] = useState<any[]>([]);
   const [idTable, setIdTable] = useState(0);
 
   const onCloseModal = (event: any) => {
@@ -47,14 +26,29 @@ const SolicitationWaiter: React.FC = () => {
   };
 
   const handleOnChange = (position: number): void => {
-    const updatedCheckedState = checked.map((item, index) =>
-      index === position ? !item : item,
-    );
-    setChecked(updatedCheckedState);
-    setMesaArray(mesaArray.filter(item => item.id !== position));
+    putOneTable(position, false)
+      .then(() => {
+        setMesaArray(mesaArray.filter(item => item.idTable !== position));
+      })
+      .catch(() => {
+        setMesaArray([]);
+      });
   };
 
-  useEffect(() => switchActualScreen('waiter-help'), [switchActualScreen]);
+  useEffect(() => {
+    switchActualScreen('waiter-help');
+    getAllTables()
+      .then(response => {
+        response.map(item => {
+          if (item.needHelp === true) {
+            setMesaArray(oldArray => [...oldArray, item]);
+          }
+        });
+      })
+      .catch(() => {
+        setMesaArray([]);
+      });
+  }, [switchActualScreen]);
 
   return (
     <>
@@ -71,23 +65,24 @@ const SolicitationWaiter: React.FC = () => {
             Clique sobre a mesa quando atender a solicitação de ajuda
           </div>
           {mesaArray &&
-            mesaArray.map(value => {
-              return (
-                <div key={value.id} className="button-mesas">
-                  <HelpButton
-                    id={value.id}
-                    checked={checked[value.id]}
-                    onToggle={() => {
-                      handleOnChange(value.id);
-                      setModalOpen(true);
-                      setIdTable(value.id + 1);
-                    }}
-                  >
-                    Mesa {value.mesa}
-                  </HelpButton>
-                </div>
-              );
-            })}
+            mesaArray
+              .map(value => {
+                return (
+                  <div key={value.idTable} className="button-mesas">
+                    <HelpButton
+                      id={value.idTable}
+                      onToggle={() => {
+                        handleOnChange(value.idTable);
+                        setModalOpen(true);
+                        setIdTable(value.idTable);
+                      }}
+                    >
+                      Mesa {value.idTable}
+                    </HelpButton>
+                  </div>
+                );
+              })
+              .reverse()}
           <div onClick={() => setModalOpen(false)}>
             <AlertModal
               icon={Icons.simbolo_ok}
