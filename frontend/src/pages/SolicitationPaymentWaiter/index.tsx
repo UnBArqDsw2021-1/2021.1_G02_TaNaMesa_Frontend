@@ -7,7 +7,7 @@ import SideBar from 'components/SideBar';
 import HelpButton from 'components/HelpButton';
 import AlertModal from 'components/Modal/AlertModal';
 
-import { getAllOrders } from 'services/orders';
+import { ENUM, getAllOrders, putOneOrder } from 'services/orders';
 
 import {
   Container,
@@ -26,15 +26,24 @@ const SolicitationPaymentWaiter: React.FC = () => {
   };
 
   const handleOnChange = (position: number): void => {
-    console.log(position);
+    putOneOrder(position, 'pagamento realizado')
+      .then(() => {
+        setOrderArray(orderArray.filter(item => item.idOrder !== position));
+      })
+      .catch(() => {
+        setOrderArray([]);
+      });
   };
 
   useEffect(() => {
     switchActualScreen('waiter-help');
     getAllOrders()
       .then(response => {
-        console.log(response);
-        // setOrderArray(oldArray => [...oldArray, item]);
+        response.map(item => {
+          if (String(item.status) === 'solicitacao pagamento') {
+            setOrderArray(oldArray => [...oldArray, item]);
+          }
+        });
       })
       .catch(() => {
         setOrderArray([]);
@@ -53,7 +62,7 @@ const SolicitationPaymentWaiter: React.FC = () => {
         />
         <SolicitationPaymentWaiterContainer size={openMenu ? 'small' : 'large'}>
           <div className="title">
-            Clique sobre a mesa quando atender a solicitação de ajuda
+            Clique sobre a mesa quando atender a solicitação de pagamento
           </div>
           {orderArray &&
             orderArray.map(value => {
@@ -67,7 +76,7 @@ const SolicitationPaymentWaiter: React.FC = () => {
                       setIdOrder(value.idOrder);
                     }}
                   >
-                    Mesa {value.idOrder}
+                    Pedido {value.idOrder}, Mesa {value.idTable}
                   </HelpButton>
                 </div>
               );
@@ -78,7 +87,7 @@ const SolicitationPaymentWaiter: React.FC = () => {
               visible={modalOpen}
               onClose={onCloseModal}
             >
-              <p>Mesa {idOrder} retirada da Solicitação de Ajuda!</p>
+              <p>Pedido {idOrder} retirado da Solicitação de Pagamento!</p>
             </AlertModal>
           </div>
         </SolicitationPaymentWaiterContainer>

@@ -13,6 +13,7 @@ interface Order {
   idOrder: number;
   status: ENUM;
   idTable: number;
+  nameClient: string;
   idClient: number;
   data: Date;
 }
@@ -23,16 +24,15 @@ export const getAllOrders = async (): Promise<Order[]> => {
   return response.data.orders;
 };
 
-// export const putOneOrder = async (
-//   idTable: number,
-//   needHelp: boolean,
-// ): Promise<Order[]> => {
-//   const data = {
-//     table: {
-//       needHelp,
-//     },
-//   };
-//   const response = await api.put(`table/${idTable}`, data);
-
-//   return response.data;
-// };
+export const putOneOrder = async (
+  idOrder: number,
+  status: string,
+): Promise<Order[]> => {
+  const data = {
+    order: {
+      status,
+    },
+  };
+  const response = await api.put(`order/${idOrder}`, data);
+  return response.data;
+};

@@ -12,6 +12,12 @@ const homeButtons = [
     text: 'Mesas que solicitam ajuda',
     route: '/garcom/ajuda',
   },
+  {
+    id: 2,
+    icon: Icons.doubt,
+    text: 'Mesas que solicitam pagamento',
+    route: '/garcom/pagamento',
+  },
 ];
 
 export default homeButtons;

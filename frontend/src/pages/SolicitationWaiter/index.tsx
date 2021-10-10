@@ -91,7 +91,7 @@ const SolicitationWaiter: React.FC = () => {
               <div key={value.id} className="button-mesas">
                 <HelpButton
                   id={value.id}
-                  checked={checked[value.id]}
+                  // checked={checked[value.id]}
                   onToggle={() => handleOnChange(value.id)}
                 >
                   Mesa {value.mesa}
