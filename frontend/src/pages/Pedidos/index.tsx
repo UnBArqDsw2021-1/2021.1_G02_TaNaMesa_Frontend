@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
+import Board, { moveCard } from '@asseinfo/react-kanban';
 
 import NavBar from 'components/NavBar';
 import PedidosModal from 'components/Modal/PedidosModal';
@@ -61,6 +64,26 @@ const mesas_ = [
   },
 ];
 
+const board = {
+  columns: [
+    {
+      id: 1,
+      title: 'Em aberto',
+      cards: [mesas_[0], mesas_[1]],
+    },
+    {
+      id: 2,
+      title: 'Em produção',
+      cards: [],
+    },
+    {
+      id: 3,
+      title: 'Concluídos',
+      cards: [],
+    },
+  ],
+};
+
 const Pedidos: React.FC = () => {
   const [mesas, setMesas] = useState<Mesa[]>(mesas_);
   const [mesaSelected, setMesaSelected] = useState<Mesa>({
@@ -69,6 +92,13 @@ const Pedidos: React.FC = () => {
   });
 
   const [showMesa, setShowMesa] = useState<boolean>(false);
+
+  const [controlledBoard, setBoard] = useState(board);
+
+  const handleCardMove = (_card: any, source: any, destination: any): void => {
+    const updatedBoard = moveCard(controlledBoard, source, destination);
+    setBoard(updatedBoard);
+  };
 
   const selectMesa = (mesa: Mesa): void => {
     setMesaSelected(mesa);
@@ -83,86 +113,33 @@ const Pedidos: React.FC = () => {
     <>
       <NavBar left="Voltar" center="Mesa" tableTitle="Pedidos" />
       <Container>
-        <div className="pedidos">
-          <div className="col">
-            <h3>Em aberto</h3>
-
-            <div className="mesas">
-              {mesas.map(mesa => (
-                <button
-                  type="button"
-                  className="mesa"
-                  key={mesa.id}
-                  onClick={() => selectMesa(mesa)}
-                >
-                  <div className="status">
-                    <h4>Mesa {mesa.id}</h4>
-                    <Status color="#EB4040" />
-                  </div>
-                  <div className="content">
-                    <h5>
-                      {mesa.comandas.length === 1
-                        ? `1 Comanda`
-                        : `${mesa.comandas.length} Comandas`}
-                    </h5>
-                  </div>
-                </button>
-              ))}
+        <Board
+          disableColumnDrag
+          onCardDragEnd={handleCardMove}
+          renderCard={(mesa: any, { dragging }: any) => (
+            <div
+              className={`mesa ${dragging ? 'dragging' : ''}`}
+              key={mesa.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => selectMesa(mesa)}
+            >
+              <div className="status">
+                <h4>Mesa {mesa.id}</h4>
+                <Status color="#2BB426" />
+              </div>
+              <div className="content">
+                <h5>
+                  {mesa.comandas.length === 1
+                    ? `1 Comanda`
+                    : `${mesa.comandas.length} Comandas`}
+                </h5>
+              </div>
             </div>
-          </div>
-          <div className="col">
-            <h3>Em produção</h3>
-
-            <div className="mesas">
-              {mesas.map(mesa => (
-                <button
-                  type="button"
-                  className="mesa"
-                  key={mesa.id}
-                  onClick={() => selectMesa(mesa)}
-                >
-                  <div className="status">
-                    <h4>Mesa {mesa.id}</h4>
-                    <Status color="#F9FC66" />
-                  </div>
-                  <div className="content">
-                    <h5>
-                      {mesa.comandas.length === 1
-                        ? `1 Comanda`
-                        : `${mesa.comandas.length} Comandas`}
-                    </h5>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="col">
-            <h3>Concluídos</h3>
-
-            <div className="mesas">
-              {mesas.map(mesa => (
-                <button
-                  type="button"
-                  className="mesa"
-                  key={mesa.id}
-                  onClick={() => selectMesa(mesa)}
-                >
-                  <div className="status">
-                    <h4>Mesa {mesa.id}</h4>
-                    <Status color="#2BB426" />
-                  </div>
-                  <div className="content">
-                    <h5>
-                      {mesa.comandas.length === 1
-                        ? `1 Comanda`
-                        : `${mesa.comandas.length} Comandas`}
-                    </h5>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+          )}
+        >
+          {controlledBoard}
+        </Board>
       </Container>
 
       <PedidosModal
