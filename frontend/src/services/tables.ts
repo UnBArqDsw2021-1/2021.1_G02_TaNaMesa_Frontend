@@ -2,11 +2,7 @@ import api from 'api';
 
 interface Table {
   idTable: number;
-  cpfWaiter: string;
   needHelp: boolean;
-  password: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export const getAllTables = async (): Promise<Table[]> => {
