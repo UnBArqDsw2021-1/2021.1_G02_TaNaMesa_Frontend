@@ -6,7 +6,7 @@ import { Container } from 'components/HelpButton/styles';
 
 type HelpButtonProps = {
   id: number;
-  onToggle: (checked: number) => void;
+  onToggle: (id: number) => void;
 };
 
 const HelpButton: React.FC<HelpButtonProps> = ({ children, onToggle, id }) => {
