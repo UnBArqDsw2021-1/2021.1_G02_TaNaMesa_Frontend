@@ -65,24 +65,22 @@ const SolicitationWaiter: React.FC = () => {
             Clique sobre a mesa quando atender a solicitação de ajuda
           </div>
           {mesaArray &&
-            mesaArray
-              .map(value => {
-                return (
-                  <div key={value.idTable} className="button-mesas">
-                    <HelpButton
-                      id={value.idTable}
-                      onToggle={() => {
-                        handleOnChange(value.idTable);
-                        setModalOpen(true);
-                        setIdTable(value.idTable);
-                      }}
-                    >
-                      Mesa {value.idTable}
-                    </HelpButton>
-                  </div>
-                );
-              })
-              .reverse()}
+            mesaArray.map(value => {
+              return (
+                <div key={value.idTable} className="button-mesas">
+                  <HelpButton
+                    id={value.idTable}
+                    onToggle={() => {
+                      handleOnChange(value.idTable);
+                      setModalOpen(true);
+                      setIdTable(value.idTable);
+                    }}
+                  >
+                    Mesa {value.idTable}
+                  </HelpButton>
+                </div>
+              );
+            })}
           <div onClick={() => setModalOpen(false)}>
             <AlertModal
               icon={Icons.simbolo_ok}
