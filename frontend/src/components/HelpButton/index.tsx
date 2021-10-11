@@ -16,10 +16,6 @@ const HelpButton: React.FC<HelpButtonProps> = ({ children, onToggle, id }) => {
         {children}
         <img alt="helpbutton" src={Icons.simbolo_duvida} />
       </div>
-      <label htmlFor="checkmark" className="container">
-        <input type="checkbox" onChange={() => onToggle(id)} />
-        <span className="checkmark"></span>
-      </label>
     </Container>
   );
 };
