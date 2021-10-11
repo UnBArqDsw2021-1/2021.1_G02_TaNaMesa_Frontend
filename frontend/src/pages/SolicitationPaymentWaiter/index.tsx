@@ -7,7 +7,7 @@ import SideBar from 'components/SideBar';
 import HelpButton from 'components/HelpButton';
 import AlertModal from 'components/Modal/AlertModal';
 
-import { ENUM, getAllOrders, putOneOrder } from 'services/orders';
+import { getAllOrders, putOneOrder } from 'services/orders';
 
 import {
   Container,
