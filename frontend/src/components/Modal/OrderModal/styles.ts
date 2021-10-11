@@ -195,6 +195,15 @@ export const Container = styled.div`
         flex-direction: row;
         justify-content: space-evenly;
         margin-bottom: 5rem;
+
+        button:hover {
+          opacity: 0.9;
+        }
+
+        button:disabled {
+          opacity: 0.7;
+          cursor: auto;
+        }
       }
 
       textarea {

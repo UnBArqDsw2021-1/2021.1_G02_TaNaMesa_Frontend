@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 
+import Icons from 'utils/assets';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import { useUserTheme } from 'hooks/theme';
+import { getAllOrders } from 'services/orders';
 import { Container } from './styles';
 
 interface Item {
@@ -22,6 +25,13 @@ interface Item {
   updatedAt: string;
 }
 
+interface Order {
+  idOrder: number;
+  status: string;
+  idTable: number;
+  idClient: number;
+}
+
 type Props = {
   visible: boolean;
   item: Item;
@@ -33,7 +43,25 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
   const { theme } = useUserTheme();
 
   const [rightSideModal, setRigthSideModal] = useState('first');
-  const [qtdItem, setQtdItem] = useState(1);
+  const [desireCheckbox, setDesireCheckbox] = useState('agora');
+  const [observationText, setObservationText] = useState('');
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [itemsCount, setQItemsCount] = useState(1);
+
+  const onChangeInput = (event: any): void => {
+    return setObservationText(event.target.value);
+  };
+
+  useEffect(() => {
+    /* TODO: Buscar pelo id da mesa logada */
+    getAllOrders()
+      .then(response => {
+        setOrders(response);
+      })
+      .catch(() => {
+        setOrders([]);
+      });
+  }, []);
 
   useEffect(() => {
     const escFunction = (event: any): void => {
@@ -62,8 +90,18 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
           <div className="modal-rigth">
             <div className="checkboxes">
               <p>Deseja</p>
-              <Checkbox label="Depois do pedido" id={1} onClick={() => {}} />
-              <Checkbox label="Agora" id={2} onClick={() => {}} />
+              <Checkbox
+                label="Agora"
+                id={1}
+                checked={desireCheckbox === 'agora'}
+                onClick={_ => setDesireCheckbox('agora')}
+              />
+              <Checkbox
+                label="Depois do pedido"
+                id={2}
+                checked={desireCheckbox === 'depois'}
+                onClick={_ => setDesireCheckbox('depois')}
+              />
             </div>
             <Button
               color={theme.primary01}
@@ -84,7 +122,8 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                 <button
                   type="button"
                   className="qtd-circulo"
-                  onClick={() => setQtdItem(qtdItem - 1)}
+                  disabled={itemsCount === 1}
+                  onClick={() => setQItemsCount(itemsCount - 1)}
                 >
                   <FiMinus color={theme.white} size="2rem" />
                 </button>
@@ -92,18 +131,22 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                   style={{ backgroundColor: theme.gray }}
                   className="qtd-circulo"
                 >
-                  {qtdItem}
+                  {itemsCount}
                 </div>
                 <button
                   type="button"
                   className="qtd-circulo"
-                  onClick={() => setQtdItem(qtdItem + 1)}
+                  onClick={() => setQItemsCount(itemsCount + 1)}
                 >
                   <FiPlus color={theme.white} size="2rem" />
                 </button>
               </div>
               <p>Observações</p>
-              <textarea id="observacao" name="observacao" />
+              <textarea
+                id="observacao"
+                name="observacao"
+                onChange={onChangeInput}
+              />
               <span>
                 Deseja realizar alguma alteração no item? Conta pra gente!
               </span>
@@ -123,22 +166,25 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
           <div className="modal-rigth">
             <div className="checkboxes">
               <p>De quem é?</p>
-              <Checkbox label="Brenda" id={1} onClick={() => {}} />
-              <Checkbox label="Sérgio" id={2} onClick={() => {}} />
+              {orders.map(order => (
+                /* TODO: Pegar o nome do cliente e adicionar lógica de clicar na checkbox */
+                <Checkbox
+                  label={order.status}
+                  id={order.idOrder}
+                  onClick={() => {}}
+                />
+              ))}
               <Button
                 color={theme.primary01}
                 width="18rem"
                 padding="1rem"
-                onClick={() => {}}
+                onClick={() => {}} /* TODO: Integrar com a modal de criar comanda */
               >
                 <span>Criar comanda</span>
               </Button>
             </div>
-            <Button
-              color={theme.primary01}
-              width="80%"
-              onClick={() => setRigthSideModal('second')}
-            >
+            {/* TODO: Fazer a requisição de adicionar item ao pedido */}
+            <Button color={theme.primary01} width="80%" onClick={() => {}}>
               <span>Adicionar ao pedido</span>
             </Button>
           </div>
@@ -161,10 +207,10 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
           <div className="item-info">
             <img
               src={
-                // item.image
-                //   ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${item.image}`
-                //   : Icons.without_photo
-                'https://www.barbosasupermercados.com.br/wp-content/uploads/2019/05/petit-gateau-01.jpg'
+                item.image
+                  ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${item.image}`
+                  : Icons.without_photo
+                // 'https://www.barbosasupermercados.com.br/wp-content/uploads/2019/05/petit-gateau-01.jpg'
               }
               alt={item.name}
             />
