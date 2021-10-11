@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
-import { useScreenSize } from 'hooks/screen';
+import OrderModal from 'components/Modal/OrderModal';
 import Icons from 'utils/assets';
 
 import { Container, MenuContainer } from 'pages/Menu/styles';
-
+import { useScreenSize } from 'hooks/screen';
 import { getAllItems } from 'services/items';
 import { useMenu } from 'hooks/menu';
 
@@ -30,6 +31,18 @@ const Menu: React.FC = () => {
   const { selectedCategory, selectedCategoryText } = useMenu();
 
   const [menuItems, setMenuItems] = useState<Item[]>([]);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [itemOrderModal, setItemOrderModal] = useState<Item>();
+
+  const onCloseModal = (event: any): void => {
+    event.preventDefault();
+    setIsOrderModalOpen(false);
+  };
+
+  const openOrderModal = (item: Item): void => {
+    setIsOrderModalOpen(true);
+    setItemOrderModal(item);
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,6 +86,7 @@ const Menu: React.FC = () => {
                 price={String(item.price)}
                 // discount={0}
                 description={`${item.description} ${item.notes}`}
+                onClick={() => openOrderModal(item)}
               />
             );
           })}
@@ -91,6 +105,13 @@ const Menu: React.FC = () => {
             </>
           ) : null}
         </MenuContainer>
+        {isOrderModalOpen && (
+          <OrderModal
+            visible={isOrderModalOpen}
+            item={itemOrderModal as Item}
+            onClose={onCloseModal}
+          />
+        )}
         {isLoading && <Loading />}
       </Container>
     </>

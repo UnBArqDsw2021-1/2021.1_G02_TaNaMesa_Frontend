@@ -16,9 +16,16 @@ type Props = {
   name: string;
   price: string;
   description: string;
+  onClick: () => void;
 };
 
-const MenuItem: React.FC<Props> = ({ image, name, price, description }) => {
+const MenuItem: React.FC<Props> = ({
+  image,
+  name,
+  price,
+  description,
+  onClick,
+}) => {
   const { theme } = useUserTheme();
 
   return (
@@ -38,12 +45,7 @@ const MenuItem: React.FC<Props> = ({ image, name, price, description }) => {
 
         <ButtonContainer>
           <p>R${price}</p>
-          <Button
-            color={theme.primary01}
-            onClick={() => {
-              null;
-            }}
-          >
+          <Button color={theme.primary01} onClick={onClick}>
             <span>Adicionar</span>
           </Button>
         </ButtonContainer>
