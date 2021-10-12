@@ -21,10 +21,10 @@ const EditAddItemPage: React.FC = () => {
         center="Mesa"
         tableTitle="Gerente | Administrador"
       />
+      <SideBar page="menu-manager" />
       <Container>
-        <SideBar page="menu-manager" />
         <EditAddItem
-          image="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.policymed.com%2F2013%2F04%2Ffda-outlines-g"
+          image=""
           name="xburguer"
           price="10"
           description="Isso aqui é um xburguer"
