@@ -11,6 +11,7 @@ const homeButtons = [
     id: 1,
     icon: Icons.simbolo_pedir,
     text: 'Pedir',
+    solicitationOrder: true,
   },
   {
     id: 2,
