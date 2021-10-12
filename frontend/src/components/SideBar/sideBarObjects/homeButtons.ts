@@ -10,7 +10,7 @@ const homeButtons = [
   {
     id: 1,
     icon: Icons.simbolo_pedir,
-    text: 'Pedir',
+    text: 'Pedir Conta',
     solicitationOrder: true,
   },
   {
