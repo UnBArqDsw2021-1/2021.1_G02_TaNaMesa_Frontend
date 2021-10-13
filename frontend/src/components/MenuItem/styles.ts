@@ -19,6 +19,7 @@ export const MenuItemContainer = styled.div`
   }
 
   @media (max-width: 980px) {
+    width: 100%;
     flex-direction: column;
     img {
       width: 100%;
@@ -28,9 +29,13 @@ export const MenuItemContainer = styled.div`
 `;
 
 export const ItemInfo = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 980px) {
+    width: 100%;
+  }
 
   h4 {
     font-family: 'Poppins';
@@ -47,6 +52,9 @@ export const ItemInfo = styled.div`
     line-height: 2.8rem;
     color: ${props => props.theme.black};
     margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

@@ -71,8 +71,8 @@ const Menu: React.FC = () => {
                 image={item.image}
                 name={item.name}
                 price={String(item.price)}
-                // discount={0}
-                description={`${item.description} ${item.notes}`}
+                description={item.description}
+                note={item.notes}
               />
             );
           })}
