@@ -4,12 +4,16 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+import { useHistory } from 'react-router';
 
 import Icons from 'utils/assets';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
+import ComandaModal from 'components/Modal/ComandaModal';
 import { useUserTheme } from 'hooks/theme';
 import { getAllOrders } from 'services/orders';
+import { createContain } from 'services/contain';
+import Loading from 'components/Loading';
 import { Container } from './styles';
 
 interface Item {
@@ -32,6 +36,13 @@ interface Order {
   idClient: number;
 }
 
+interface Contain {
+  idOrder: number;
+  idItem: number;
+  quantity: number;
+  observation: string;
+}
+
 type Props = {
   visible: boolean;
   item: Item;
@@ -41,20 +52,25 @@ type Props = {
 const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
   const modalRef = useRef(null);
   const { theme } = useUserTheme();
+  const history = useHistory();
+
+  const idTable = 1;
 
   const [rightSideModal, setRigthSideModal] = useState('first');
   const [desireCheckbox, setDesireCheckbox] = useState('agora');
   const [observationText, setObservationText] = useState('');
   const [orders, setOrders] = useState<Order[]>([]);
-  const [itemsCount, setQItemsCount] = useState(1);
+  const [itemQuantity, setItemQuantity] = useState(1);
+  const [isComandaModalOpen, setIsComandaModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeInput = (event: any): void => {
     return setObservationText(event.target.value);
   };
 
   useEffect(() => {
-    /* TODO: Buscar pelo id da mesa logada */
-    getAllOrders()
+    getAllOrders(idTable)
       .then(response => {
         setOrders(response);
       })
@@ -82,6 +98,30 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
       document.removeEventListener('touchstart', handleClick);
     };
   }, [onClose]);
+
+  const onCloseComandaModal = (event: any): void => {
+    event.preventDefault();
+    setIsComandaModalOpen(false);
+  };
+
+  const handleSubmit = (): void => {
+    const contain: Contain = {
+      idOrder: selectedOrder,
+      idItem: item.idItem,
+      quantity: itemQuantity,
+      observation: observationText,
+    };
+    setIsLoading(true);
+
+    createContain(contain)
+      .then(response => {
+        // history.goBack();
+      })
+      .catch(response => {
+        console.log(response);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const renderRigthSideModal = (): JSX.Element | null => {
     switch (rightSideModal) {
@@ -122,8 +162,8 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                 <button
                   type="button"
                   className="qtd-circulo"
-                  disabled={itemsCount === 1}
-                  onClick={() => setQItemsCount(itemsCount - 1)}
+                  disabled={itemQuantity === 1}
+                  onClick={() => setItemQuantity(itemQuantity - 1)}
                 >
                   <FiMinus color={theme.white} size="2rem" />
                 </button>
@@ -131,12 +171,12 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                   style={{ backgroundColor: theme.gray }}
                   className="qtd-circulo"
                 >
-                  {itemsCount}
+                  {itemQuantity}
                 </div>
                 <button
                   type="button"
                   className="qtd-circulo"
-                  onClick={() => setQItemsCount(itemsCount + 1)}
+                  onClick={() => setItemQuantity(itemQuantity + 1)}
                 >
                   <FiPlus color={theme.white} size="2rem" />
                 </button>
@@ -163,31 +203,41 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
 
       case 'third':
         return (
-          <div className="modal-rigth">
-            <div className="checkboxes">
-              <p>De quem é?</p>
-              {orders.map(order => (
-                /* TODO: Pegar o nome do cliente e adicionar lógica de clicar na checkbox */
-                <Checkbox
-                  label={order.status}
-                  id={order.idOrder}
-                  onClick={() => {}}
-                />
-              ))}
+          <>
+            <div className="modal-rigth">
+              <div className="checkboxes">
+                <p>De quem é?</p>
+                {orders.map(order => (
+                  <Checkbox
+                    label={order.status} /* Trocar para o nome */
+                    id={order.idOrder}
+                    checked={selectedOrder === order.idOrder}
+                    onClick={() => setSelectedOrder(order.idOrder)}
+                  />
+                ))}
+                <Button
+                  color={theme.primary01}
+                  width="18rem"
+                  padding="1rem"
+                  onClick={() => setIsComandaModalOpen(true)}
+                >
+                  <span>Criar comanda</span>
+                </Button>
+              </div>
               <Button
                 color={theme.primary01}
-                width="18rem"
-                padding="1rem"
-                onClick={() => {}} /* TODO: Integrar com a modal de criar comanda */
+                width="80%"
+                onClick={handleSubmit}
+                disabled={selectedOrder === 0}
               >
-                <span>Criar comanda</span>
+                <span>Adicionar ao pedido</span>
               </Button>
             </div>
-            {/* TODO: Fazer a requisição de adicionar item ao pedido */}
-            <Button color={theme.primary01} width="80%" onClick={() => {}}>
-              <span>Adicionar ao pedido</span>
-            </Button>
-          </div>
+            <ComandaModal
+              visible={isComandaModalOpen}
+              onClose={onCloseComandaModal}
+            />
+          </>
         );
 
       default:
@@ -246,6 +296,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
         </div>
         {renderRigthSideModal()}
       </div>
+      {isLoading && <Loading />}
     </Container>
   );
 };
