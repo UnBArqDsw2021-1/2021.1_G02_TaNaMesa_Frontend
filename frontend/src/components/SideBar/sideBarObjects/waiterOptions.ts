@@ -9,7 +9,7 @@ const homeButtons = [
   },
   {
     id: 2,
-    icon: Icons.doubt,
+    icon: Icons.money,
     text: 'Mesas que solicitam pagamento',
     route: '/garcom/pagamento',
   },
