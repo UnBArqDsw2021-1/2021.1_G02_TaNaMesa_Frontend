@@ -8,7 +8,9 @@ interface Order {
 }
 
 export const getAllOrders = async (idTable?: number): Promise<Order[]> => {
-  const response = await api.get(`order/?idTable=${idTable || ''}`);
+  const response = await api.get(
+    idTable ? `order/?idTable=${idTable}` : 'order',
+  );
 
   return response.data.orders;
 };
