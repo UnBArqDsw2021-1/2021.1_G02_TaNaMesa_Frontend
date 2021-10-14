@@ -20,6 +20,8 @@ const SolicitationWaiter: React.FC = () => {
   const [mesaArray, setMesaArray] = useState<any[]>([]);
   const [idTable, setIdTable] = useState(0);
 
+  useEffect(() => switchActualScreen('waiter-help'), []);
+
   const onCloseModal = (event: any) => {
     event.preventDefault();
     setModalOpen(false);

@@ -33,7 +33,7 @@ const Menu: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => switchActualScreen('menu'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('menu'), []);
 
   useEffect(() => {
     setIsLoading(true);
