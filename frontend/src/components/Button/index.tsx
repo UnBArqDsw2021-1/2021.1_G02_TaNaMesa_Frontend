@@ -8,6 +8,7 @@ type ButtonProps = {
   padding?: string;
   disabled?: boolean;
   onClick: () => void;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,9 +18,11 @@ const Button: React.FC<ButtonProps> = ({
   padding,
   disabled,
   onClick,
+  type,
 }) => {
   return (
     <NormalButton
+      type={type}
       color={color}
       width={width}
       padding={padding}
@@ -35,6 +38,7 @@ Button.defaultProps = {
   width: '15rem',
   padding: '1.5rem',
   disabled: false,
+  type: 'button',
 };
 
 export default Button;

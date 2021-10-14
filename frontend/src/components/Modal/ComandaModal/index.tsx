@@ -14,8 +14,7 @@ type Props = {
   onClose: (event: any) => void;
 };
 
-const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
-  const table = {};
+const ComandaModal: React.FC<Props> = ({ visible, onClose }) => {
   const modalRef = useRef(null);
   const [comandas, setComandas] = useState<string[]>([]);
   const [name, setName] = useState('');
@@ -131,4 +130,4 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
   );
 };
 
-export default LoginModal;
+export default ComandaModal;
