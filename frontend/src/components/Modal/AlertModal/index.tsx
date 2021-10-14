@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React, { ReactNode, useEffect, useRef } from 'react';
 import { Container } from 'components/Modal/AlertModal/styles';
-import Icons from 'utils/assets';
+import Button from 'components/Button';
+import { useUserTheme } from 'hooks/theme';
 
 type Props = {
   children: ReactNode;
@@ -12,6 +13,7 @@ type Props = {
 
 const AlertModal: React.FC<Props> = ({ children, icon, visible, onClose }) => {
   const modalRef = useRef(null);
+  const { theme } = useUserTheme();
 
   useEffect(() => {
     const escFunction = (event: any): void => {
@@ -35,8 +37,11 @@ const AlertModal: React.FC<Props> = ({ children, icon, visible, onClose }) => {
   return (
     <Container className={visible ? '-visible' : ''} ref={modalRef}>
       <div className="content">
-        {icon && <img alt="alertModal" src={Icons.simbolo_cozinha} />}
+        {icon && <img alt="alertModal" src={icon} />}
         {children}
+        <Button color={theme.primary01} onClick={() => onClose}>
+          <span>Ok</span>
+        </Button>
       </div>
     </Container>
   );

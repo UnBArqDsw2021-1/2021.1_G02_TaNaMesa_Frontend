@@ -3,14 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   text-align: center;
   height: 100vh;
-  position: relative;
+  /* position: relative; */
   display: flex;
   justify-content: center;
+  align-items: center;
 
   .content {
-    margin: 0;
-    top: 50%;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: absolute; */
   }
 
   p {
@@ -19,7 +21,13 @@ export const Container = styled.div`
   }
 
   img {
+    margin-top: 2rem;
     height: 50px;
     width: 50px;
+  }
+
+  a {
+    margin-top: 2rem;
+    font-size: 2rem;
   }
 `;

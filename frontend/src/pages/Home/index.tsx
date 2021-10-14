@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const { actualScreen, switchActualScreen } = useScreenSize();
   const { solicitationWaiter, handleSolicitationWaiter } = useWaiter();
 
-  useEffect(() => switchActualScreen('home'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('home'), []);
 
   return (
     <>

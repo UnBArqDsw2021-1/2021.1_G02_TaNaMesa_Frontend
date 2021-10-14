@@ -6,6 +6,7 @@ import Icons from 'utils/assets';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { useUserTheme } from 'hooks/theme';
 import { useScreenSize } from 'hooks/screen';
+import { useUser } from 'hooks/user';
 import {
   homeButtons,
   kitchenOptions,
@@ -40,6 +41,7 @@ interface SideBarObjects {
 const screensNamesNeedToBeStatic = ['home', 'waiter', 'kitchen', 'manager'];
 
 const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
+  const { logoutUser } = useUser();
   const { switchScreenSize, actualScreen } = useScreenSize();
   const { theme } = useUserTheme();
 
@@ -129,6 +131,10 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
               isCallWaiter
             />
           )}
+
+          <button id="logout" type="button" onClick={logoutUser}>
+            Fazer Logout
+          </button>
         </>
       ) : (
         <Button

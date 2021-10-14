@@ -19,6 +19,7 @@ export const Container = styled.div<ContainerProps>`
   overflow-y: auto;
   transition: 0.6s ease;
   padding-bottom: 12rem;
+  z-index: 1;
   background: linear-gradient(
     180deg,
     ${props => props.theme.primary03} 0%,
@@ -30,6 +31,17 @@ export const Container = styled.div<ContainerProps>`
     css`
       position: static;
     `}
+
+  #logout {
+    padding: 1rem;
+    font-size: 2rem;
+    text-decoration: underline;
+    transition: 0.2s all;
+  }
+
+  #logout:hover {
+    opacity: 0.4;
+  }
 
   @media (max-width: 1000px) {
     width: ${props => (props.size === 'large' ? '100%' : '10%')};
