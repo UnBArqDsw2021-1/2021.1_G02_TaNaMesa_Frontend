@@ -4,7 +4,7 @@ const options = [
   {
     id: 0,
     icon: Icons.simbolo_hamburguer,
-    text: 'Burguers',
+    text: 'Hambúrgueres',
     category: 'hamburgueres',
   },
   {
