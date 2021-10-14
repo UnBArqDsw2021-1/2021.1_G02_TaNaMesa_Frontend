@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router';
 
@@ -6,6 +5,8 @@ import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 import { useMenu } from 'hooks/menu';
 import { useScreenSize } from 'hooks/screen';
 import { useModal } from 'hooks/modal';
+import { useUser } from 'hooks/user';
+import { putOneTable } from 'services/tables';
 
 interface SideBarButtonProps {
   icon: string;
@@ -39,6 +40,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
   const { handleSolicitationWaiter, handleSolicitationOrder } = useModal();
   const { switchScreenSize } = useScreenSize();
+  const { table } = useUser();
   const history = useHistory();
 
   const whichFunctionOnClick = (): ((e: FormEvent) => void) => {
@@ -60,6 +62,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
     if (solicitationWaiter) {
       return e => {
         e.preventDefault();
+        putOneTable(Number(table), true);
         handleSolicitationWaiter(true);
       };
     }
