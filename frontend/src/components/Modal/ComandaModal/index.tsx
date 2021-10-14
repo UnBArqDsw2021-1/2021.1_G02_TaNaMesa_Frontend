@@ -6,6 +6,7 @@ import Icons from 'utils/assets';
 
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 
+import { getComanda, postComanda, deleteComanda } from 'services/items';
 import { Container } from './styles';
 
 type Props = {
@@ -14,12 +15,25 @@ type Props = {
 };
 
 const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
+  const table = {};
   const modalRef = useRef(null);
   const [comandas, setComandas] = useState<string[]>([]);
   const [name, setName] = useState('');
 
+  useEffect(() => {
+    getComanda(name)
+      .then(response => {
+        setComandas(response);
+      })
+      .catch(() => {
+        setComandas([]);
+      });
+    // .finally(() => );
+  }, []);
+
   const removePersonFromComanda = (person: string): void => {
     const newComandas = comandas.filter(comanda => comanda !== person);
+    deleteComanda(name);
     setComandas(newComandas);
   };
 
@@ -30,7 +44,7 @@ const LoginModal: React.FC<Props> = ({ visible, onClose }) => {
     if (hasComanda.length > 0) {
       alert('Já existe uma comanda com esse nome');
     } else if (name.length > 0) {
-      newComandas.push(name);
+      postComanda(name);
       setComandas(newComandas);
       setName('');
     }

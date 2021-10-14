@@ -18,3 +18,21 @@ export const getAllItems = async (category: string): Promise<Item[]> => {
 
   return response.data.items;
 };
+
+export const getComanda = async (name: string): Promise<string[]> => {
+  const response = await api.get(`string?name=${name}`);
+
+  return response.data.items;
+};
+
+export const postComanda = async (name: string): Promise<string[]> => {
+  const response = await api.post(`string?name=${name}`);
+
+  return response.data.items;
+};
+
+export const deleteComanda = async (name: string): Promise<string[]> => {
+  const response = await api.delete(`string?name=${name}`);
+
+  return response.data.items;
+};
