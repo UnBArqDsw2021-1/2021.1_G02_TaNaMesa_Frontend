@@ -34,8 +34,8 @@ const Menu: React.FC = () => {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [itemOrderModal, setItemOrderModal] = useState<Item>();
 
-  const onCloseModal = (event: any): void => {
-    event.preventDefault();
+  const onCloseModal = (event: any = null): void => {
+    event && event.preventDefault();
     setIsOrderModalOpen(false);
   };
 

@@ -57,7 +57,7 @@ interface Contain {
 type Props = {
   visible: boolean;
   item: Item;
-  onClose: (event: any) => void;
+  onClose: (event?: any) => void;
 };
 
 const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
@@ -129,7 +129,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
     setIsLoading(true);
     createContain(contain)
       .then(response => {
-        /* TODO: Fechar a modal */
+        onClose();
       })
       .catch(response => {
         console.log(response);
@@ -226,6 +226,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                 ) : (
                   orders.map(order => (
                     <Checkbox
+                      key={order.idOrder}
                       label={order.nameClient}
                       id={order.idOrder}
                       checked={selectedOrder === order.idOrder}
