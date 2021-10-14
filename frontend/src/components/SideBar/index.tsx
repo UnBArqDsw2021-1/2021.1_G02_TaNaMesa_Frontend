@@ -132,6 +132,7 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
             <SideBarButton
               text={callWaiterOnMenuUser.text}
               icon={callWaiterOnMenuUser.icon}
+              solicitationWaiter={callWaiterOnMenuUser.solicitationWaiter}
               isCallWaiter
             />
           )}

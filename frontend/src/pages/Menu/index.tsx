@@ -1,16 +1,20 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
-import { useScreenSize } from 'hooks/screen';
+import AlertModal from 'components/Modal/AlertModal';
 import Icons from 'utils/assets';
 
 import { Container, MenuContainer } from 'pages/Menu/styles';
-
 import { getAllItems } from 'services/items';
 import { useMenu } from 'hooks/menu';
+import { useModal } from 'hooks/modal';
+import { useScreenSize } from 'hooks/screen';
 
 interface Item {
   category: string;
@@ -28,6 +32,7 @@ interface Item {
 const Menu: React.FC = () => {
   const { openMenu, switchActualScreen } = useScreenSize();
   const { selectedCategory, selectedCategoryText } = useMenu();
+  const { solicitationWaiter, handleSolicitationWaiter } = useModal();
 
   const [menuItems, setMenuItems] = useState<Item[]>([]);
 
@@ -91,6 +96,16 @@ const Menu: React.FC = () => {
             </>
           ) : null}
         </MenuContainer>
+        <div onClick={() => handleSolicitationWaiter(false)}>
+          <AlertModal
+            visible={solicitationWaiter}
+            onClose={(_: any) => handleSolicitationWaiter(false)}
+          >
+            <p style={{ marginBottom: '5rem', marginTop: 0 }}>
+              O garçom já foi notificado e, em breve, irá até você!
+            </p>
+          </AlertModal>
+        </div>
         {isLoading && <Loading />}
       </Container>
     </>
