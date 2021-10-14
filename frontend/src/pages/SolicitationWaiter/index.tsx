@@ -63,7 +63,7 @@ const SolicitationWaiter: React.FC = () => {
   ];
   const [checked, setChecked] = useState(new Array(mesas.length).fill(false));
 
-  useEffect(() => switchActualScreen('waiter-help'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('waiter-help'), []);
 
   const handleOnChange = (position: number): void => {
     const updatedCheckedState = checked.map((item, index) =>
