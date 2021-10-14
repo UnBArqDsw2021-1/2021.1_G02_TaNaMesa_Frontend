@@ -166,11 +166,18 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      margin-bottom: 2rem;
 
       button span {
         font-weight: 600;
         font-size: 1.4rem;
         color: ${props => props.theme.white};
+      }
+
+      h5 {
+        margin-bottom: 1rem;
+        font-weight: 500;
+        font-size: 1.6rem;
       }
     }
 
@@ -215,6 +222,7 @@ export const Container = styled.div`
         font-size: 1.5rem;
         border: solid 1px ${props => props.theme.gray};
         border-radius: 1rem;
+        padding: 1rem;
       }
 
       span {

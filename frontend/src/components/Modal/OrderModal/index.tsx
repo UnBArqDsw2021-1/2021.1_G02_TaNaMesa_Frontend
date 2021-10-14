@@ -4,13 +4,13 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FiMinus, FiPlus } from 'react-icons/fi';
-import { useHistory } from 'react-router';
 
 import Icons from 'utils/assets';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import ComandaModal from 'components/Modal/ComandaModal';
 import { useUserTheme } from 'hooks/theme';
+import { useUser } from 'hooks/user';
 import { getAllOrders } from 'services/orders';
 import { createContain } from 'services/contain';
 import Loading from 'components/Loading';
@@ -29,11 +29,22 @@ interface Item {
   updatedAt: string;
 }
 
+export enum ENUM {
+  'na fila',
+  'na cozinha',
+  'preparando',
+  'na mesa',
+  'solicitacao pagamento',
+  'pagamento realizado',
+}
+
 interface Order {
   idOrder: number;
-  status: string;
+  status: ENUM;
   idTable: number;
+  nameClient: string;
   idClient: number;
+  data: Date;
 }
 
 interface Contain {
@@ -52,9 +63,7 @@ type Props = {
 const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
   const modalRef = useRef(null);
   const { theme } = useUserTheme();
-  const history = useHistory();
-
-  const idTable = 1;
+  const { table } = useUser();
 
   const [rightSideModal, setRigthSideModal] = useState('first');
   const [desireCheckbox, setDesireCheckbox] = useState('agora');
@@ -70,14 +79,15 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
   };
 
   useEffect(() => {
-    getAllOrders(idTable)
+    getAllOrders(Number(table))
       .then(response => {
         setOrders(response);
+        setSelectedOrder(response[0].idOrder);
       })
       .catch(() => {
         setOrders([]);
       });
-  }, []);
+  }, [isComandaModalOpen]);
 
   useEffect(() => {
     const escFunction = (event: any): void => {
@@ -109,13 +119,17 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
       idOrder: selectedOrder,
       idItem: item.idItem,
       quantity: itemQuantity,
-      observation: observationText,
+      observation:
+        `${observationText ? `${observationText}. ` : ''}` +
+        `Entregar: ${
+          desireCheckbox === 'agora' ? 'Agora' : 'Depois do Pedido'
+        }`,
     };
-    setIsLoading(true);
 
+    setIsLoading(true);
     createContain(contain)
       .then(response => {
-        // history.goBack();
+        /* TODO: Fechar a modal */
       })
       .catch(response => {
         console.log(response);
@@ -129,7 +143,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
         return (
           <div className="modal-rigth">
             <div className="checkboxes">
-              <p>Deseja</p>
+              <p>Entrega</p>
               <Checkbox
                 label="Agora"
                 id={1}
@@ -206,17 +220,22 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
           <>
             <div className="modal-rigth">
               <div className="checkboxes">
-                <p>De quem é?</p>
-                {orders.map(order => (
-                  <Checkbox
-                    label={order.status} /* Trocar para o nome */
-                    id={order.idOrder}
-                    checked={selectedOrder === order.idOrder}
-                    onClick={() => setSelectedOrder(order.idOrder)}
-                  />
-                ))}
+                <p>Comanda</p>
+                {orders.length === 0 ? (
+                  <h5>Nenhuma comanda cadastrada</h5>
+                ) : (
+                  orders.map(order => (
+                    <Checkbox
+                      label={order.nameClient}
+                      id={order.idOrder}
+                      checked={selectedOrder === order.idOrder}
+                      onClick={() => setSelectedOrder(order.idOrder)}
+                    />
+                  ))
+                )}
+
                 <Button
-                  color={theme.primary01}
+                  color={theme.secondaryGreen}
                   width="18rem"
                   padding="1rem"
                   onClick={() => setIsComandaModalOpen(true)}
@@ -260,7 +279,6 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                 item.image
                   ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${item.image}`
                   : Icons.without_photo
-                // 'https://www.barbosasupermercados.com.br/wp-content/uploads/2019/05/petit-gateau-01.jpg'
               }
               alt={item.name}
             />
@@ -274,7 +292,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
               onClick={() => setRigthSideModal('first')}
             >
               <div className="circulo">1</div>
-              <span>Deseja</span>
+              <span>Entrega</span>
             </Button>
             <Button
               color={theme.gray}
@@ -290,7 +308,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
               onClick={() => setRigthSideModal('third')}
             >
               <div className="circulo">3</div>
-              <span>De quem é?</span>
+              <span>Comanda</span>
             </Button>
           </div>
         </div>
