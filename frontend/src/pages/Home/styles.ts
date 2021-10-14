@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
-interface ContainerProps {
-  isLoginVisible: boolean;
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   display: flex;
   height: 100vh;
   flex-direction: row;
   background-color: ${props => props.theme.background};
-  opacity: ${props => (props.isLoginVisible ? 0.6 : 1)};
 
   @media (max-width: 1000px) {
     div + div {
