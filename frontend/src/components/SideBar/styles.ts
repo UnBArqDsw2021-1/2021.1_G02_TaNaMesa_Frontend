@@ -31,6 +31,17 @@ export const Container = styled.div<ContainerProps>`
       position: static;
     `}
 
+  #logout {
+    padding: 1rem;
+    font-size: 2rem;
+    text-decoration: underline;
+    transition: 0.2s all;
+  }
+
+  #logout:hover {
+    opacity: 0.4;
+  }
+
   @media (max-width: 1000px) {
     width: ${props => (props.size === 'large' ? '100%' : '10%')};
   }
