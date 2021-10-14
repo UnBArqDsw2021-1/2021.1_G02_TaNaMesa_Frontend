@@ -57,7 +57,7 @@ export const UserThemeProvider: React.FC = ({ children }) => {
       theme.type === 'default' ? 'dark' : 'default',
     );
     setTheme(theme === taNaMesaTheme ? taNaMesaDarkTheme : taNaMesaTheme);
-  }, [theme]);
+  }, []);
 
   return (
     <UserThemeContext.Provider value={{ theme, switchTheme }}>
