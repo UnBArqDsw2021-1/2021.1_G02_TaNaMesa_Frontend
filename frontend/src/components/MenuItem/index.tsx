@@ -16,6 +16,7 @@ type Props = {
   name: string;
   price: string;
   description: string;
+  note: string;
   onClick: () => void;
 };
 
@@ -24,6 +25,7 @@ const MenuItem: React.FC<Props> = ({
   name,
   price,
   description,
+  note,
   onClick,
 }) => {
   const { theme } = useUserTheme();
@@ -42,6 +44,7 @@ const MenuItem: React.FC<Props> = ({
       <ItemInfo>
         <h4>{name}</h4>
         <p>{description}</p>
+        {note ? <p>{note}</p> : null}
 
         <ButtonContainer>
           <p>R${price}</p>

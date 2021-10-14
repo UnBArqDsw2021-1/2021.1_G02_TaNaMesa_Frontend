@@ -1,16 +1,38 @@
 import api from 'api';
 
-interface Order {
-  idOrder: number;
-  status: string;
-  idTable: number;
-  idClient: number;
+export enum ENUM {
+  'na fila',
+  'na cozinha',
+  'preparando',
+  'na mesa',
+  'solicitacao pagamento',
+  'pagamento realizado',
 }
 
-export const getAllOrders = async (idTable?: number): Promise<Order[]> => {
-  const response = await api.get(
-    idTable ? `order/?idTable=${idTable}` : 'order',
-  );
+interface Order {
+  idOrder: number;
+  status: ENUM;
+  idTable: number;
+  nameClient: string;
+  idClient: number;
+  data: Date;
+}
+
+export const getAllOrders = async (): Promise<Order[]> => {
+  const response = await api.get('order');
 
   return response.data.orders;
+};
+
+export const putOneOrder = async (
+  idOrder: number,
+  status: string,
+): Promise<Order[]> => {
+  const data = {
+    order: {
+      status,
+    },
+  };
+  const response = await api.put(`order/${idOrder}`, data);
+  return response.data;
 };

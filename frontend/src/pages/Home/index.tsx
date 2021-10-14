@@ -10,7 +10,7 @@ import { useScreenSize } from 'hooks/screen';
 const Home: React.FC = () => {
   const { actualScreen, switchActualScreen } = useScreenSize();
 
-  useEffect(() => switchActualScreen('home'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('home'), []);
 
   return (
     <>

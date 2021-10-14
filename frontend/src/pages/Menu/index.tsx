@@ -46,7 +46,7 @@ const Menu: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => switchActualScreen('menu'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('menu'), []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -84,9 +84,9 @@ const Menu: React.FC = () => {
                 image={item.image}
                 name={item.name}
                 price={String(item.price)}
-                // discount={0}
-                description={`${item.description} ${item.notes}`}
                 onClick={() => openOrderModal(item)}
+                description={item.description}
+                note={item.notes}
               />
             );
           })}

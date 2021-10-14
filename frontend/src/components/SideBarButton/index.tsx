@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router';
 

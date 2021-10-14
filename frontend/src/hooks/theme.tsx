@@ -32,6 +32,7 @@ interface AppTheme {
   black: string;
   white: string;
   background: string;
+  darkGray: string;
   gray: string;
 }
 
@@ -56,7 +57,7 @@ export const UserThemeProvider: React.FC = ({ children }) => {
       theme.type === 'default' ? 'dark' : 'default',
     );
     setTheme(theme === taNaMesaTheme ? taNaMesaDarkTheme : taNaMesaTheme);
-  }, [theme]);
+  }, []);
 
   return (
     <UserThemeContext.Provider value={{ theme, switchTheme }}>
