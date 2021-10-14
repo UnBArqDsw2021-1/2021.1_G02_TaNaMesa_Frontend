@@ -21,6 +21,7 @@ interface UserContextData {
 
 interface TokenPayload {
   sub: string;
+  exp: number;
 }
 
 const UserContext = createContext<UserContextData | null>(null);
@@ -37,12 +38,15 @@ export const UserProvider: React.FC = ({ children }) => {
     const actualTable = localStorage.getItem('@TaNaMesa:table');
 
     if (jwtToken) {
-      const user = jwt(jwtToken) as TokenPayload;
-      setOccupation(user.sub);
-      setTable(actualTable || '0');
+      const user = jwt(jwtToken.split(' ')[1]) as TokenPayload;
+      console.log({ user });
+      if (Math.floor(new Date().getTime() / 1000) <= user.exp) {
+        setOccupation(user.sub);
+        setTable(actualTable || '0');
 
-      api.defaults.headers.common.Authorization = `${jwtToken}`;
-      setToken(jwtToken.split(' ')[1]);
+        api.defaults.headers.common.Authorization = `${jwtToken}`;
+        setToken(jwtToken.split(' ')[1]);
+      }
     }
   }, []);
 
