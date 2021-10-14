@@ -10,6 +10,7 @@ import { useUser } from 'hooks/user';
 import Pedido from '../pages/Pedido';
 import Login from '../pages/Login';
 import SolicitationWaiter from '../pages/SolicitationWaiter';
+import SolicitationPaymentWaiter from '../pages/SolicitationPaymentWaiter';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 
@@ -62,6 +63,14 @@ const Routes: React.FC = () => {
             exact
             path="/garcom/ajuda"
             component={SolicitationWaiter}
+          />
+          <Route
+            token={token}
+            isPrivate
+            occupation="gerente"
+            exact
+            path="/garcom/pagamento"
+            component={SolicitationPaymentWaiter}
           />
           <Route
             token={token}
@@ -146,6 +155,14 @@ const Routes: React.FC = () => {
             exact
             path="/garcom/ajuda"
             component={SolicitationWaiter}
+          />
+          <Route
+            token={token}
+            isPrivate
+            occupation="garcom"
+            exact
+            path="/garcom/pagamento"
+            component={SolicitationPaymentWaiter}
           />
           <Route
             token={token}

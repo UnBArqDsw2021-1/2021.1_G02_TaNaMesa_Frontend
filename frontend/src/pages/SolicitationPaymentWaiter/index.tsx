@@ -7,20 +7,18 @@ import SideBar from 'components/SideBar';
 import HelpButton from 'components/HelpButton';
 import AlertModal from 'components/Modal/AlertModal';
 
-import { getAllTables, putOneTable } from 'services/tables';
+import { getAllOrders, putOneOrder } from 'services/orders';
 
 import {
   Container,
-  SolicitationWaiterContainer,
-} from 'pages/SolicitationWaiter/styles';
+  SolicitationPaymentWaiterContainer,
+} from 'pages/SolicitationPaymentWaiter/styles';
 
-const SolicitationWaiter: React.FC = () => {
+const SolicitationPaymentWaiter: React.FC = () => {
   const { openMenu, switchActualScreen } = useScreenSize();
   const [modalOpen, setModalOpen] = useState(false);
-  const [mesaArray, setMesaArray] = useState<any[]>([]);
-  const [idTable, setIdTable] = useState(0);
-
-  useEffect(() => switchActualScreen('waiter-help'), []);
+  const [orderArray, setOrderArray] = useState<any[]>([]);
+  const [idOrder, setIdOrder] = useState(0);
 
   const onCloseModal = (event: any) => {
     event.preventDefault();
@@ -28,27 +26,27 @@ const SolicitationWaiter: React.FC = () => {
   };
 
   const handleOnChange = (position: number): void => {
-    putOneTable(position, false)
+    putOneOrder(position, 'pagamento realizado')
       .then(() => {
-        setMesaArray(mesaArray.filter(item => item.idTable !== position));
+        setOrderArray(orderArray.filter(item => item.idOrder !== position));
       })
       .catch(() => {
-        setMesaArray([]);
+        setOrderArray([]);
       });
   };
 
   useEffect(() => {
     switchActualScreen('waiter-help');
-    getAllTables()
+    getAllOrders()
       .then(response => {
         response.map(item => {
-          if (item.needHelp === true) {
-            setMesaArray(oldArray => [...oldArray, item]);
+          if (String(item.status) === 'solicitacao pagamento') {
+            setOrderArray(oldArray => [...oldArray, item]);
           }
         });
       })
       .catch(() => {
-        setMesaArray([]);
+        setOrderArray([]);
       });
   }, [switchActualScreen]);
 
@@ -62,23 +60,23 @@ const SolicitationWaiter: React.FC = () => {
           page="menu-waiter"
           hasLogo
         />
-        <SolicitationWaiterContainer size={openMenu ? 'small' : 'large'}>
+        <SolicitationPaymentWaiterContainer size={openMenu ? 'small' : 'large'}>
           <div className="title">
-            Clique sobre a mesa quando atender a solicitação de ajuda
+            Clique sobre a mesa quando atender a solicitação de pagamento
           </div>
-          {mesaArray &&
-            mesaArray.map(value => {
+          {orderArray &&
+            orderArray.map(value => {
               return (
-                <div key={value.idTable} className="button-mesas">
+                <div key={value.idOrder} className="button-mesas">
                   <HelpButton
-                    id={value.idTable}
+                    id={value.idOrder}
                     onToggle={() => {
-                      handleOnChange(value.idTable);
+                      handleOnChange(value.idOrder);
                       setModalOpen(true);
-                      setIdTable(value.idTable);
+                      setIdOrder(value.idOrder);
                     }}
                   >
-                    Mesa {value.idTable}
+                    Pedido {value.idOrder}, Mesa {value.idTable}
                   </HelpButton>
                 </div>
               );
@@ -89,13 +87,13 @@ const SolicitationWaiter: React.FC = () => {
               visible={modalOpen}
               onClose={onCloseModal}
             >
-              <p>Mesa {idTable} retirada da Solicitação de Ajuda!</p>
+              <p>Pedido {idOrder} retirado da Solicitação de Pagamento!</p>
             </AlertModal>
           </div>
-        </SolicitationWaiterContainer>
+        </SolicitationPaymentWaiterContainer>
       </Container>
     </>
   );
 };
 
-export default SolicitationWaiter;
+export default SolicitationPaymentWaiter;

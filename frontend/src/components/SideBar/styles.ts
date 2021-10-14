@@ -19,6 +19,7 @@ export const Container = styled.div<ContainerProps>`
   overflow-y: auto;
   transition: 0.6s ease;
   padding-bottom: 12rem;
+  z-index: 1;
   background: linear-gradient(
     180deg,
     ${props => props.theme.primary03} 0%,
