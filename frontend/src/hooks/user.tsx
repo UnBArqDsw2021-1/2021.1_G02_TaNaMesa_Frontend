@@ -5,40 +5,79 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import jwt from 'jwt-decode';
 
 import api from 'api';
 
 interface UserContextData {
   table: string;
   token: string;
+  occupation: string;
+  isLoginVisible: boolean;
+  setIsLoginVisible: (isVisible: boolean) => void;
   changeToken: (newJWToken: string, newTable: string) => void;
+  logoutUser: () => void;
+}
+
+interface TokenPayload {
+  sub: string;
 }
 
 const UserContext = createContext<UserContextData | null>(null);
 
 export const UserProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState('');
+  const [occupation, setOccupation] = useState('');
   const [table, setTable] = useState('');
+
+  const [isLoginVisible, setIsLoginVisible] = useState(true);
 
   useEffect(() => {
     const jwtToken = localStorage.getItem('@TaNaMesa:token');
     const actualTable = localStorage.getItem('@TaNaMesa:table');
 
     if (jwtToken) {
-      setToken(jwtToken.split(' ')[1]);
+      const user = jwt(jwtToken) as TokenPayload;
+      setOccupation(user.sub);
       setTable(actualTable || '0');
+
       api.defaults.headers.common.Authorization = `${jwtToken}`;
+      setToken(jwtToken.split(' ')[1]);
     }
   }, []);
 
   const changeToken = useCallback((newJWToken, newTable) => {
     localStorage.setItem('@TaNaMesa:token', `Bearer ${newJWToken}`);
-    setToken(newJWToken);
+
+    const user = jwt(newJWToken) as TokenPayload;
+    api.defaults.headers.common.Authorization = `Bearer ${newJWToken}`;
+
+    setOccupation(user.sub);
     setTable(newTable);
+    setToken(newJWToken);
+  }, []);
+
+  const logoutUser = useCallback((): void => {
+    setToken('');
+    setOccupation('');
+    setTable('');
+    setIsLoginVisible(true);
+
+    localStorage.removeItem('@TaNaMesa:token');
   }, []);
 
   return (
-    <UserContext.Provider value={{ token, table, changeToken }}>
+    <UserContext.Provider
+      value={{
+        token,
+        table,
+        changeToken,
+        occupation,
+        isLoginVisible,
+        setIsLoginVisible,
+        logoutUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
