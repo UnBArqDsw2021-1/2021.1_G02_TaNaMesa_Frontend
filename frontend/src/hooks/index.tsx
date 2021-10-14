@@ -4,7 +4,7 @@ import { UserThemeProvider } from './theme';
 import { UserProvider } from './user';
 import { ScreenProvider } from './screen';
 import { MenuProvider } from './menu';
-import { WaiterProvider } from './waiter';
+import { ModalProvider } from './modal';
 
 const AppProvider: React.FC = ({ children }) => {
   return (
@@ -12,7 +12,7 @@ const AppProvider: React.FC = ({ children }) => {
       <UserProvider>
         <ScreenProvider>
           <MenuProvider>
-            <WaiterProvider>{children}</WaiterProvider>
+            <ModalProvider>{children}</ModalProvider>
           </MenuProvider>
         </ScreenProvider>
       </UserProvider>

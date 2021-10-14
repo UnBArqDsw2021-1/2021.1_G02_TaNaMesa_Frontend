@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 import { useMenu } from 'hooks/menu';
 import { useScreenSize } from 'hooks/screen';
-import { useWaiter } from 'hooks/waiter';
+import { useModal } from 'hooks/modal';
 
 interface SideBarButtonProps {
   icon: string;
@@ -37,7 +37,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   solicitationOrder,
 }) => {
   const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
-  const { handleSolicitationWaiter, handleSolicitationOrder } = useWaiter();
+  const { handleSolicitationWaiter, handleSolicitationOrder } = useModal();
   const { switchScreenSize } = useScreenSize();
   const history = useHistory();
 

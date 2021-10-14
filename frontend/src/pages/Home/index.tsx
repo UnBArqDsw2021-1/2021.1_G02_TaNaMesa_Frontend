@@ -11,7 +11,7 @@ import Button from 'components/Button';
 import { Container } from 'pages/Home/styles';
 import { useScreenSize } from 'hooks/screen';
 import { useUserTheme } from 'hooks/theme';
-import { useWaiter } from 'hooks/waiter';
+import { useModal } from 'hooks/modal';
 
 const Home: React.FC = () => {
   const { theme } = useUserTheme();
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
     handleSolicitationWaiter,
     solicitationOrder,
     handleSolicitationOrder,
-  } = useWaiter();
+  } = useModal();
 
   useEffect(() => switchActualScreen('home'), []);
 

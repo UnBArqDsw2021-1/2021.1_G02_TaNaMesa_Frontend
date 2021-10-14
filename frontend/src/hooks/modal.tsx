@@ -1,15 +1,15 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-interface WaiterContextData {
+interface ModalContextData {
   solicitationWaiter: boolean;
   solicitationOrder: boolean;
   handleSolicitationWaiter: (isWaiterSolicited: boolean) => void;
   handleSolicitationOrder: (isOrderSolicited: boolean) => void;
 }
 
-const WaiterContext = createContext<WaiterContextData | null>(null);
+const ModalContext = createContext<ModalContextData | null>(null);
 
-export const WaiterProvider: React.FC = ({ children }) => {
+export const ModalProvider: React.FC = ({ children }) => {
   const [solicitationWaiter, setSolicitationWaiter] = useState<boolean>(false);
   const [solicitationOrder, setSolicitationOrder] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ export const WaiterProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <WaiterContext.Provider
+    <ModalContext.Provider
       value={{
         solicitationWaiter,
         handleSolicitationWaiter,
@@ -31,12 +31,12 @@ export const WaiterProvider: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </WaiterContext.Provider>
+    </ModalContext.Provider>
   );
 };
 
-export function useWaiter(): WaiterContextData {
-  const context = useContext(WaiterContext);
+export function useModal(): ModalContextData {
+  const context = useContext(ModalContext);
 
   if (!context) {
     throw new Error('useWaiter must be used within an UserWaiterProvider');
