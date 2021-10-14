@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import React, { useRef, useState } from 'react';
 
 import api from 'api';
 import Button from 'components/Button';
@@ -11,10 +12,9 @@ import { Container } from 'components/Modal/LoginModal/styles';
 type Props = {
   title: string;
   visible: boolean;
-  onClose: (event: any) => void;
 };
 
-const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
+const LoginModal: React.FC<Props> = ({ title, visible }) => {
   const { changeToken } = useUser();
   const theme = useTheme();
   const modalRef = useRef(null);
@@ -31,26 +31,6 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
     return setValueSelect(event.target.value);
   };
 
-  useEffect(() => {
-    const escFunction = (event: any): void => {
-      if (event.keyCode === 27) onClose(event);
-    };
-
-    const handleClick = (event: any): void => {
-      // if (modalRef.current === event.target) onClose(event);
-    };
-
-    document.addEventListener('keydown', escFunction, false);
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('touchstart', handleClick);
-
-    return () => {
-      document.removeEventListener('keydown', escFunction, false);
-      document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('touchstart', handleClick);
-    };
-  }, [onClose]);
-
   const handleLogin = async (): Promise<void> => {
     try {
       setIsLoading(true);
@@ -63,14 +43,33 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
 
       setError('');
       changeToken(response.data.token, login);
-      onClose(Event);
     } catch (requestError) {
-      console.log(requestError);
       setError(`${valueSelect === 'Mesa' ? 'Mesa' : 'CPF'} ou senha inválida.`);
-    } finally {
       setIsLoading(false);
+    } finally {
+      // setIsLoading(false);
     }
   };
+
+  // useEffect(() => {
+  //   const escFunction = (event: any): void => {
+  //     if (event.keyCode === 27) onClose();
+  //   };
+
+  //   const handleClick = (event: any): void => {
+  //     // if (modalRef.current === event.target) onClose(event);
+  //   };
+
+  //   document.addEventListener('keydown', escFunction, false);
+  //   document.addEventListener('mousedown', handleClick);
+  //   document.addEventListener('touchstart', handleClick);
+
+  //   return () => {
+  //     document.removeEventListener('keydown', escFunction, false);
+  //     document.removeEventListener('mousedown', handleClick);
+  //     document.removeEventListener('touchstart', handleClick);
+  //   };
+  // }, [onClose]);
 
   return (
     <Container
@@ -79,11 +78,11 @@ const LoginModal: React.FC<Props> = ({ title, visible, onClose }) => {
       ref={modalRef}
     >
       <div className="content">
-        <div className="close-button">
+        {/* <div className="close-button">
           <button type="button" onClick={onClose}>
             x
           </button>
-        </div>
+        </div> */}
         {title}
         <div id="dropdown">
           <select
