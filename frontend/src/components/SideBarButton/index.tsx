@@ -14,6 +14,7 @@ interface SideBarButtonProps {
   route?: string | null;
   category?: string | null;
   solicitationWaiter?: boolean;
+  solicitationOrder?: boolean;
 }
 
 type Categories =
@@ -33,9 +34,10 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   route,
   category,
   solicitationWaiter,
+  solicitationOrder,
 }) => {
   const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
-  const { handleSolicitationWaiter } = useWaiter();
+  const { handleSolicitationWaiter, handleSolicitationOrder } = useWaiter();
   const { switchScreenSize } = useScreenSize();
   const history = useHistory();
 
@@ -61,6 +63,12 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
         handleSolicitationWaiter(true);
       };
     }
+    if (solicitationOrder) {
+      return e => {
+        e.preventDefault();
+        handleSolicitationOrder(true);
+      };
+    }
 
     return () =>
       console.log('Ainda não foi especificado o tipo de ação do botão');
@@ -82,6 +90,7 @@ SideBarButton.defaultProps = {
   route: null,
   category: null,
   solicitationWaiter: false,
+  solicitationOrder: false,
   // onClick: () => console.log('Sem função de onClick'),
 };
 

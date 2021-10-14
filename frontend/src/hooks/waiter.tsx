@@ -2,16 +2,23 @@ import React, { createContext, useCallback, useContext, useState } from 'react';
 
 interface WaiterContextData {
   solicitationWaiter: boolean;
+  solicitationOrder: boolean;
   handleSolicitationWaiter: (isWaiterSolicited: boolean) => void;
+  handleSolicitationOrder: (isOrderSolicited: boolean) => void;
 }
 
 const WaiterContext = createContext<WaiterContextData | null>(null);
 
 export const WaiterProvider: React.FC = ({ children }) => {
-  const [solicitationWaiter, setsolicitationWaiter] = useState<boolean>(false);
+  const [solicitationWaiter, setSolicitationWaiter] = useState<boolean>(false);
+  const [solicitationOrder, setSolicitationOrder] = useState<boolean>(false);
+
+  const handleSolicitationOrder = useCallback((isOrderSolicited: boolean) => {
+    setSolicitationOrder(isOrderSolicited);
+  }, []);
 
   const handleSolicitationWaiter = useCallback((isWaiterSolicited: boolean) => {
-    setsolicitationWaiter(isWaiterSolicited);
+    setSolicitationWaiter(isWaiterSolicited);
   }, []);
 
   return (
@@ -19,6 +26,8 @@ export const WaiterProvider: React.FC = ({ children }) => {
       value={{
         solicitationWaiter,
         handleSolicitationWaiter,
+        solicitationOrder,
+        handleSolicitationOrder,
       }}
     >
       {children}

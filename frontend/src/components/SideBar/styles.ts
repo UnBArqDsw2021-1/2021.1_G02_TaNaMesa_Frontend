@@ -11,7 +11,7 @@ export const Container = styled.div<ContainerProps>`
   position: ${props => (props.size === 'large' ? 'fixed' : 'static')};
   flex-direction: column;
   align-items: center;
-  z-index: 5555;
+  z-index: 2;
   justify-content: ${props => (props.hasLogo ? 'none' : 'center')};
   width: ${props => (props.size === 'large' ? '40%' : '10%')};
   padding-top: ${props => (props.size === 'small' ? '2rem' : 0)};
