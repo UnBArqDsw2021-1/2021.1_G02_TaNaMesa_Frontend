@@ -38,12 +38,16 @@ export enum ENUM {
   'pagamento realizado',
 }
 
+interface Client {
+  idClient: number;
+  name: string;
+}
+
 interface Order {
   idOrder: number;
   status: ENUM;
   idTable: number;
-  nameClient: string;
-  idClient: number;
+  client: Client;
   data: Date;
 }
 
@@ -227,7 +231,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
                   orders.map(order => (
                     <Checkbox
                       key={order.idOrder}
-                      label={order.nameClient}
+                      label={order.client.name}
                       id={order.idOrder}
                       checked={selectedOrder === order.idOrder}
                       onClick={() => setSelectedOrder(order.idOrder)}

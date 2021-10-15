@@ -9,12 +9,16 @@ export enum ENUM {
   'pagamento realizado',
 }
 
+interface Client {
+  idClient: number;
+  name: string;
+}
+
 interface Order {
   idOrder: number;
   status: ENUM;
   idTable: number;
-  nameClient: string;
-  idClient: number;
+  client: Client;
   data: Date;
 }
 
