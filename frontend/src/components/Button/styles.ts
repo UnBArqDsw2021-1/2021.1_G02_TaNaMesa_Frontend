@@ -8,7 +8,6 @@ interface NormalButtonProps {
 
 export const NormalButton = styled.button<NormalButtonProps>`
   padding: ${props => props.padding};
-  font-weight: 600;
   text-align: center;
   border-radius: 2rem;
   width: ${props => props.width};
@@ -17,6 +16,9 @@ export const NormalButton = styled.button<NormalButtonProps>`
   opacity: ${props => (props.disabled ? 0.7 : 1)};
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   transition: 0.2s all;
+
+  font-weight: 600;
+  font-size: 2rem;
 
   &:hover {
     opacity: ${props => (props.disabled ? 0.7 : 0.9)};

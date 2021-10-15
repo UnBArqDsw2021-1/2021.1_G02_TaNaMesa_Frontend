@@ -6,16 +6,18 @@ import {
   Slogan,
 } from 'components/BackgroundHamburguer/styles';
 
-import logo from 'assets/logo-contorno.png';
+import Icons from 'utils/assets';
+import { useScreenSize } from 'hooks/screen';
 
 interface BackgroundProps {
   text?: string | null;
 }
 
 const BackgroundHamburguer: React.FC<BackgroundProps> = ({ text }) => {
+  const { actualScreen } = useScreenSize();
   return (
-    <Container>
-      <Logo src={logo} alt="Tá Na Mesa" />
+    <Container needToBeHidden={actualScreen !== 'menu'}>
+      <Logo src={Icons.logo_contorno} alt="Tá Na Mesa" />
 
       {text && (
         <Slogan>

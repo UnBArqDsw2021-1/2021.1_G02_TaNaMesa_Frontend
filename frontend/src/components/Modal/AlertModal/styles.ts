@@ -16,8 +16,9 @@ export const Container = styled.div`
 
   p {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: normal;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   img {
@@ -34,9 +35,9 @@ export const Container = styled.div`
     visibility: hidden;
     position: relative;
     background: ${props => props.theme.white};
-    padding: 24px;
-    width: 400px;
-    border-radius: 10px;
+    padding: 30px;
+    width: 450px;
+    border-radius: 15px;
   }
   &.-visible {
     background: rgba(0, 0, 0, 0.7);

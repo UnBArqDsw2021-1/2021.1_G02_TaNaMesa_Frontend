@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  hasError: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,28 +18,29 @@ export const Container = styled.div`
   visibility: hidden;
   touch-action: none;
 
-  & > .close-button {
+  .close-button {
     display: flex;
-    cursor: pointer;
     justify-content: center;
     text-align: center;
-    margin-left: 280px;
-    height: 24px;
     border-radius: 50%;
-    background-color: ${props => props.theme.secondaryRed02};
-    height: 30px;
-    width: 30px;
-    margin-bottom: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: -17px;
+    right: -17px;
 
     button {
+      height: 34px;
+      width: 34px;
       padding: 0;
       border: none;
-      background: none;
+      background-color: ${props => props.theme.secondaryRed};
+      cursor: pointer;
       color: ${props => props.theme.white};
-      width: 100%;
+      font-weight: 700;
       outline: none;
     }
     button:hover {
+      background-color: ${props => props.theme.secondaryWine};
       box-shadow: none;
       transform: none;
     }
@@ -43,17 +48,16 @@ export const Container = styled.div`
 
   & > .content {
     max-height: 100%;
-    overflow: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
-    font-size: 15px;
+    font-size: 2rem;
     font-weight: bold;
     opacity: 0;
     visibility: hidden;
     position: relative;
     background: ${props => props.theme.white};
-    padding: 24px;
+    padding: 3.4rem;
     width: 300px;
     border-radius: 10px;
   }
@@ -75,8 +79,8 @@ export const Container = styled.div`
 
   select {
     border: 0 none;
-    color: ${props => props.theme.white};
-    background: ${props => props.theme.gray};
+    color: ${props => props.theme.black};
+    background: ${props => props.theme.darkGray};
     padding: 10px;
     font-weight: bold;
     font-size: 15px;
@@ -88,21 +92,43 @@ export const Container = styled.div`
     margin-top: 10px;
     height: 40px;
     border-radius: 20px;
-    background: ${props => props.theme.gray};
+    background: ${props => props.theme.darkGray};
   }
 
   #dropdown option {
     color: ${props => props.theme.black};
   }
 
+  #dropdown button {
+    font-size: 3rem;
+    margin-top: 1rem;
+  }
+
   input {
-    background: ${props => props.theme.gray};
-    color: ${props => props.theme.white};
+    background: ${props => props.theme.darkGray};
+    color: ${props => props.theme.black};
     font-weight: bold;
-    border: none;
+    border: ${props =>
+      props.hasError ? `2px solid ${props.theme.secondaryRed}` : 'none'};
     height: 40px;
     border-radius: 20px;
-    padding: 10px;
+    padding: 10px 10px 10px 2.5rem;
     margin-top: 10px;
+  }
+
+  .content input[type='password'] {
+    margin-bottom: 2rem;
+  }
+
+  .content button[type='submit'] {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  #error {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: ${props => props.theme.secondaryRed};
   }
 `;

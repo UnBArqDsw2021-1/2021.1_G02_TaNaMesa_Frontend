@@ -1,67 +1,83 @@
 import styled from 'styled-components';
 
 export const MenuItemContainer = styled.div`
-  width: 50%;
-  height: 18em;
-  margin: 5em;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
-  gap: 20px;
-  border-radius: 0.5rem;
-  box-shadow: 3px 4px 10px 1px #00000033;
+  background-color: ${props => props.theme.white};
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 10px ${props => props.theme.gray};
+  margin-bottom: 2.2rem;
 
   img {
-    flex: 30%;
-    margin: 1.5em;
-    max-width: 20em;
-    max-height: 20em;
-    border-radius: 15px;
+    width: 30rem;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-right: 4rem;
   }
 
-  div {
-    flex: 60%;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 6.25% 6.25% 6.25% 6.25%;
-    grid-template-rows: auto;
-    grid-template-areas:
-      'name name name name name . .'
-      'description description description . . . .'
-      '. . . . price price .'
-      '. . . button button button button';
-
-    h4 {
-      grid-area: name;
-      margin: 0;
-      padding: 0;
-      font-weight: bold;
+  @media (max-width: 980px) {
+    width: 100%;
+    flex-direction: column;
+    img {
+      width: 100%;
+      margin-bottom: 2rem;
     }
+  }
+`;
 
-    p {
-      grid-area: description;
-      margin: 0;
-    }
+export const ItemInfo = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
 
-    h5 {
-      margin: 0;
-      grid-area: price;
-      font-size: 1.5em;
-      font-weight: bold;
-    }
+  @media (max-width: 980px) {
+    width: 100%;
+  }
 
-    button {
-      margin: 0.5em;
-      height: 2em;
-      grid-area: button;
-      margin-top: 0;
-      border-radius: 30px;
-      background: #8e3031;
-      text-align: center;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 3px 4px 10px 1px #00000033;
-    }
+  h4 {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    color: ${props => props.theme.black};
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    color: ${props => props.theme.black};
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+
+  p {
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+  }
+
+  span {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 2.2rem;
+  }
+
+  @media (max-width: 630px) {
+    flex-direction: column;
   }
 `;
