@@ -80,9 +80,11 @@ const ComandaModal: React.FC<Props> = ({ visible, onClose }) => {
     const deletedOrder = comandas.filter(order => order.idOrder === idOrder)[0];
     const newOrders = comandas.filter(order => order.idOrder !== idOrder);
 
-    await removeItems(deletedOrder);
-    await deleteOrder(idOrder);
-    await deleteClient(deletedOrder.idClient);
+    removeItems(deletedOrder).then(() => {
+      deleteOrder(idOrder).then(() => {
+        deleteClient(deletedOrder.idClient);
+      });
+    });
 
     setComandas(newOrders);
   };
