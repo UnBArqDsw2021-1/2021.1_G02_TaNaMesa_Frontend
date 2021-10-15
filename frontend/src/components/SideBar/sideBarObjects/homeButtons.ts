@@ -10,12 +10,14 @@ const homeButtons = [
   {
     id: 1,
     icon: Icons.simbolo_pedir,
-    text: 'Pedir',
+    text: 'Pedir Conta',
+    solicitationOrder: true,
   },
   {
     id: 2,
     icon: Icons.simbolo_usuario,
     text: 'Chamar Garçom',
+    solicitationWaiter: true,
   },
   {
     id: 3,

@@ -1,10 +1,12 @@
-/* eslint-disable */
 import React, { FormEvent } from 'react';
 import { useHistory } from 'react-router';
 
 import { SideBarButtonContainer } from 'components/SideBarButton/styles';
 import { useMenu } from 'hooks/menu';
 import { useScreenSize } from 'hooks/screen';
+import { useModal } from 'hooks/modal';
+import { useUser } from 'hooks/user';
+import { putOneTable } from 'services/tables';
 
 interface SideBarButtonProps {
   icon: string;
@@ -12,6 +14,8 @@ interface SideBarButtonProps {
   isCallWaiter?: boolean;
   route?: string | null;
   category?: string | null;
+  solicitationWaiter?: boolean;
+  solicitationOrder?: boolean;
 }
 
 type Categories =
@@ -30,9 +34,13 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   isCallWaiter,
   route,
   category,
+  solicitationWaiter,
+  solicitationOrder,
 }) => {
   const { changeMenuItemCategory, changeMenuItemCategoryText } = useMenu();
+  const { handleSolicitationWaiter, handleSolicitationOrder } = useModal();
   const { switchScreenSize } = useScreenSize();
+  const { table } = useUser();
   const history = useHistory();
 
   const whichFunctionOnClick = (): ((e: FormEvent) => void) => {
@@ -49,6 +57,19 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
         changeMenuItemCategory(category as Categories);
         changeMenuItemCategoryText(text as CategoriesTexts);
         switchScreenSize();
+      };
+    }
+    if (solicitationWaiter) {
+      return e => {
+        e.preventDefault();
+        putOneTable(Number(table), true);
+        handleSolicitationWaiter(true);
+      };
+    }
+    if (solicitationOrder) {
+      return e => {
+        e.preventDefault();
+        handleSolicitationOrder(true);
       };
     }
 
@@ -71,6 +92,8 @@ SideBarButton.defaultProps = {
   isCallWaiter: false,
   route: null,
   category: null,
+  solicitationWaiter: false,
+  solicitationOrder: false,
   // onClick: () => console.log('Sem função de onClick'),
 };
 
