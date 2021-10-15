@@ -77,11 +77,3 @@ export const Container = styled.div`
   }
 }
 `;
-
-export const Status = styled.div`
-  background: ${props => props.color};
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  display: inline-block;
-`;

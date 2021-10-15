@@ -7,7 +7,7 @@ import { Order } from 'services/orders';
 import { Item } from 'services/items';
 
 import { Container } from './styles';
-import { Status } from '../../../pages/Pedidos/styles';
+import { Status, getStatusColor } from '../../../pages/Pedidos/statusConsts';
 
 type Props = {
   visible: boolean;
@@ -68,26 +68,32 @@ const PedidosModal: React.FC<Props> = ({ visible, order, onClose }) => {
           <div className="order">
             <div className="resume">
               <div className="person">
-                <Status color="#EB4040" />
+                <Status color={getStatusColor(order.status)} />
                 <h6>Mesa {order.idTable}</h6>
               </div>
-              <div className="buttons">
-                <button
-                  type="button"
-                  data-target={`items-${order.idTable}`}
-                  onClick={e => toggleOrders(e)}
-                >
-                  <FiPlus />
-                </button>
-              </div>
-            </div>
-            <div id={`items-${order.idTable}`} className="items">
-              {order.items.map((item: Item) => (
-                <div className="item" key={`i${item.idItem}`}>
-                  <div className="name">{item.name}</div>
-                  {item.notes ? <span>Observação: {item.notes}</span> : null}
+              {order.items.length > 0 ? (
+                <div className="buttons">
+                  <button
+                    type="button"
+                    data-target={`items-${order.idTable}`}
+                    onClick={e => toggleOrders(e)}
+                  >
+                    <FiPlus />
+                  </button>
                 </div>
-              ))}
+              ) : null}
+            </div>
+            <div id={`items-${order.idTable}`} className="items show">
+              {order.items.map((item: Item, index: number) => {
+                const key = `${item.idItem}${index}`;
+
+                return (
+                  <div className="item" key={`i${key}`}>
+                    <div className="name">1x - {item.name}</div>
+                    {item.notes ? <span>Observação: {item.notes}</span> : null}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

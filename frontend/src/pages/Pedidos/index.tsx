@@ -8,7 +8,8 @@ import PedidosModal from 'components/Modal/PedidosModal';
 
 import { getAllOrders, putOneOrder, Order, ENUM } from 'services/orders';
 
-import { Container, Status } from './styles';
+import { Container } from './styles';
+import { Status, getStatusColor } from './statusConsts';
 
 interface Board {
   columns: Array<Columns>;
@@ -64,10 +65,50 @@ const Pedidos: React.FC = () => {
 
   const [board, setBoard] = useState(initialBoard);
 
-  const handleCardMove = (_card: any, source: any, destination: any): void => {
-    console.log(_card);
+  const getAndFilterOrders = (): void => {
+    const column1: Order[] = [];
+    const column2: Order[] = [];
+    const column3: Order[] = [];
+
+    getAllOrders()
+      .then(newOrders => {
+        newOrders.forEach((order: Order) => {
+          if (order.status === ENUM[1]) {
+            column1.push({ ...order, id: order.idOrder });
+          } else if (order.status === ENUM[2]) {
+            column2.push({ ...order, id: order.idOrder });
+          } else if (order.status === ENUM[3]) {
+            column3.push({ ...order, id: order.idOrder });
+          }
+        });
+
+        const newColumns = board.columns.slice();
+        newColumns[0].cards = column1;
+        newColumns[1].cards = column2;
+        newColumns[2].cards = column3;
+
+        setBoard({ columns: newColumns });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const handleOrderMove = (
+    order: Order,
+    source: any,
+    destination: any,
+  ): void => {
     const updatedBoard = moveCard(board, source, destination);
     setBoard(updatedBoard);
+
+    putOneOrder(order.idOrder, ENUM[destination.toColumnId])
+      .then(() => {
+        getAndFilterOrders();
+      })
+      .catch(() => {
+        window.location.reload();
+      });
   };
 
   const selectOrder = (order: Order): void => {
@@ -75,38 +116,8 @@ const Pedidos: React.FC = () => {
     setShowOrder(true);
   };
 
-  const filterOrders = (newOrders: Order[]): void => {
-    const filteredOrders: Order[] = [];
-
-    newOrders.forEach((order: Order) => {
-      if (
-        order.status === ENUM[1] ||
-        order.status === ENUM[2] ||
-        order.status === ENUM[3]
-      ) {
-        filteredOrders.push({ ...order, id: order.idOrder });
-      }
-    });
-
-    console.log('filtered', filteredOrders);
-    setOrders(filteredOrders);
-
-    const newColumns = board.columns.slice();
-    newColumns[0].cards = filteredOrders;
-
-    setBoard({ columns: newColumns });
-  };
-
   useEffect(() => {
-    setOrders([]);
-
-    getAllOrders()
-      .then(response => {
-        filterOrders(response);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    getAndFilterOrders();
   }, []);
 
   return (
@@ -115,7 +126,7 @@ const Pedidos: React.FC = () => {
       <Container>
         <Board
           disableColumnDrag
-          onCardDragEnd={handleCardMove}
+          onCardDragEnd={handleOrderMove}
           renderCard={(order: Order, { dragging }: any) => (
             <div
               className={`order ${dragging ? 'dragging' : ''}`}
@@ -126,7 +137,7 @@ const Pedidos: React.FC = () => {
             >
               <div className="status">
                 <h4>Pedido #{order.idOrder}</h4>
-                <Status color="#2BB426" />
+                <Status color={getStatusColor(order.status)} />
               </div>
               <div className="content">
                 <h5>Mesa {order.idTable}</h5>
