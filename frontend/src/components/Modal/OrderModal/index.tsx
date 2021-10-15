@@ -11,7 +11,7 @@ import Checkbox from 'components/Checkbox';
 import ComandaModal from 'components/Modal/ComandaModal';
 import { useUserTheme } from 'hooks/theme';
 import { useUser } from 'hooks/user';
-import { getOrdersByTableId } from 'services/orders';
+import { Order, getOrdersByTableId } from 'services/orders';
 import { createContain } from 'services/contains';
 import Loading from 'components/Loading';
 import { Container } from './styles';
@@ -41,14 +41,6 @@ export enum ENUM {
 interface Client {
   idClient: number;
   name: string;
-}
-
-interface Order {
-  idOrder: number;
-  status: ENUM;
-  idTable: number;
-  client: Client;
-  data: Date;
 }
 
 interface Contain {

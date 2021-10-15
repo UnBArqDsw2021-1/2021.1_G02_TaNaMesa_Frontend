@@ -59,11 +59,11 @@ interface Client {
 
 interface Order {
   idOrder: number;
-  status: ENUM;
+  status: string;
   idTable: number;
   idClient: number;
   client: Client;
-  data: Date;
+  data: string;
 }
 
 const Pedido: React.FC = () => {

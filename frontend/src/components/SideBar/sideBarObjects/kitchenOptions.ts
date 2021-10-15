@@ -5,6 +5,7 @@ const kitchenOptions = [
     id: 0,
     icon: Icons.visualizar_pedido,
     text: 'Visualizar Área de Pedidos',
+    route: '/pedidos',
   },
   {
     id: 1,

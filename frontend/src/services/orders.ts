@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from 'api';
+
+import { Table } from './tables';
 
 export enum ENUM {
   'na fila',
@@ -27,15 +30,18 @@ interface Item {
   updatedAt: string;
 }
 
-interface Order {
+export interface Order {
+  id?: number;
   idOrder: number;
-  status: ENUM;
+  status: string;
   idTable: number;
+  table: Table;
   client: Client;
   idClient: number;
-  data: Date;
   items: Item[];
+  data: string;
 }
+
 export const createOrder = async (
   idClient: number,
   idTable: number,
