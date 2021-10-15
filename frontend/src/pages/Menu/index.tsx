@@ -16,6 +16,7 @@ import { getAllItems } from 'services/items';
 import { useMenu } from 'hooks/menu';
 import { useModal } from 'hooks/modal';
 import { useScreenSize } from 'hooks/screen';
+import { useUser } from 'hooks/user';
 
 interface Item {
   category: string;
@@ -31,6 +32,7 @@ interface Item {
 }
 
 const Menu: React.FC = () => {
+  const { table } = useUser();
   const { openMenu, switchActualScreen } = useScreenSize();
   const { selectedCategory, selectedCategoryText } = useMenu();
   const { solicitationWaiter, handleSolicitationWaiter } = useModal();
@@ -67,7 +69,12 @@ const Menu: React.FC = () => {
 
   return (
     <>
-      <NavBar left="Voltar" center="Mesa" tableTitle="Mesa 1" right="Pedido" />
+      <NavBar
+        left="Voltar"
+        center="Mesa"
+        tableTitle={`Mesa ${table}`}
+        right="Pedido"
+      />
       <Container>
         <SideBar
           collapse

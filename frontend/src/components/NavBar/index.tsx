@@ -8,6 +8,8 @@ import {
   CenterContainer,
   RightContainer,
 } from 'components/NavBar/styles';
+import { useUserTheme } from 'hooks/theme';
+import Button from 'components/Button';
 
 interface NavBarProps {
   left?: 'Voltar' | null;
@@ -25,6 +27,7 @@ const NavBar: React.FC<NavBarProps> = ({
   center,
 }) => {
   const history = useHistory();
+  const { theme } = useUserTheme();
 
   const renderLeftSide = (): JSX.Element | null => {
     switch (left) {
@@ -46,7 +49,17 @@ const NavBar: React.FC<NavBarProps> = ({
       case 'Pedido':
         return (
           <RightContainer>
-            <span>{isOrderEmpty ? 'Pedido vazio' : 'Pedido'}</span>
+            <Button
+              width="100%"
+              padding="0.8rem"
+              color={theme.white}
+              disabled={isOrderEmpty}
+              onClick={() => {
+                history.push('/pedido');
+              }}
+            >
+              <span>{isOrderEmpty ? 'Pedido vazio' : 'Pedido'}</span>
+            </Button>
           </RightContainer>
         );
 
