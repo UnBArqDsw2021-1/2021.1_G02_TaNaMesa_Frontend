@@ -35,6 +35,8 @@ interface SideBarObjects {
   id: number;
   route?: string;
   category?: string;
+  solicitationWaiter?: boolean;
+  solicitationOrder?: boolean;
 }
 
 const screensNamesNeedToBeStatic = ['home', 'waiter', 'kitchen', 'manager'];
@@ -116,6 +118,12 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
                 icon={option.icon}
                 category={option.category ? option.category : null}
                 route={option.route ? option.route : null}
+                solicitationWaiter={
+                  option.solicitationWaiter ? option.solicitationWaiter : false
+                }
+                solicitationOrder={
+                  option.solicitationOrder ? option.solicitationOrder : false
+                }
               />
             );
           })}
@@ -124,6 +132,7 @@ const SideBar: React.FC<SideBarProps> = ({ page, hasLogo, size, collapse }) => {
             <SideBarButton
               text={callWaiterOnMenuUser.text}
               icon={callWaiterOnMenuUser.icon}
+              solicitationWaiter={callWaiterOnMenuUser.solicitationWaiter}
               isCallWaiter
             />
           )}

@@ -1,5 +1,6 @@
 import simboloCozinha from 'assets/simbolo_cozinha.svg';
 import simboloOk from 'assets/simbolo_ok.svg';
+import simboloEdit from 'assets/simbolo_edit.svg';
 import simboloDuvida from 'assets/simbolo_duvida.svg';
 import LogoContorno from 'assets/logo-contorno.png';
 import HamburguerBackground from 'assets/hamburguer-background.png';
@@ -22,6 +23,7 @@ import Money from 'assets/dinheiro.png';
 const Icons = {
   simbolo_cozinha: simboloCozinha,
   simbolo_ok: simboloOk,
+  simbolo_edit: simboloEdit,
   simbolo_duvida: simboloDuvida,
   logo_contorno: LogoContorno,
   hamburguer_background: HamburguerBackground,

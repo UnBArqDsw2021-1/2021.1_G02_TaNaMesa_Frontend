@@ -39,7 +39,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (jwtToken) {
       const user = jwt(jwtToken.split(' ')[1]) as TokenPayload;
-      console.log({ user });
+
       if (Math.floor(new Date().getTime() / 1000) <= user.exp) {
         setOccupation(user.sub);
         setTable(actualTable || '0');
@@ -52,6 +52,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
   const changeToken = useCallback((newJWToken, newTable) => {
     localStorage.setItem('@TaNaMesa:token', `Bearer ${newJWToken}`);
+    localStorage.setItem('@TaNaMesa:table', `${newTable}`);
 
     const user = jwt(newJWToken) as TokenPayload;
     api.defaults.headers.common.Authorization = `Bearer ${newJWToken}`;
