@@ -7,6 +7,7 @@ import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import Loading from 'components/Loading';
 import MenuItem from 'components/MenuItem';
+import OrderModal from 'components/Modal/OrderModal';
 import AlertModal from 'components/Modal/AlertModal';
 import Icons from 'utils/assets';
 
@@ -35,6 +36,18 @@ const Menu: React.FC = () => {
   const { solicitationWaiter, handleSolicitationWaiter } = useModal();
 
   const [menuItems, setMenuItems] = useState<Item[]>([]);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [itemOrderModal, setItemOrderModal] = useState<Item>();
+
+  const onCloseModal = (event: any = null): void => {
+    event && event.preventDefault();
+    setIsOrderModalOpen(false);
+  };
+
+  const openOrderModal = (item: Item): void => {
+    setItemOrderModal(item);
+    setIsOrderModalOpen(true);
+  };
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -76,6 +89,7 @@ const Menu: React.FC = () => {
                 image={item.image}
                 name={item.name}
                 price={String(item.price)}
+                onClick={() => openOrderModal(item)}
                 description={item.description}
                 note={item.notes}
               />
@@ -96,6 +110,13 @@ const Menu: React.FC = () => {
             </>
           ) : null}
         </MenuContainer>
+        {isOrderModalOpen && (
+          <OrderModal
+            visible={isOrderModalOpen}
+            item={itemOrderModal as Item}
+            onClose={onCloseModal}
+          />
+        )}
         <div onClick={() => handleSolicitationWaiter(false)}>
           <AlertModal
             visible={solicitationWaiter}
