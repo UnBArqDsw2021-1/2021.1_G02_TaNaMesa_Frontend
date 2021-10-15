@@ -18,6 +18,7 @@ import Drink from 'assets/SideBar/simbolo_bebida 1.png';
 import Fries from 'assets/SideBar/simbolo batata 1.png';
 import Dessert from 'assets/SideBar/simbolo_sobremesa 1.png';
 import NotFound from 'assets/notFound.png';
+import Money from 'assets/dinheiro.png';
 
 const Icons = {
   simbolo_cozinha: simboloCozinha,
@@ -40,6 +41,7 @@ const Icons = {
   fries: Fries,
   dessert: Dessert,
   not_found: NotFound,
+  money: Money,
 };
 
 export default Icons;

@@ -15,5 +15,6 @@ export default {
   black: '#FFFFFF',
   white: '#000000',
   background: '#111111',
+  darkGray: '#A4A4A4',
   gray: '#424A4D',
 };

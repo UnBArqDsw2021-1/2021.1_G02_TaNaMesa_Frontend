@@ -9,7 +9,7 @@ import { useScreenSize } from 'hooks/screen';
 const Waiter: React.FC = () => {
   const { switchActualScreen, openMenu } = useScreenSize();
 
-  useEffect(() => switchActualScreen('waiter'), [switchActualScreen]);
+  useEffect(() => switchActualScreen('waiter'), []);
 
   return (
     <>
