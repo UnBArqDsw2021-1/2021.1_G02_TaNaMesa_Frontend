@@ -12,7 +12,7 @@ import ComandaModal from 'components/Modal/ComandaModal';
 import { useUserTheme } from 'hooks/theme';
 import { useUser } from 'hooks/user';
 import { getOrdersByTableId } from 'services/orders';
-import { createContain } from 'services/contain';
+import { createContain } from 'services/contains';
 import Loading from 'components/Loading';
 import { Container } from './styles';
 
