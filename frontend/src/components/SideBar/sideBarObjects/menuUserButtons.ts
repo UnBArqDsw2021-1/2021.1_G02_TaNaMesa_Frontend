@@ -31,6 +31,7 @@ const callWaiter = {
   id: 4,
   icon: Icons.simbolo_usuario,
   text: 'Chamar Garçom',
+  solicitationWaiter: true,
 };
 
 export default { options, callWaiter };
