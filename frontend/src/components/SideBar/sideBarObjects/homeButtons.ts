@@ -9,9 +9,9 @@ const homeButtons = [
   },
   {
     id: 1,
-    icon: Icons.simbolo_pedir,
-    text: 'Pedir Conta',
-    solicitationOrder: true,
+    icon: Icons.simbolo_conta,
+    text: 'Meu Pedido',
+    route: '/pedido',
   },
   {
     id: 2,
@@ -21,8 +21,9 @@ const homeButtons = [
   },
   {
     id: 3,
-    icon: Icons.simbolo_conta,
-    text: 'Minha Conta',
+    icon: Icons.simbolo_pedir,
+    text: 'Pedir Conta',
+    solicitationOrder: true,
   },
 ];
 

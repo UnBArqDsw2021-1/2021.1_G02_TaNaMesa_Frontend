@@ -4,8 +4,12 @@ import { useTheme } from 'styled-components';
 
 import NavBar from 'components/NavBar';
 import Button from 'components/Button';
+import Loading from 'components/Loading';
 import ComandaModal from 'components/Modal/ComandaModal';
 
+import { useUser } from 'hooks/user';
+import { getOrdersByTableId } from 'services/orders';
+import { getAllContains } from 'services/contains';
 import {
   Container,
   ContainerOrderList,
@@ -18,134 +22,137 @@ import {
 } from './styles';
 
 interface Item {
-  id: number;
-  quantity: number;
+  category: string;
+  createdAt: string;
+  description: string;
+  discount: number;
+  idItem: number;
+  image: string;
   name: string;
+  notes: string;
   price: number;
-  obs?: string;
+  updatedAt: string;
+}
+
+interface Contain {
+  id: number;
+  idOrder: number;
+  idItem: number;
+  quantity: number;
+  observation: string;
+  item: Item;
+}
+
+export enum ENUM {
+  'na fila',
+  'na cozinha',
+  'preparando',
+  'na mesa',
+  'solicitacao pagamento',
+  'pagamento realizado',
 }
 
 interface Client {
+  idClient: number;
   name: string;
-  totalPrice: number;
+}
+
+interface Order {
+  idOrder: number;
+  status: ENUM;
+  idTable: number;
+  idClient: number;
+  client: Client;
+  data: Date;
 }
 
 const Pedido: React.FC = () => {
+  let tableTotalPrice = 0;
   const theme = useTheme();
+  const { table } = useUser();
 
-  const [items, setItems] = useState<Item[]>([]);
-  const [clients, setClients] = useState<Client[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState(0);
+  const [allItems, setAllItems] = useState<Contain[]>([]);
+  const [orderContain, setOrderContain] = useState<Contain[]>([]);
 
   const [isComandaModalVisible, setIsComandaModalVisible] = useState(false);
 
   useEffect(() => {
-    setItems([
-      { id: 0, quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
-      {
-        id: 1,
-        quantity: 2,
-        name: 'Suco de Laranja',
-        price: 20.0,
-        obs: 'Suco sem açúcar',
-      },
-      { id: 2, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 3,
-        quantity: 3,
-        name: 'Petit Gateu',
-        price: 21.0,
-        obs: 'Tem observação',
-      },
-      { id: 4, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { id: 5, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 6,
-        quantity: 3,
-        name: 'Petit Gateu',
-        price: 21.0,
-        obs: 'Tem observação',
-      },
-      { id: 7, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 8,
-        quantity: 2,
-        name: 'Suco de Laranja',
-        price: 20.0,
-        obs: 'Suco sem açúcar',
-      },
-      { id: 9, quantity: 1, name: 'Petit Gateu', price: 21.0, obs: '' },
-      {
-        id: 10,
-        quantity: 2,
-        name: 'Suco de Laranja',
-        price: 20.0,
-        obs: 'Suco sem açúcar',
-      },
-      { id: 11, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 12,
-        quantity: 3,
-        name: 'Petit Gateu',
-        price: 21.0,
-        obs: 'Tem observação',
-      },
-      { id: 13, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      { id: 14, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 15,
-        quantity: 3,
-        name: 'Petit Gateu',
-        price: 21.0,
-        obs: 'Tem observação',
-      },
-      { id: 16, quantity: 1, name: 'Creme de Maracujá', price: 12.0, obs: '' },
-      {
-        id: 17,
-        quantity: 2,
-        name: 'Suco de Laranja',
-        price: 20.0,
-        obs: 'Suco sem açúcar',
-      },
-    ]);
+    setIsLoading(true);
 
-    setClients([
-      { name: 'Brenda', totalPrice: 35.0 },
-      { name: 'Sérgio', totalPrice: 23.0 },
-      { name: 'Hérick', totalPrice: 42.0 },
-      { name: 'Eduarda', totalPrice: 15.0 },
-    ]);
+    getAllContains()
+      .then(response => {
+        setAllItems(response);
+
+        getOrdersByTableId(table)
+          .then(responseOrders => {
+            setOrders(responseOrders);
+            setSelectedOrder(responseOrders[0].idOrder);
+            setOrderContain(
+              allItems.filter(({ idOrder }) => idOrder === selectedOrder),
+            );
+          })
+          .catch(() => {
+            setOrders([]);
+          });
+      })
+      .catch(() => {
+        setAllItems([]);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
-  const getTotalPrice = (): number => {
-    return clients.reduce((sum, { totalPrice }) => sum + totalPrice, 0);
+  useEffect(() => {
+    setOrderContain(
+      allItems.filter(({ idOrder }) => idOrder === selectedOrder),
+    );
+  }, [selectedOrder]);
+
+  const getComandaName = (): string => {
+    return orders.filter(({ idOrder }) => idOrder === selectedOrder)[0].client
+      .name;
+  };
+
+  const getOrderPrice = (order: number): number => {
+    const orderItems = allItems.filter(({ idOrder }) => idOrder === order);
+    const orderPrice = orderItems.reduce(
+      (sum, { quantity, item }) => sum + quantity * item.price,
+      0,
+    );
+    tableTotalPrice += orderPrice;
+    return orderPrice;
   };
 
   return (
     <>
       <NavBar left="Voltar" center="Mesa" tableTitle="Mesa 1" />
       <Container>
+        {isLoading && <Loading />}
         <ContainerLeft>
           <ContainerOrderList>
-            <h1>Brenda</h1>
+            <h1>{selectedOrder ? getComandaName() : '...'}</h1>
             <OrderList>
-              {items.length === 0 ? (
+              {orderContain.length === 0 ? (
                 <h2 className="pedido-vazio">
-                  Aqui você pode consultar os pedidos realizados sempre que
-                  quiser.
+                  Essa comanda ainda não possui itens adicionados.
                 </h2>
               ) : (
-                items.map(item => {
+                orderContain.map(contain => {
                   return (
-                    <Item key={item.id}>
+                    <Item key={contain.id}>
                       <h3>
-                        {item.quantity}x {item.name}
-                        {item.obs ? (
-                          <span>Observação: {item.obs}</span>
+                        {contain.quantity}x {contain.item?.name}
+                        {contain.observation ? (
+                          <span>Observação: {contain.observation}</span>
                         ) : (
                           <br />
                         )}
                       </h3>
-                      <p>R$ {item.price.toFixed(2)}</p>
+                      <p>
+                        R$ {(contain.quantity * contain.item.price).toFixed(2)}
+                      </p>
                     </Item>
                   );
                 })
@@ -163,16 +170,19 @@ const Pedido: React.FC = () => {
               </button>
             </div>
             <ButtonsContainer>
-              {clients.map(({ name }) => {
+              {orders.map(order => {
                 return (
                   <Button
-                    key={name}
+                    key={order.idOrder}
                     color={theme.primary02}
+                    disabled={order.idOrder === selectedOrder}
                     width="10rem"
                     padding="1rem"
-                    onClick={() => {}}
+                    onClick={() => {
+                      setSelectedOrder(order.idOrder);
+                    }}
                   >
-                    {name}
+                    {order.client.name}
                   </Button>
                 );
               })}
@@ -182,22 +192,28 @@ const Pedido: React.FC = () => {
         <ContainerTotal>
           <div className="total">
             <h1>Total</h1>
-            {clients.map(client => {
+            {orders.map(order => {
               return (
-                <div key={client.name} className="valor-total cliente">
-                  <h3>{client.name}:</h3>
-                  <p>R$ {client.totalPrice.toFixed(2)}</p>
+                <div key={order.idOrder} className="valor-total cliente">
+                  <h3>{order.client.name}:</h3>
+                  <p>R$ {getOrderPrice(order.idOrder).toFixed(2)}</p>
                 </div>
               );
             })}
             <div id="linha-horizontal" />
             <div className="valor-total pedido">
               <h1>Total:</h1>
-              <h1>R$ {getTotalPrice().toFixed(2)}</h1>
+              <h1>R$ {tableTotalPrice.toFixed(2)}</h1>
             </div>
           </div>
-          <Button color={theme.primary02} width="80%" onClick={() => {}}>
-            Pedir Conta
+          <Button
+            color={theme.primary02}
+            width="80%"
+            onClick={() => {
+              /* TODO: Criar fluxo de enviar pedido para a cozinha */
+            }}
+          >
+            Enviar Pedido
           </Button>
         </ContainerTotal>
         <ComandaModal
