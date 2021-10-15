@@ -14,12 +14,7 @@ const kitchenOptions = [
   {
     id: 2,
     icon: Icons.simbolo_usuario,
-    text: 'Gerenciar Garçons',
-  },
-  {
-    id: 3,
-    icon: Icons.simbolo_hamburguer,
-    text: 'Gerenciar Cozinha',
+    text: 'Gerenciar Funcionários',
   },
 ];
 

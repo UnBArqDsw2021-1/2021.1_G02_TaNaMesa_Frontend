@@ -37,7 +37,7 @@ Um sistema para que as pessoas possam chegar no restaurante fazer seus pedidos s
 
 ## O Projeto está rodando?
 
-( ) SIM
+(X) SIM
 ( ) NÃO
 Se SIM, insira um manual (ou um script) para auxiliar ainda mais os interessados em consultar o projeto.
 
