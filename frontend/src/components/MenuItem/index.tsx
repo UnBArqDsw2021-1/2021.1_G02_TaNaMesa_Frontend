@@ -32,14 +32,7 @@ const MenuItem: React.FC<Props> = ({
 
   return (
     <MenuItemContainer>
-      <img
-        src={
-          image
-            ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${image}`
-            : Icons.without_photo
-        }
-        alt={name}
-      />
+      <img src={image ? `${image}` : Icons.without_photo} alt={name} />
 
       <ItemInfo>
         <h4>{name}</h4>

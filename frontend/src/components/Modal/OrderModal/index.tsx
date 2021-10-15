@@ -280,11 +280,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
         <div className="modal-left">
           <div className="item-info">
             <img
-              src={
-                item.image
-                  ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${item.image}`
-                  : Icons.without_photo
-              }
+              src={item.image ? `${item.image}` : Icons.without_photo}
               alt={item.name}
             />
             <h4>{item.name}</h4>

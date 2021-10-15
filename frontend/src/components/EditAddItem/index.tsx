@@ -28,14 +28,7 @@ const EditAddItem: React.FC<Props> = ({ image, name, price, description }) => {
     <EditAddItemContainer>
       <h1>Item</h1>
       <Container>
-        <img
-          src={
-            image
-              ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${image}`
-              : Icons.without_photo
-          }
-          alt={name}
-        />
+        <img src={image ? `${image}` : Icons.without_photo} alt={name} />
         <ImageButtonContainer image={Icons.simbolo_edit}>
           <Button
             color={theme.primary01}
