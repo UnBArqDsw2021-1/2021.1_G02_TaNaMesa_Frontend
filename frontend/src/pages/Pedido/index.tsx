@@ -8,7 +8,7 @@ import Loading from 'components/Loading';
 import ComandaModal from 'components/Modal/ComandaModal';
 
 import { useUser } from 'hooks/user';
-import { getAllOrders } from 'services/orders';
+import { getOrdersByTableId } from 'services/orders';
 import { getAllContains } from 'services/contains';
 import {
   Container,
@@ -86,7 +86,7 @@ const Pedido: React.FC = () => {
       .then(response => {
         setAllItems(response);
 
-        getAllOrders(Number(table))
+        getOrdersByTableId(table)
           .then(responseOrders => {
             setOrders(responseOrders);
             setSelectedOrder(responseOrders[0].idOrder);
