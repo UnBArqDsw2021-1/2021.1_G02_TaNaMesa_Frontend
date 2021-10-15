@@ -78,15 +78,15 @@ export const Container = styled.div`
     }
   }
 
-  .comandas {
+  .order-container {
     margin-top: 3rem;
   }
 
-  .comanda + .comanda {
+  .order + .order {
     margin-top: 2rem;
   }
 
-  .comanda {
+  .order {
     border: 1px ${props => props.theme.gray} solid;
     border-radius: 20px;
     padding: 1.2rem;
@@ -118,7 +118,7 @@ export const Container = styled.div`
       background-color: ${props => props.theme.primary04};
     }
 
-    .orders {
+    .items {
       font-size: 1.5rem;
       font-weight: 500;
       text-align: left;
@@ -139,7 +139,7 @@ export const Container = styled.div`
       }
     }
 
-    .orders.show {
+    .items.show {
       margin-top: 1rem;
       max-height: 500px;
       transition: max-height 0.5s ease-in;

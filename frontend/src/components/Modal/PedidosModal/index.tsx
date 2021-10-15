@@ -1,42 +1,21 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { FiPlus } from 'react-icons/fi';
+
+import { Order } from 'services/orders';
+import { Item } from 'services/items';
 
 import { Container } from './styles';
 import { Status } from '../../../pages/Pedidos/styles';
 
-interface Mesa {
-  id: number;
-  comandas: Array<Comanda>;
-}
-
-interface Comanda {
-  id: number;
-  pessoa: Client;
-  itens: Array<Item>;
-}
-
-interface Client {
-  name: string;
-  totalPrice: number;
-}
-
-interface Item {
-  id: number;
-  quantity: number;
-  name: string;
-  price: number;
-  obs?: string;
-}
-
 type Props = {
   visible: boolean;
-  table: Mesa;
+  order: Order;
   onClose: (event: any) => void;
 };
 
-const PedidosModal: React.FC<Props> = ({ visible, table, onClose }) => {
+const PedidosModal: React.FC<Props> = ({ visible, order, onClose }) => {
   const modalRef = useRef(null);
 
   const toggleOrders = (e: any): void => {
@@ -83,40 +62,34 @@ const PedidosModal: React.FC<Props> = ({ visible, table, onClose }) => {
           </button>
         </div>
 
-        <span>Mesa {table.id}</span>
+        <span>Pedido #{order.idOrder}</span>
 
-        <div className="comandas">
-          {table.comandas.map((comanda, index) => (
-            <div className="comanda" key={comanda.id}>
-              <div className="resume">
-                <div className="person">
-                  <Status color="#EB4040" />
-                  <h6>
-                    Comanda {index + 1} - {comanda.pessoa?.name}
-                  </h6>
-                </div>
-                <div className="buttons">
-                  <button
-                    type="button"
-                    data-target={`orders-${index + 1}`}
-                    onClick={e => toggleOrders(e)}
-                  >
-                    <FiPlus />
-                  </button>
-                </div>
+        <div className="order-container">
+          <div className="order">
+            <div className="resume">
+              <div className="person">
+                <Status color="#EB4040" />
+                <h6>Mesa {order.idTable}</h6>
               </div>
-              <div id={`orders-${index + 1}`} className="orders">
-                {comanda.itens.map(item => (
-                  <div className="item" key={item.id}>
-                    <div className="name">
-                      {item.quantity}x {item.name}
-                    </div>
-                    {item.obs ? <span>Observação: {item.obs}</span> : null}
-                  </div>
-                ))}
+              <div className="buttons">
+                <button
+                  type="button"
+                  data-target={`items-${order.idTable}`}
+                  onClick={e => toggleOrders(e)}
+                >
+                  <FiPlus />
+                </button>
               </div>
             </div>
-          ))}
+            <div id={`items-${order.idTable}`} className="items">
+              {order.items.map((item: Item) => (
+                <div className="item" key={`i${item.idItem}`}>
+                  <div className="name">{item.name}</div>
+                  {item.notes ? <span>Observação: {item.notes}</span> : null}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </Container>
