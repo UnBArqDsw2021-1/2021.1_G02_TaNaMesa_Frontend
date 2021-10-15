@@ -36,7 +36,6 @@ interface Order {
   data: Date;
   items: Item[];
 }
-
 export const createOrder = async (
   idClient: number,
   idTable: number,
