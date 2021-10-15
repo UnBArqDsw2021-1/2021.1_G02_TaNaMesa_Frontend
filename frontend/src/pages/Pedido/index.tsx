@@ -9,7 +9,7 @@ import ComandaModal from 'components/Modal/ComandaModal';
 
 import { useUser } from 'hooks/user';
 import { getAllOrders } from 'services/orders';
-import { getAllContains } from 'services/contain';
+import { getAllContains } from 'services/contains';
 import {
   Container,
   ContainerOrderList,
@@ -75,7 +75,7 @@ const Pedido: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [allItems, setAllItems] = useState<Contain[]>([]);
-  const [contains, setContains] = useState<Contain[]>([]);
+  const [orderContain, setOrderContain] = useState<Contain[]>([]);
 
   const [isComandaModalVisible, setIsComandaModalVisible] = useState(false);
 
@@ -90,7 +90,7 @@ const Pedido: React.FC = () => {
           .then(responseOrders => {
             setOrders(responseOrders);
             setSelectedOrder(responseOrders[0].idOrder);
-            setContains(
+            setOrderContain(
               allItems.filter(({ idOrder }) => idOrder === selectedOrder),
             );
           })
@@ -105,7 +105,9 @@ const Pedido: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setContains(allItems.filter(({ idOrder }) => idOrder === selectedOrder));
+    setOrderContain(
+      allItems.filter(({ idOrder }) => idOrder === selectedOrder),
+    );
   }, [selectedOrder]);
 
   const getComandaName = (): string => {
@@ -132,12 +134,12 @@ const Pedido: React.FC = () => {
           <ContainerOrderList>
             <h1>{selectedOrder ? getComandaName() : '...'}</h1>
             <OrderList>
-              {contains.length === 0 ? (
+              {orderContain.length === 0 ? (
                 <h2 className="pedido-vazio">
                   Essa comanda ainda não possui itens adicionados.
                 </h2>
               ) : (
-                contains.map(contain => {
+                orderContain.map(contain => {
                   return (
                     <Item key={contain.id}>
                       <h3>
