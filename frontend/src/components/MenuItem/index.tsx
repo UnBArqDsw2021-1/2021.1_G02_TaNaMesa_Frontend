@@ -17,6 +17,7 @@ type Props = {
   price: string;
   description: string;
   note: string;
+  onClick: () => void;
 };
 
 const MenuItem: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const MenuItem: React.FC<Props> = ({
   price,
   description,
   note,
+  onClick,
 }) => {
   const { theme } = useUserTheme();
 
@@ -46,12 +48,7 @@ const MenuItem: React.FC<Props> = ({
 
         <ButtonContainer>
           <p>R${price}</p>
-          <Button
-            color={theme.primary01}
-            onClick={() => {
-              null;
-            }}
-          >
+          <Button color={theme.primary01} onClick={onClick}>
             <span>Adicionar</span>
           </Button>
         </ButtonContainer>

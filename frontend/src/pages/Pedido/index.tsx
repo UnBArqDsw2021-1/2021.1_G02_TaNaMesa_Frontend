@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components';
 import NavBar from 'components/NavBar';
 import Button from 'components/Button';
 import Loading from 'components/Loading';
+import ComandaModal from 'components/Modal/ComandaModal';
 
 import { useUser } from 'hooks/user';
 import { getAllOrders } from 'services/orders';
@@ -75,6 +76,8 @@ const Pedido: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState(0);
   const [allItems, setAllItems] = useState<Contain[]>([]);
   const [contains, setContains] = useState<Contain[]>([]);
+
+  const [isComandaModalVisible, setIsComandaModalVisible] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -157,7 +160,10 @@ const Pedido: React.FC = () => {
           <ContainerClientsOrder>
             <div className="criar-comanda">
               <p>Comandas abertas:</p>
-              <button type="button" onClick={() => {}}>
+              <button
+                type="button"
+                onClick={() => setIsComandaModalVisible(true)}
+              >
                 +
               </button>
             </div>
@@ -208,6 +214,10 @@ const Pedido: React.FC = () => {
             Enviar Pedido
           </Button>
         </ContainerTotal>
+        <ComandaModal
+          visible={isComandaModalVisible}
+          onClose={() => setIsComandaModalVisible(false)}
+        />
       </Container>
     </>
   );
