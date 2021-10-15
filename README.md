@@ -41,7 +41,20 @@ Um sistema para que as pessoas possam chegar no restaurante fazer seus pedidos s
 ( ) NÃO
 Se SIM, insira um manual (ou um script) para auxiliar ainda mais os interessados em consultar o projeto.
 
-## Informações Complementares 
+## Informações Complementares
+
+## Login
+**Mesa:**
+- mesa: 1
+- password: 123456
+
+**Garçom:**
+- cpf: 123458
+- password: 654321
+
+**Cozinha:**
+- cpf: 123459
+- password: 654321
 
 ## Ambientes
 ### Local
