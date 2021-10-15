@@ -17,6 +17,7 @@ type Props = {
   price: string;
   description: string;
   note: string;
+  onClick: () => void;
 };
 
 const MenuItem: React.FC<Props> = ({
@@ -25,19 +26,13 @@ const MenuItem: React.FC<Props> = ({
   price,
   description,
   note,
+  onClick,
 }) => {
   const { theme } = useUserTheme();
 
   return (
     <MenuItemContainer>
-      <img
-        src={
-          image
-            ? `${process.env.REACT_APP_API_ENDPOINT}/uploads/${image}`
-            : Icons.without_photo
-        }
-        alt={name}
-      />
+      <img src={image ? `${image}` : Icons.without_photo} alt={name} />
 
       <ItemInfo>
         <h4>{name}</h4>
@@ -46,12 +41,7 @@ const MenuItem: React.FC<Props> = ({
 
         <ButtonContainer>
           <p>R${price}</p>
-          <Button
-            color={theme.primary01}
-            onClick={() => {
-              null;
-            }}
-          >
+          <Button color={theme.primary01} onClick={onClick}>
             <span>Adicionar</span>
           </Button>
         </ButtonContainer>

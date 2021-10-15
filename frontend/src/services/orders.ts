@@ -2,7 +2,6 @@
 import api from 'api';
 
 import { Table } from './tables';
-import { Item } from './items';
 
 export enum ENUM {
   'na fila',
@@ -13,20 +12,57 @@ export enum ENUM {
   'pagamento realizado',
 }
 
+interface Client {
+  name: string;
+  idClient: number;
+}
+
+interface Item {
+  category: string;
+  createdAt: string;
+  description: string;
+  discount: number;
+  idItem: number;
+  image: string;
+  name: string;
+  notes: string;
+  price: number;
+  updatedAt: string;
+}
+
 export interface Order {
   id?: number;
   idOrder: number;
   status: string;
   idTable: number;
   table: Table;
+  client: Client;
   idClient: number;
-  client: Record<string, any>;
-  items: Array<Item>;
+  items: Item[];
   data: string;
 }
 
+export const createOrder = async (
+  idClient: number,
+  idTable: number,
+): Promise<Order> => {
+  const response = await api.post('order', { order: { idClient, idTable } });
+
+  return response.data.order;
+};
+
+export const deleteOrder = async (idOrder: number): Promise<void> => {
+  const response = await api.delete(`order/${idOrder}`);
+};
+
 export const getAllOrders = async (): Promise<Order[]> => {
   const response = await api.get('order');
+
+  return response.data.orders;
+};
+
+export const getOrdersByTableId = async (tableId: string): Promise<Order[]> => {
+  const response = await api.get(`order?id_table=${tableId}`);
 
   return response.data.orders;
 };

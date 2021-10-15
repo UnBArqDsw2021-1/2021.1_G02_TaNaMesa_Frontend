@@ -13,6 +13,7 @@ import Login from '../pages/Login';
 import SolicitationWaiter from '../pages/SolicitationWaiter';
 import SolicitationPaymentWaiter from '../pages/SolicitationPaymentWaiter';
 import Home from '../pages/Home';
+import EditAddItem from '../pages/EditAddItem';
 import NotFound from '../pages/NotFound';
 
 const Routes: React.FC = () => {

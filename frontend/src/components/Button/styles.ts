@@ -17,6 +17,9 @@ export const NormalButton = styled.button<NormalButtonProps>`
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   transition: 0.2s all;
 
+  font-weight: 600;
+  font-size: 2rem;
+
   &:hover {
     opacity: ${props => (props.disabled ? 0.7 : 0.9)};
   }
