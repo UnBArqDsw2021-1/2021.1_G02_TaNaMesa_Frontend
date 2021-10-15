@@ -46,7 +46,7 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  .mesa {
+  .order {
     width: 100%;
     background-color: ${props => props.theme.white};
     border-radius: 15px;
@@ -61,7 +61,7 @@ export const Container = styled.div`
     }
   }
 
-  .mesa.dragging, .mesa:hover {
+  .order.dragging, .order:hover {
     background-color: ${props => props.theme.gray};
   }
 

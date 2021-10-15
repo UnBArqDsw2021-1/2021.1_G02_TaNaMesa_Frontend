@@ -6,70 +6,26 @@ import Board, { moveCard } from '@asseinfo/react-kanban';
 import NavBar from 'components/NavBar';
 import PedidosModal from 'components/Modal/PedidosModal';
 
+import { getAllOrders, putOneOrder, Order, ENUM } from 'services/orders';
+
 import { Container, Status } from './styles';
 
-interface Mesa {
+interface Board {
+  columns: Array<Columns>;
+}
+
+interface Columns {
   id: number;
-  comandas: Array<Comanda>;
+  title: string;
+  cards: Order[];
 }
 
-interface Comanda {
-  id: number;
-  pessoa: Client;
-  itens: Array<Item>;
-}
-
-interface Client {
-  name: string;
-  totalPrice: number;
-}
-
-interface Item {
-  id: number;
-  quantity: number;
-  name: string;
-  price: number;
-  obs?: string;
-}
-
-// eslint-disable-next-line no-underscore-dangle
-const mesas_ = [
-  {
-    id: 1,
-    comandas: [
-      {
-        id: 1,
-        pessoa: { name: 'Ítalo', totalPrice: 21.0 },
-        itens: [
-          { id: 0, quantity: 2, name: 'Petit', price: 21.0, obs: 'Obs.' },
-          { id: 1, quantity: 1, name: 'Creme', price: 12.0, obs: '' },
-        ],
-      },
-      {
-        id: 2,
-        pessoa: { name: 'Tiago', totalPrice: 12.0 },
-        itens: [{ id: 2, quantity: 3, name: 'Creme', price: 12.0, obs: '' }],
-      },
-    ],
-  },
-  {
-    id: 2,
-    comandas: [
-      {
-        id: 3,
-        pessoa: { name: 'Tiago', totalPrice: 12.0 },
-        itens: [{ id: 3, quantity: 3, name: 'Creme', price: 12.0, obs: '' }],
-      },
-    ],
-  },
-];
-
-const board = {
+const initialBoard: Board = {
   columns: [
     {
       id: 1,
       title: 'Em aberto',
-      cards: [mesas_[0], mesas_[1]],
+      cards: [],
     },
     {
       id: 2,
@@ -84,29 +40,73 @@ const board = {
   ],
 };
 
+const initialOrder: Order = {
+  idOrder: 1001,
+  status: 'preparando',
+  idClient: 1,
+  client: {
+    idClient: 1,
+    name: 'sergio',
+  },
+  idTable: 1,
+  table: {
+    idTable: 1,
+    needHelp: false,
+  },
+  items: [],
+  data: '2021-10-13T23:25:31.681Z',
+};
+
 const Pedidos: React.FC = () => {
-  const [mesas, setMesas] = useState<Mesa[]>(mesas_);
-  const [mesaSelected, setMesaSelected] = useState<Mesa>({
-    id: 0,
-    comandas: [],
-  });
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<Order>(initialOrder);
+  const [showOrder, setShowOrder] = useState<boolean>(false);
 
-  const [showMesa, setShowMesa] = useState<boolean>(false);
-
-  const [controlledBoard, setBoard] = useState(board);
+  const [board, setBoard] = useState(initialBoard);
 
   const handleCardMove = (_card: any, source: any, destination: any): void => {
-    const updatedBoard = moveCard(controlledBoard, source, destination);
+    console.log(_card);
+    const updatedBoard = moveCard(board, source, destination);
     setBoard(updatedBoard);
   };
 
-  const selectMesa = (mesa: Mesa): void => {
-    setMesaSelected(mesa);
-    setShowMesa(true);
+  const selectOrder = (order: Order): void => {
+    setSelectedOrder(order);
+    setShowOrder(true);
+  };
+
+  const filterOrders = (newOrders: Order[]): void => {
+    const filteredOrders: Order[] = [];
+
+    newOrders.forEach((order: Order) => {
+      if (
+        order.status === ENUM[1] ||
+        order.status === ENUM[2] ||
+        order.status === ENUM[3]
+      ) {
+        filteredOrders.push({ ...order, id: order.idOrder });
+      }
+    });
+
+    console.log('filtered', filteredOrders);
+    setOrders(filteredOrders);
+
+    const newColumns = board.columns.slice();
+    newColumns[0].cards = filteredOrders;
+
+    setBoard({ columns: newColumns });
   };
 
   useEffect(() => {
-    setMesas(mesas_);
+    setOrders([]);
+
+    getAllOrders()
+      .then(response => {
+        filterOrders(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }, []);
 
   return (
@@ -116,36 +116,32 @@ const Pedidos: React.FC = () => {
         <Board
           disableColumnDrag
           onCardDragEnd={handleCardMove}
-          renderCard={(mesa: any, { dragging }: any) => (
+          renderCard={(order: Order, { dragging }: any) => (
             <div
-              className={`mesa ${dragging ? 'dragging' : ''}`}
-              key={mesa.id}
+              className={`order ${dragging ? 'dragging' : ''}`}
+              key={`o${order.idOrder}`}
               role="button"
               tabIndex={0}
-              onClick={() => selectMesa(mesa)}
+              onClick={() => selectOrder(order)}
             >
               <div className="status">
-                <h4>Mesa {mesa.id}</h4>
+                <h4>Pedido #{order.idOrder}</h4>
                 <Status color="#2BB426" />
               </div>
               <div className="content">
-                <h5>
-                  {mesa.comandas.length === 1
-                    ? `1 Comanda`
-                    : `${mesa.comandas.length} Comandas`}
-                </h5>
+                <h5>Mesa {order.idTable}</h5>
               </div>
             </div>
           )}
         >
-          {controlledBoard}
+          {board}
         </Board>
       </Container>
 
       <PedidosModal
-        visible={showMesa}
-        table={mesaSelected}
-        onClose={e => setShowMesa(e.target.value)}
+        visible={showOrder}
+        order={selectedOrder}
+        onClose={e => setShowOrder(e.target.value)}
       />
     </>
   );
