@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from 'api';
+
+import { Table } from './tables';
+import { Item } from './items';
 
 export enum ENUM {
   'na fila',
@@ -9,13 +13,16 @@ export enum ENUM {
   'pagamento realizado',
 }
 
-interface Order {
+export interface Order {
+  id?: number;
   idOrder: number;
-  status: ENUM;
+  status: string;
   idTable: number;
-  nameClient: string;
+  table: Table;
   idClient: number;
-  data: Date;
+  client: Record<string, any>;
+  items: Array<Item>;
+  data: string;
 }
 
 export const getAllOrders = async (): Promise<Order[]> => {
