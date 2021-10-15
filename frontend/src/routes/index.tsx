@@ -7,6 +7,7 @@ import Waiter from 'pages/Waiter';
 import Kitchen from 'pages/Kitchen';
 import Manager from 'pages/Manager';
 import { useUser } from 'hooks/user';
+import Pedidos from 'pages/Pedidos';
 import Pedido from '../pages/Pedido';
 import Login from '../pages/Login';
 import SolicitationWaiter from '../pages/SolicitationWaiter';
@@ -186,6 +187,14 @@ const Routes: React.FC = () => {
           exact
           path="/cozinha"
           component={Kitchen}
+        />
+        <Route
+          token={token}
+          isPrivate
+          occupation="cozinha"
+          exact
+          path="/pedidos"
+          component={Pedidos}
         />
         <Route
           token={token}

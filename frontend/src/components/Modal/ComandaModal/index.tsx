@@ -16,6 +16,7 @@ import {
 } from 'services/orders';
 import { createClient, deleteClient } from 'services/clients';
 import { deleteContain, getOneContain } from 'services/contains';
+import { Order } from 'services/orders';
 import { Container } from './styles';
 
 type Props = {
@@ -39,16 +40,6 @@ interface Item {
   notes: string;
   price: number;
   updatedAt: string;
-}
-
-interface Order {
-  idOrder: number;
-  status: ENUM;
-  idTable: number;
-  client: Client;
-  idClient: number;
-  data: Date;
-  items: Item[];
 }
 
 const ComandaModal: React.FC<Props> = ({ visible, onClose }) => {

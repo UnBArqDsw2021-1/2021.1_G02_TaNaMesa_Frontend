@@ -54,8 +54,8 @@ export const RightContainer = styled.div`
   display: flex;
   border: 2px solid ${props => props.theme.gray};
   border-radius: 15px;
-  padding: 0.6rem 1.5rem;
   margin-right: 2.5rem;
+  z-index: 10;
 
   span {
     font-size: 2rem;

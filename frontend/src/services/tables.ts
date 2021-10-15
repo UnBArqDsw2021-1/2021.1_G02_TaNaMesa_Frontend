@@ -1,6 +1,6 @@
 import api from 'api';
 
-interface Table {
+export interface Table {
   idTable: number;
   needHelp: boolean;
 }
