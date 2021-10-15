@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components';
 
 import NavBar from 'components/NavBar';
 import Button from 'components/Button';
+import ComandaModal from 'components/Modal/ComandaModal';
 
 import {
   Container,
@@ -34,6 +35,8 @@ const Pedido: React.FC = () => {
 
   const [items, setItems] = useState<Item[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
+
+  const [isComandaModalVisible, setIsComandaModalVisible] = useState(false);
 
   useEffect(() => {
     setItems([
@@ -152,7 +155,10 @@ const Pedido: React.FC = () => {
           <ContainerClientsOrder>
             <div className="criar-comanda">
               <p>Comandas abertas:</p>
-              <button type="button" onClick={() => {}}>
+              <button
+                type="button"
+                onClick={() => setIsComandaModalVisible(true)}
+              >
                 +
               </button>
             </div>
@@ -194,6 +200,10 @@ const Pedido: React.FC = () => {
             Pedir Conta
           </Button>
         </ContainerTotal>
+        <ComandaModal
+          visible={isComandaModalVisible}
+          onClose={() => setIsComandaModalVisible(false)}
+        />
       </Container>
     </>
   );

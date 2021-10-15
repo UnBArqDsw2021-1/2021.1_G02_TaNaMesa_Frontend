@@ -11,7 +11,7 @@ import Checkbox from 'components/Checkbox';
 import ComandaModal from 'components/Modal/ComandaModal';
 import { useUserTheme } from 'hooks/theme';
 import { useUser } from 'hooks/user';
-import { getAllOrders } from 'services/orders';
+import { getOrdersByTableId } from 'services/orders';
 import { createContain } from 'services/contain';
 import Loading from 'components/Loading';
 import { Container } from './styles';
@@ -83,7 +83,7 @@ const OrderModal: React.FC<Props> = ({ visible, item, onClose }) => {
   };
 
   useEffect(() => {
-    getAllOrders(Number(table))
+    getOrdersByTableId(table)
       .then(response => {
         setOrders(response);
         setSelectedOrder(response[0].idOrder);
